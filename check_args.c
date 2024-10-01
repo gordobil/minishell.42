@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/01 11:37:32 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/10/01 11:34:58 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/10/01 11:36:42 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-
-typedef struct s_mini
+int	check_args(t_mini *mini)
 {
-	int		arg_count;
-	char	**args;
-	char	**envp;
-}				t_mini;
-
-//MAIN
-int	check_args(t_mini *mini);
-
-#endif
+	return (0);
+}
