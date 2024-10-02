@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/30 11:26:56 by ngordobi          #+#    #+#              #
-#    Updated: 2024/09/30 11:54:32 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/10/02 12:30:21 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CC					=	gcc
 CC_FLAGS			=	-Wall -Wextra -Werror
 
 SOURCES				=	minishell.c \
+						check_args.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
 

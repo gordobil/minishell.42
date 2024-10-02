@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/01 11:37:55 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:29:43 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	minishell(t_mini *mini)
 {
+	printf ("\n\n\n%d\n", mini->arg_count);
 	return ;
 }
 
@@ -25,6 +26,7 @@ int	main(int argc, char **argv, char **envp)
 	mini->arg_count = argc;
 	mini->args = argv;
 	mini->envp = envp;
+	mini->rdline = readline("minishell¬");
 	while(envp[i])
 		printf("%s\n", envp[i++]);
 	if (check_args(mini) != 0)
