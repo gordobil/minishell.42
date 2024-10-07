@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/30 11:26:56 by ngordobi          #+#    #+#              #
-#    Updated: 2024/10/02 12:30:21 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/10/07 14:12:42 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ export MINISHELL
 all:				$(NAME)
 
 $(NAME):			$(OBJECTS) $(INCLUDE)
-					$(CC) $(CC_FLAGS) $(OBJECTS) -o $(NAME)
+					$(CC) $(CC_FLAGS) $(OBJECTS) -o $(NAME) -lreadline
 					mkdir -p ./objects/
 					mv $(OBJECTS) ./objects/
 					echo "\n························ Compilation complete ·························"

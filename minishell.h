@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/02 12:29:31 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:17:27 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@
 
 typedef struct s_mini
 {
-	int		arg_count;
-	char	**args;
-	char	**envp;
 	char	*rdline;
 }				t_mini;
 

@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:34:58 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/01 11:36:42 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:19:10 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,9 @@
 
 int	check_args(t_mini *mini)
 {
+	if (mini->rdline[0] == '0')
+		printf ("0");
+	else
+		return (printf ("1"), -1);
 	return (0);
 }
