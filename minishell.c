@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/02 12:29:43 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:48:10 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 	mini->envp = envp;
 	mini->rdline = readline("minishell¬");
 	while(envp[i])
-		printf("%s\n", envp[i++]);
+		printf("\n%s\n", envp[i++]);
 	if (check_args(mini) != 0)
     	return (-1);
   	minishell(mini);
