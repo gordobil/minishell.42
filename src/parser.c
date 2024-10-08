@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/07 14:21:09 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/10/01 11:34:58 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/10/08 14:33:23 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
-void	minishell(t_mini *mini)
+int	parser(t_mini *mini)
 {
-	printf ("%s\n", mini->rdline);
-	return ;
-}
-
-int	main(void)
-{
-	t_mini	*mini;
-	int		i = 0;
-
-	mini->rdline = readline("minishell¬ ");
-	if (check_args(mini) != 0)
-    	return (-1);
-  	minishell(mini);
-  	return (0);
+	if (mini->rdline[0] == '0')
+		printf ("0");
+	else
+		return (printf ("1"), -1);
+	return (0);
 }

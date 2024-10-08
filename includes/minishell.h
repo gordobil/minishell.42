@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/07 14:17:27 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:33:29 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <errno.h>
+# include "libft.h"
 
 typedef struct s_mini
 {
@@ -26,6 +28,6 @@ typedef struct s_mini
 }				t_mini;
 
 //MAIN
-int	check_args(t_mini *mini);
+int	parser(t_mini *mini);
 
 #endif

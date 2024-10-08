@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c                                       :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 11:34:58 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/07 14:19:10 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/10/08 14:28:45 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
-int	check_args(t_mini *mini)
+void	minishell(t_mini *mini)
 {
-	if (mini->rdline[0] == '0')
-		printf ("0");
-	else
-		return (printf ("1"), -1);
-	return (0);
+	printf ("%s\n", mini->rdline);
+	return ;
+}
+
+int	main(void)
+{
+	t_mini	*mini;
+	int		i = 0;
+
+	while (1)
+	{
+		mini->rdline = readline("minishell¬ ");
+		
+	}
+  	return (0);
 }
