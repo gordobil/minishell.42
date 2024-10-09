@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/08 14:33:29 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:16:35 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # include <signal.h>
 # include <errno.h>
 # include "libft.h"
+
+//COLORS
+# define BLUE "\033[1;33m"
+# define WHITE "\033[0m"
 
 typedef struct s_mini
 {

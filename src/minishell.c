@@ -6,16 +6,20 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/08 14:28:45 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:16:23 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	minishell(t_mini *mini)
+char	*ms_title(void)
 {
-	printf ("%s\n", mini->rdline);
-	return ;
+	char	*title;
+	char	buffer[4096];
+
+	title = ft_strjoin(BLUE"minishell:"WHITE"~", getcwd(buffer, 4096));
+	title = ft_strjoin(title, BLUE"¬ "WHITE);
+	return (title);
 }
 
 int	main(void)
@@ -25,8 +29,8 @@ int	main(void)
 
 	while (1)
 	{
-		mini->rdline = readline("minishell¬ ");
-		
+		mini->rdline = readline(ms_title());
+		break ;
 	}
   	return (0);
 }
