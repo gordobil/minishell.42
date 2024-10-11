@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/09 19:16:35 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/11 19:38:27 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include "libft.h"
 
 //COLORS
-# define BLUE "\033[1;33m"
+# define BLUE "\033[1;94m"
+# define CYAN "\033[0;36m"
 # define WHITE "\033[0m"
 
 typedef struct s_mini
@@ -32,6 +33,14 @@ typedef struct s_mini
 }				t_mini;
 
 //MAIN
-int	parser(t_mini *mini);
+void	rdl_signals(int sig);
+int		parser(char *rdline);
+
+//UTILS
+char	*mini_title(void);
+int		ft_strncmp(const char *s1, const char *s2, unsigned int n);
+size_t	ft_strlen(const char *s);
+char	*ft_strjoin(const char *s1, const char *s2);
+char	**arg_split(const char *s, char c);
 
 #endif
