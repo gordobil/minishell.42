@@ -74,11 +74,12 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 //FT_PRINTF
 int			ft_printf(const char *arg, ...);
-int			ft_putchar(char c, int count);
-int			ft_putstr(char *str, int count);
-int			ft_putnbr(int n, int count);
-int			ft_putunbr(unsigned int n, int count);
-int			ft_puthex(unsigned long n, int count, char arg_format);
-int			ft_putptr(unsigned long p, int count);
+int			ft_putchar(char c);
+int			ft_putstr(char *str);
+int			ft_putmatrix(char **matrix);
+int			ft_putnbr(int n);
+int			ft_putunbr(unsigned int n);
+int			ft_puthex(unsigned long n, char arg_format);
+int			ft_putptr(unsigned long p);
 
 #endif

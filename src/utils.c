@@ -17,7 +17,7 @@ char	*mini_title(void)
 	char	*title;
 	char	buffer[4096];
 
-	title = ft_strjoin(BLUE"minishell: "CYAN"~", getcwd(buffer, 4096));
+	title = ft_strjoin(BLUE"minishell: "YELLOW"~", getcwd(buffer, 4096));
 	title = ft_strjoin(title, BLUE"¬ "WHITE);
 	return (title);
 }

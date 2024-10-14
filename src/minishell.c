@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/11 19:54:44 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/14 14:21:36 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	rdl_signals(int sig)
 {
 	(void)sig;
-	printf("/n");
+	ft_printf("/n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
@@ -27,7 +27,7 @@ int	main(int argc, char **argv, char **envp)
 	char	*rdline;
 	int		i = 0;
 
-	printf ("\n");
+	ft_printf ("\n");
 	while (1)
 	{
 		signal(SIGINT, rdl_signals);
@@ -36,11 +36,16 @@ int	main(int argc, char **argv, char **envp)
 		if (!rdline || ft_strncmp(rdline, "exit", 5) == 0)
 			break ;
 		add_history(rdline);
-		if (parser(rdline) != 0)
+		mini->args = split_args(rdline);
+		ft_printf("%m\n", mini->args);
+		if (mini->args[0] == NULL)
 			break ;
+		
+		/* if (parser(rdline) != 0)
+			break ; */
 		free(rdline);
 	}
-	printf("exit\n");
+	ft_printf("exit\n");
 	clear_history();
   	return (0);
 }

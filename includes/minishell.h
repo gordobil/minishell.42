@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/14 12:17:48 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:35:17 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@
 # include "./libft.h"
 
 //COLORS
-# define BLUE "\033[1;94m"
-# define CYAN "\033[0;36m"
+# define BLUE "\033[1;34m"
+# define YELLOW "\033[0;32m"
 # define WHITE "\033[0m"
 
 typedef struct s_mini
 {
 	char	*rdline;
+	char	**args;
 }				t_mini;
 
 //MAIN
@@ -38,6 +39,8 @@ int		parser(char *rdline);
 
 //UTILS
 char	*mini_title(void);
-char	**arg_split(const char *s);
+char	**split_args(const char *s);
+int		arg_count(const char *s);
+int		arg_len(const char *s, int j);
 
 #endif
