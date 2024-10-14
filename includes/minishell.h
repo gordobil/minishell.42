@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/14 12:09:46 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:17:48 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <errno.h>
-# include "libft.h"
+# include "./libft.h"
 
 //COLORS
 # define BLUE "\033[1;94m"
@@ -38,9 +38,6 @@ int		parser(char *rdline);
 
 //UTILS
 char	*mini_title(void);
-int		ft_strncmp(const char *s1, const char *s2, unsigned int n);
-size_t	ft_strlen(const char *s);
-char	*ft_strjoin(const char *s1, const char *s2);
 char	**arg_split(const char *s);
 
 #endif

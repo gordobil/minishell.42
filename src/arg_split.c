@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
 int	w_count(const char *s)
 {
@@ -33,10 +33,10 @@ int	w_count(const char *s)
 				while (s[i] != '"')
 					i++;
 			}
-			else if (s[i] == "'")
+			else if (s[i] == '\'')
 			{
 				i++;
-				while (s[i] != "'")
+				while (s[i] != '\'')
 					i++;
 			}
 			count++;
@@ -46,16 +46,16 @@ int	w_count(const char *s)
 	return (count);
 }
 
-int	w_len(const char *s, char c, int j)
+int	w_len(const char *s, int j)
 {
 	int	count;
 
 	count = 0;
 	if (s[0] == '\0')
 		return (1);
-	while (s[j] == c)
+	while (s[j] == ' ')
 		j++;
-	while (s[j] != c && s[j] != '\0')
+	while (s[j] != ' ' && s[j] != '\0')
 	{
 		count++;
 		j++;
@@ -63,12 +63,12 @@ int	w_len(const char *s, char c, int j)
 	return (count);
 }
 
-int	w_start(const char *s, char c, int j, int word_l)
+int	w_start(const char *s, int j, int word_l)
 {
 	j = j + word_l;
 	if (s[j] == '\0')
 		return (j);
-	while (s[j] == c)
+	while (s[j] == ' ')
 		j++;
 	return (j);
 }
@@ -107,8 +107,8 @@ char	**arg_split(const char *s)
 	word_l = 0;
 	while (++i < word_c)
 	{
-		j = w_start(s, c, j, word_l);
-		word_l = w_len(s, c, j);
+		j = w_start(s, j, word_l);
+		word_l = w_len(s, j);
 		if (s[0] == '\0')
 			return (matrix_errors(matrix, i, 1));
 		matrix[i] = ft_substr(s, j, word_l);

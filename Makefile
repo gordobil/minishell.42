@@ -1,14 +1,14 @@
-;; ************************************************************************** ;;
-;;                                                                            ;;
-;;                                                        :::      ::::::::   ;;
-;;   Makefile copy                                      :+:      :+:    :+:   ;;
-;;                                                    +:+ +:+         +:+     ;;
-;;   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        ;;
-;;                                                +#+#+#+#+#+   +#+           ;;
-;;   Created: 2024/09/30 11:26:56 by ngordobi          #+#    #+#             ;;
-;;   Updated: 2024/10/14 12:05:07 by ngordobi         ###   ########.fr       ;;
-;;                                                                            ;;
-;; ************************************************************************** ;;
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
+#    Updated: 2024/10/14 12:45:03 by ngordobi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME				=	minishell
 
@@ -57,7 +57,7 @@ export MINISHELL
 all:				$(NAME) $(LIBFT)
 
 $(NAME):			$(OBJECTS) $(LIBFT) $(INCLUDES)
-					$(CC) $(CC_FLAGS) $(OBJECTS) $(RL_FLAGS) -o $(NAME)
+					$(CC) $(CC_FLAGS) $(OBJECTS) $(LIBFT) $(RL_FLAGS) -o $(NAME)
 					mkdir -p $(SRC_PATH)objects/
 					mv $(OBJECTS) $(SRC_PATH)objects/
 					echo "\n······················· Compilation complete ·························"
