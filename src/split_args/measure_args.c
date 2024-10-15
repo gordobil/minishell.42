@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_measure_args.c                               :+:      :+:    :+:   */
+/*   measure_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 15:34:27 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/14 15:39:25 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/15 13:37:25 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	quotes(const char *s, int j, int count)
 {

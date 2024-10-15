@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/10/14 15:35:49 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/10/15 12:13:45 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,15 @@ RL_FLAGS			=	-I/usr/include/readline -lreadline
 LIBFT				=	libft.a
 
 SRC_PATH			=	./src/
+SPLIT_PATH			=	./src/split_args/
 LIBFT_PATH			=	./libft/
 
 SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)parser.c \
-						$(SRC_PATH)utils.c \
-						$(SRC_PATH)split_args.c \
-						$(SRC_PATH)split_count_args.c \
-						$(SRC_PATH)split_measure_args.c \
+						$(SRC_PATH)rdl_utils.c \
+						$(SPLIT_PATH)split_args.c \
+						$(SPLIT_PATH)count_args.c \
+						$(SPLIT_PATH)measure_args.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
 

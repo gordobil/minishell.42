@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/14 15:35:17 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:04:13 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,21 @@ typedef struct s_mini
 {
 	char	*rdline;
 	char	**args;
+	int		arg_c;
 }				t_mini;
 
 //MAIN
-void	rdl_signals(int sig);
 int		parser(char *rdline);
 
-//UTILS
+//RDL_UTILS
+void	rdl_signals(int sig);
 char	*mini_title(void);
-char	**split_args(const char *s);
+int		arg_errors(int error);
+
+//SPLIT_ARGS
+int		split_args(const char *s, t_mini *mini);
 int		arg_count(const char *s);
 int		arg_len(const char *s, int j);
+int		arg_jump(const char *s, int i);
 
 #endif

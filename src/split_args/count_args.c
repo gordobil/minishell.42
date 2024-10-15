@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_count_args.c                                 :+:      :+:    :+:   */
+/*   count_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 15:24:16 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/14 15:25:50 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:18:24 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	word_jump(const char *s, int i)
 {
@@ -24,20 +24,20 @@ int	arg_jump(const char *s, int i)
 	if (s[i] == '"')
 	{
 		i++;
-		while (s[i] != '"' && s[i] != '\0')
+		while (s[i] != '"')
 		{
 			i++;
 			if (s[i] == '\0')
-				return (-1);
+				return (-2);
 		}
 		i++;
 	}
 	else if (s[i] == '\'')		
 	{
 		i++;
-		while (s[i] != '\'' && s[i] != '\0')
+		while (s[i] != '\'')
 		{
-					i++;
+			i++;
 			if (s[i] == '\0')
 				return (-1);
 		}
@@ -53,6 +53,8 @@ int	arg_count(const char *s)
 	int	i;
 	int	count;
 
+	if (s[0] == '\n' && s[1] == '\0')
+		return (0);
 	i = 0;
 	count = 0;
 	while (s[i] == ' ')
@@ -62,6 +64,9 @@ int	arg_count(const char *s)
 	while (s[i] != '\0')
 	{
 		i = arg_jump(s, i);
+		ft_printf("%d\n", i);
+		if (i <= 0)
+			return (i);
 		while (s[i] == ' ')
 			i++;
 		if (s[i] != '\0')
