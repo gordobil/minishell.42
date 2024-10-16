@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 15:34:27 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/15 13:37:25 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:15:34 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	arg_len(const char *s, int j)
 	int	count;
 
 	count = 0;
-	if (s[j - 1] == '"' || s[j - 1] == '\'')
+	if ((s[j - 1] == '"' || s[j - 1] == '\'')
+		&& quote_count(s, j - 1) == j - 1)
 		count = quotes(s, j, count);
 	else
 	{

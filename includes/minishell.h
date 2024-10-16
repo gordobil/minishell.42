@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/15 14:04:13 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:14:40 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int		split_args(const char *s, t_mini *mini);
 int		arg_count(const char *s);
 int		arg_len(const char *s, int j);
 int		arg_jump(const char *s, int i);
+int		quote_count(const char *s, int j);
 
 #endif

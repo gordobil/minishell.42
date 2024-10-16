@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 15:24:16 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/15 14:18:24 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:21:40 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	arg_count(const char *s)
 	while (s[i] != '\0')
 	{
 		i = arg_jump(s, i);
-		ft_printf("%d\n", i);
 		if (i <= 0)
 			return (i);
 		while (s[i] == ' ')
