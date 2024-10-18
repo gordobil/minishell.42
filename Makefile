@@ -6,14 +6,14 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/10/15 12:13:45 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/10/18 20:57:50 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				=	minishell
 
 CC					=	gcc
-CC_FLAGS			=	-Wall -Wextra -Werror
+CC_FLAGS			=	-g -Wall -Wextra -Werror
 RL_FLAGS			=	-I/usr/include/readline -lreadline
 
 LIBFT				=	libft.a
