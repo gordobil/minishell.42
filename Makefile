@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/10/18 20:57:50 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/10/21 15:01:46 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,7 @@ LIBFT_PATH			=	./libft/
 SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)parser.c \
 						$(SRC_PATH)rdl_utils.c \
-						$(SPLIT_PATH)split_args.c \
-						$(SPLIT_PATH)count_args.c \
-						$(SPLIT_PATH)measure_args.c \
+						$(SRC_PATH)split_args.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
 

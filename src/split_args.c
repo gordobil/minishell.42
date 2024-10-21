@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_args.c                                       :+:      :+:    :+:   */
+/*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 15:24:16 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/16 19:21:40 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/10/21 15:26:57 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
 int	word_jump(const char *s, int i)
 {
@@ -74,4 +74,49 @@ int	arg_count(const char *s)
 			break ;
 	}
 	return (count);
+}
+
+int	arg_size(char *s, int i, char mark)
+{
+	int start;
+
+	while (s[i] == ' ')
+		i++;
+	if (mark == 's')
+		return (i);
+	start = i;
+	i = arg_jump(s, i);
+	if (mark == 'e')
+		return (i);
+	else
+		return (i - start);
+}
+
+char	**split_args(char *s, t_mini *mini)
+{
+	char	**args;
+	int		i;
+	int		j;
+
+	mini->arg_c = arg_count(s);
+	if (mini->arg_c <= 0)
+		return (NULL);
+	args = malloc((mini->arg_c + 1) * sizeof(char *));
+	i = 0;
+	j = 0;
+	while (i < mini->arg_c)
+	{
+		args[i] = malloc((arg_size(s, j, 'r') + 1) * sizeof(char));
+		if (!(args[i]))
+		{
+			while (i-- >= 0)
+				free(args[i]);
+			return (free(args), NULL);
+		}
+		args[i] = ft_substr(s, arg_size(s, j, 's'), arg_size(s, j, 'r'));
+		j = arg_size(s, j, 'e');
+		i++;
+	}
+	args[i] = NULL;
+	return (args);
 }
