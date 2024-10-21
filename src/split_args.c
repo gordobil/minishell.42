@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/21 15:26:57 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:31:20 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	arg_jump(const char *s, int i)
 		}
 		i++;
 	}
-	else if (s[i] == '\'')		
+	else if (s[i] == '\'')
 	{
 		i++;
 		while (s[i] != '\'')
@@ -78,7 +78,7 @@ int	arg_count(const char *s)
 
 int	arg_size(char *s, int i, char mark)
 {
-	int start;
+	int	start;
 
 	while (s[i] == ' ')
 		i++;
