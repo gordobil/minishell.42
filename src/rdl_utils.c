@@ -31,15 +31,10 @@ char	*mini_title(void)
 	return (title);
 }
 
-int	arg_errors(int error)
+void	error_message(int error)
 {
-	if (error == 0)
-		ft_printf ("\n");
-	else if (error == -1)
-		ft_printf ("error: unclosed simple quotes.");
+	if (error == -1)
+		ft_printf("error: unclosed quotes\n");
 	else if (error == -2)
-		ft_printf ("error: unclosed double quotes.");
-	else if (error == -3)
-		ft_printf ("error: error reading commands.");
-	return (error);
+		ft_printf("error: unclosed double quotes\n");
 }

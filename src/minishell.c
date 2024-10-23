@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/23 20:06:53 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/23 20:49:03 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ t_args	*arg_info(char **arg_matrix)
 		args = args->next;
 		i++;
 	}
+	while (args->prev != NULL)
+		args = args->prev;
+	return (args);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -76,6 +79,12 @@ int	main(int argc, char **argv, char **envp)
 		mini.arg_matrix = split_args(rdline, &mini);
 		if (mini.arg_matrix != NULL)
 			mini.args = arg_info(mini.arg_matrix);
+		/* while (mini.args != NULL)
+		{
+			ft_printf("[%d|%c]%s/\n", mini.args->position, mini.args->type, mini.args->arg);
+			mini.args = mini.args->next;
+		} */
+		//free_mini(&mini);
 		free(rdline);
 	}
 	ft_printf("exit\n\n");

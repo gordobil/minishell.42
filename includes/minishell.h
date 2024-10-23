@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/23 19:25:34 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/23 20:47:36 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ typedef struct s_mini
 
 //MAIN
 char	**split_args(char *str, t_mini *mini);
-void	error_message(int error);
+//void	free_mini(t_mini *mini);
 
 //RDL_UTILS
 void	rdl_signals(int sig);
 char	*mini_title(void);
-int		arg_errors(int error);
+void	error_message(int error);
 
 /* ARGUMENT TYPES:
 	2 = double quotation____ " "
