@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/21 15:31:20 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:21:22 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	arg_size(char *s, int i, char mark)
 		return (i);
 	start = i;
 	i = arg_jump(s, i);
-	if (mark == 'e')
+	if (mark == 'e' || i < 0)
 		return (i);
 	else
 		return (i - start);
@@ -100,22 +100,22 @@ char	**split_args(char *s, t_mini *mini)
 
 	mini->arg_c = arg_count(s);
 	if (mini->arg_c <= 0)
-		return (NULL);
+		return (error_message(mini->arg_c), NULL);
 	args = malloc((mini->arg_c + 1) * sizeof(char *));
-	i = 0;
+	i = -1;
 	j = 0;
-	while (i < mini->arg_c)
+	while (++i < mini->arg_c)
 	{
 		args[i] = malloc((arg_size(s, j, 'r') + 1) * sizeof(char));
 		if (!(args[i]))
 		{
-			while (i-- >= 0)
+			i++;
+			while (--i >= 0)
 				free(args[i]);
 			return (free(args), NULL);
 		}
 		args[i] = ft_substr(s, arg_size(s, j, 's'), arg_size(s, j, 'r'));
 		j = arg_size(s, j, 'e');
-		i++;
 	}
 	args[i] = NULL;
 	return (args);

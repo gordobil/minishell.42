@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/22 13:17:12 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/23 19:25:34 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,34 @@
 # define YELLOW "\033[0;32m"
 # define WHITE "\033[0m"
 
-typedef	struct s_args
+struct	s_mini;
+
+typedef struct s_args
 {
-	char	*arg;
-	int		position;
-	char	type;
-	t_mini	*mini;
-	t_args	*next;
-	t_args	*prev;
+	char			*arg;
+	int				position;
+	char			type;
+	struct s_mini	*mini;
+	void			*next;
+	void			*prev;
 }				t_args;
+
+typedef struct s_mini
+{
+	char	*rdline;
+	char	**arg_matrix;
+	int		arg_c;
+	t_args	*args;
+}				t_mini;
+
+//MAIN
+char	**split_args(char *str, t_mini *mini);
+void	error_message(int error);
+
+//RDL_UTILS
+void	rdl_signals(int sig);
+char	*mini_title(void);
+int		arg_errors(int error);
 
 /* ARGUMENT TYPES:
 	2 = double quotation____ " "
@@ -46,23 +65,6 @@ typedef	struct s_args
 	a = append to output____ >>
 	v = variable_____________ $
 	p = pipe_________________ |
-	
 */
-typedef struct s_mini
-{
-	char	*rdline;
-	char	**arg_matrix;
-	int		arg_c;
-	t_args	*args;
-}				t_mini;
-
-//MAIN
-int		parser(char *rdline);
-char	**split_args(char *str, t_mini *mini);
-
-//RDL_UTILS
-void	rdl_signals(int sig);
-char	*mini_title(void);
-int		arg_errors(int error);
 
 #endif

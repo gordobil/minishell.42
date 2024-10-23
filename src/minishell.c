@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/22 13:17:55 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/23 20:06:53 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	arg_type(char *arg)
 t_args	*arg_info(char **arg_matrix)
 {
 	t_args	*args;
+	t_args	*prev_node;
 	int		i;
 
 	i = 0;
@@ -46,14 +47,16 @@ t_args	*arg_info(char **arg_matrix)
 		args->arg = arg_matrix[i];
 		args->position = i;
 		args->type = arg_type(arg_matrix[i]);
+		if (i == 0)
+			args->prev = NULL;
+		else
+			args->prev = prev_node;
+		if (arg_matrix[i + 1] == NULL)
+			args->next = NULL;
+		prev_node = args;
+		args = args->next;
+		i++;
 	}
-}
-
-void	mini_init(t_mini *mini)
-{
-	mini->rdline = NULL;
-	mini->args = NULL;
-	mini->arg_c = 0;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -62,7 +65,6 @@ int	main(int argc, char **argv, char **envp)
 	char	*rdline;
 
 	ft_printf ("\n");
-	mini_init(&mini);
 	while (1)
 	{
 		signal(SIGINT, rdl_signals);
@@ -72,7 +74,8 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		add_history(rdline);
 		mini.arg_matrix = split_args(rdline, &mini);
-		mini.args = arg_info(mini.arg_matrix);
+		if (mini.arg_matrix != NULL)
+			mini.args = arg_info(mini.arg_matrix);
 		free(rdline);
 	}
 	ft_printf("exit\n\n");
