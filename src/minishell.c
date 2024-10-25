@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/23 20:49:03 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/25 11:27:33 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,9 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		add_history(rdline);
 		mini.arg_matrix = split_args(rdline, &mini);
-		if (mini.arg_matrix != NULL)
-			mini.args = arg_info(mini.arg_matrix);
+		ft_printf("%m\n", mini.arg_matrix);
+		/* if (mini.arg_matrix != NULL)
+			mini.args = arg_info(mini.arg_matrix); */
 		/* while (mini.args != NULL)
 		{
 			ft_printf("[%d|%c]%s/\n", mini.args->position, mini.args->type, mini.args->arg);
