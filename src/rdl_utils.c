@@ -15,9 +15,9 @@
 void	rdl_signals(int sig)
 {
 	(void)sig;
-	ft_printf("/n");
+	ft_printf("\n");
 	rl_replace_line("", 0);
-	rl_on_new_line();
+	ft_printf("%s", mini_title());
 	rl_redisplay();
 }
 

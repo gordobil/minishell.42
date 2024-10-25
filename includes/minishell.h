@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/23 20:47:36 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/25 13:33:03 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,15 @@ typedef struct s_args
 {
 	char			*arg;
 	int				position;
-	char			type;
-	struct s_mini	*mini;
-	void			*next;
-	void			*prev;
+	struct s_args	*next;
+	struct s_args	*prev;
 }				t_args;
 
 typedef struct s_mini
 {
-	char	*rdline;
 	char	**arg_matrix;
 	int		arg_c;
-	t_args	*args;
+	t_args	args;
 }				t_mini;
 
 //MAIN
@@ -55,16 +52,5 @@ char	**split_args(char *str, t_mini *mini);
 void	rdl_signals(int sig);
 char	*mini_title(void);
 void	error_message(int error);
-
-/* ARGUMENT TYPES:
-	2 = double quotation____ " "
-	q = quotation marks_____ ' '
-	i = infile______________ <
-	o = outfile_____________ >
-	d = delimiter___________ <<
-	a = append to output____ >>
-	v = variable_____________ $
-	p = pipe_________________ |
-*/
 
 #endif
