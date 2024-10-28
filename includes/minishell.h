@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/25 13:33:03 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:57:50 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,27 @@
 
 struct	s_mini;
 
-typedef struct s_args
+typedef struct s_pipes
 {
-	char			*arg;
+	char			**command;
 	int				position;
-	struct s_args	*next;
-	struct s_args	*prev;
-}				t_args;
+	struct s_mini	*mini;
+	struct s_pipes	*next;
+	struct s_pipes	*prev;
+}				t_pipes;
 
 typedef struct s_mini
 {
 	char	**arg_matrix;
 	int		arg_c;
-	t_args	args;
+	char	*infile;
+	char	*outfile;
+	t_pipes	*pipes;
 }				t_mini;
 
 //MAIN
 char	**split_args(char *str, t_mini *mini);
-//void	free_mini(t_mini *mini);
+void	pipe_info(char **arg_matrix, t_mini *mini);
 
 //RDL_UTILS
 void	rdl_signals(int sig);

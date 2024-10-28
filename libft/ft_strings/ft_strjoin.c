@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:27:37 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/23 20:03:14 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/28 10:53:00 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	size_t	i;
 	size_t	j;
 
-	s3 = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	s3 = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 2);
 	if (!s3)
 		return (NULL);
 	i = 0;
