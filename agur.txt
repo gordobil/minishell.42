@@ -1,0 +1,12 @@
+.
+..
+.git
+.vscode
+Makefile
+agur.txt
+includes
+libft
+libft.a
+minishell
+src
+subject_minishell.pdf
