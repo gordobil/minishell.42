@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/28 11:43:25 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/29 14:22:21 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,24 @@
 
 int	word_jump(const char *s, int i)
 {
-	while (s[i] != ' ' && s[i] != '"' && s[i] != '\'' && s[i] != '\0')
+	if (s[i] == '|')
 		i++;
+	else
+	{
+		if (s[i] == '<' || s[i] == '>')
+		{
+			i++;
+			if (s[i] == '<' && s[i + 1] == '<')
+				i++;
+			else if (s[i] == '>' && s[i + 1] == '>')
+				i++;
+			while (s[i] == ' ')
+				i++;
+		}
+		while (s[i] != ' ' && s[i] != '"' && s[i] != '|' && s[i] != '\''
+				&& s[i] != '\0' && s[i] != '<' && s[i] != '>')
+				i++;
+	}
 	return (i);
 }
 

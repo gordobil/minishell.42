@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-void	single_comm(char **arg_matrix, t_mini *mini)
+void	single_command(char **arg_matrix, t_mini *mini)
 {
 	int	i;
 
@@ -27,6 +27,35 @@ void	single_comm(char **arg_matrix, t_mini *mini)
 	mini->pipes->next = NULL;
 }
 
+void	dup_args(char **arg_matrix, t_mini *mini, int i)
+{
+	int	j;
+	int	k;
+
+	j = 0;
+	k = 0;
+	while ((ft_strcmp(arg_matrix[i], "|") != 0) && (arg_matrix[i] != NULL))
+	{
+		if (arg_matrix[i][0] != '<' && arg_matrix[i][0] != '>')
+		{
+			mini->pipes->command[j] = ft_strdup(arg_matrix[i]);
+			j++;
+		}
+		else
+		{
+			if (k < mini->file_c - 1)
+			{
+				mini->files[k] = ft_strdup(arg_matrix[i]);
+				k++;
+			}
+			i++;
+		}
+		if (arg_matrix[i] == NULL)
+			break ;
+	}
+	mini->pipes->command[j] = NULL;
+}
+
 int	count_args(char **arg_matrix, t_mini *mini, int i, char ret)
 {
 	int	count;
@@ -34,20 +63,18 @@ int	count_args(char **arg_matrix, t_mini *mini, int i, char ret)
 	count = 0;
 	while (arg_matrix[++i] != NULL)
 	{
-		if (arg_matrix[i][0] == '|' && arg_matrix[i][1] == '\0')
+		if (ft_strcmp(arg_matrix[i], "|") == 0)
 			break ;
 		if (arg_matrix[i][0] != '<' && arg_matrix[i][0] != '>')
 			count++;
 		else if (arg_matrix[i][0] == '<')
 		{
-			if (mini->infile != NULL)
-				free(mini->infile);
+			mini->file_c++;
 			mini->infile = ft_strdup(arg_matrix[i]);
 		}
 		else if (arg_matrix[i][0] == '>')
 		{
-			if (mini->infile != NULL)
-				free(mini->infile);
+			mini->file_c++;
 			mini->outfile = ft_strdup(arg_matrix[i]);
 		}
 	}
@@ -56,28 +83,17 @@ int	count_args(char **arg_matrix, t_mini *mini, int i, char ret)
 	return (count);
 }
 
-void	dup_args(char **arg_matrix, t_mini *mini, int i)
-{
-	int	j;
-
-	j = 0;
-	while ((arg_matrix[i][0] != '|' && arg_matrix[i][1] != '\0')
-		&& arg_matrix[i] != NULL)
-	{
-		if (arg_matrix[i][0] != '<' && arg_matrix[i][0] != '>')
-			mini->pipes->command[j] = ft_strdup(arg_matrix[i]);
-		i++;
-		j++;
-	}
-	mini->pipes->command[j] = NULL;
-}
-
 void	pipe_info(char **arg_matrix, t_mini *mini)
 {
 	t_pipes	*prev_node;
 	int		i;
 	int		position;
 
+	mini->arg_matrix = NULL;
+	mini->infile = NULL;
+	mini->outfile = NULL;
+	mini->pipes = NULL;
+	mini->file_c = 0;
 	i = 0;
 	position = 0;
 	while (arg_matrix[i] != NULL)
@@ -87,12 +103,11 @@ void	pipe_info(char **arg_matrix, t_mini *mini)
 		mini->pipes->position = position;
 		mini->pipes->command = malloc((count_args(arg_matrix, mini, i - 1, 'c') + 1)
 				* sizeof(char *));
-		ft_printf("MALLOCS\n");
+		mini->files = malloc(mini->file_c * sizeof(char *));
+		mini->files[mini->file_c - 1] = NULL;
 		if (count_args(arg_matrix, mini, i - 1, 'c') == mini->arg_c)
-			return (single_comm(arg_matrix, mini));
-		ft_printf("1 ARG\n");
+			return (single_command(arg_matrix, mini));
 		dup_args(arg_matrix, mini, i);
-		ft_printf("DUP ARGS\n");
 		if (position == 0)
 			mini->pipes->prev = NULL;
 		else
@@ -101,19 +116,16 @@ void	pipe_info(char **arg_matrix, t_mini *mini)
 			mini->pipes->prev->next = mini->pipes;
 		}
 		prev_node = mini->pipes;
-		ft_printf("PREV NODE\n");
-		if (arg_matrix[i + 1] == NULL)
+		ft_printf("%m\n", mini->pipes->command);
+		if (arg_matrix[count_args(arg_matrix, mini, i - 1, 'i')] == NULL)
 		{
 			mini->pipes->next = NULL;
 			break ;
 		}
 		i = count_args(arg_matrix, mini, i - 1, 'i');
-		if (arg_matrix[i][0] == '|')
+		if (ft_strcmp(arg_matrix[i], "|") == 0)
 			i++;
-		ft_printf("---------------i:%d---------------\n", i);
-		ft_printf("%m", mini->pipes->command);
 		mini->pipes = mini->pipes->next;
 		position++;
-		ft_printf("\n");
 	}
 }

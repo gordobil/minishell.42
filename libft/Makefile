@@ -44,6 +44,7 @@ SOURCES				=	$(CHAR_PATH)ft_isalpha.c \
 						$(STR_PATH)ft_strlen.c \
 						$(STR_PATH)ft_strlcpy.c \
 						$(STR_PATH)ft_strlcat.c \
+						$(STR_PATH)ft_strcmp.c \
 						$(STR_PATH)ft_strncmp.c \
 						$(STR_PATH)ft_strnstr.c \
 						$(STR_PATH)ft_strchr.c \
