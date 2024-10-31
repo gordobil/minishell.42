@@ -23,7 +23,7 @@ int	ft_strcmp(char *s1, char *s2)
 	{
 		if (s1[i] == s2[i])
 			i++;
-		else
+		else if (s1[i] != s2[i])
 			break ;
 	}
 	if (i == ft_strlen(s1) && i == ft_strlen(s2)

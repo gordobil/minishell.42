@@ -19,8 +19,8 @@ int	ft_putmatrix(char **matrix)
 
 	i = 0;
 	count = 0;
-	if (matrix[0] == NULL)
-		return (ft_putstr(matrix[0]));
+	if (matrix[0] == NULL || matrix == NULL)
+		return (ft_putstr(NULL));
 	while (matrix[i] != NULL)
 	{
 		count += ft_putstr(matrix[i]);

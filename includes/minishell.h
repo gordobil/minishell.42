@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/29 14:20:01 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:14:04 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,11 @@ void	pipe_info(char **arg_matrix, t_mini *mini);
 void	rdl_signals(int sig);
 char	*mini_title(void);
 void	error_message(int error);
+
+//PARSING_UTILS
+int		file_count(char **args, int i, char ret);
+int		count_args(char **arg_matrix, t_mini *mini, int i, char ret);
+int		ms_strcmp(char *s1, char *s2);
+void	free_structs(t_mini *mini, int i);
 
 #endif

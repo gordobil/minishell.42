@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   rdl_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 18:50:12 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/11 18:50:12 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/10/31 14:53:30 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/10/31 14:53:30 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	rdl_signals(int sig)
 {
@@ -38,3 +38,5 @@ void	error_message(int error)
 	else if (error == -2)
 		ft_printf("error: unclosed double quotes\n");
 }
+
+

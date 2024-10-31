@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/29 14:22:21 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:50:59 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	word_jump(const char *s, int i)
 {
@@ -25,12 +25,12 @@ int	word_jump(const char *s, int i)
 				i++;
 			else if (s[i] == '>' && s[i + 1] == '>')
 				i++;
-			while (s[i] == ' ')
+			while (s[i] == ' ' || s[i] == '	')
 				i++;
 		}
 		while (s[i] != ' ' && s[i] != '"' && s[i] != '|' && s[i] != '\''
-				&& s[i] != '\0' && s[i] != '<' && s[i] != '>')
-				i++;
+			&& s[i] != '\0' && s[i] != '<' && s[i] != '>' && s[i] != '	')
+			i++;
 	}
 	return (i);
 }
@@ -73,7 +73,7 @@ int	arg_count(const char *s)
 		return (0);
 	i = 0;
 	count = 0;
-	while (s[i] == ' ')
+	while (s[i] == ' ' || s[i] == '	')
 		i++;
 	if (s[i] != '\0')
 		count = 1;
@@ -82,7 +82,7 @@ int	arg_count(const char *s)
 		i = arg_jump(s, i);
 		if (i <= 0)
 			return (i);
-		while (s[i] == ' ')
+		while (s[i] == ' ' || s[i] == '	')
 			i++;
 		if (s[i] != '\0')
 			count++;
@@ -96,7 +96,7 @@ int	arg_size(char *s, int i, char mark)
 {
 	int	start;
 
-	while (s[i] == ' ')
+	while (s[i] == ' ' || s[i] == '	')
 		i++;
 	if (mark == 's')
 		return (i);
