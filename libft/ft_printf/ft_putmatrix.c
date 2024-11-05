@@ -20,7 +20,7 @@ int	ft_putmatrix(char **matrix)
 	i = 0;
 	count = 0;
 	if (matrix[0] == NULL || matrix == NULL)
-		return (ft_putstr(NULL));
+		return (ft_putstr("(null)"));
 	while (matrix[i] != NULL)
 	{
 		count += ft_putstr(matrix[i]);

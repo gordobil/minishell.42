@@ -38,5 +38,3 @@ void	error_message(int error)
 	else if (error == -2)
 		ft_printf("error: unclosed double quotes\n");
 }
-
-
