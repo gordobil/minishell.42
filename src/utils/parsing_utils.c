@@ -12,6 +12,17 @@
 
 #include "../../includes/minishell.h"
 
+int	file_management(t_mini *mini, int i, int k)
+{
+	mini->files[k] = ft_strdup(mini->arg_matrix[i]);
+	if (mini->arg_matrix[i][0] == '<')
+		mini->pipes->infile = ft_strdup(mini->arg_matrix[i]);
+	else if (mini->arg_matrix[i][0] == '>')
+		mini->pipes->outfile = ft_strdup(mini->arg_matrix[i]);
+	k++;
+	return (k);
+}
+
 int	file_count(char **args, int i, char ret)
 {
 	int	j;
@@ -48,10 +59,6 @@ int	count_args(char **arg_matrix, t_mini *mini, int i, char ret)
 			break ;
 		if (arg_matrix[i][0] != '<' && arg_matrix[i][0] != '>')
 			count++;
-		/* else if (arg_matrix[i][0] == '<')
-			mini->infile = ft_strdup(arg_matrix[i]);
-		else if (arg_matrix[i][0] == '>')
-			mini->outfile = ft_strdup(arg_matrix[i]); */
 		i++;
 	}
 	if (ret == 'i')

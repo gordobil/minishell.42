@@ -31,7 +31,7 @@ char	*mini_title(void)
 	return (title);
 }
 
-void	error_message(int error)
+void	error_messages(int error)
 {
 	if (error == -1)
 		ft_printf("error: unclosed quotes\n");

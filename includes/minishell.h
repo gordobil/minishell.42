@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/06 13:08:19 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:21:09 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void	pipe_info(char **arg_matrix, t_mini *mini, int k);
 //RDL_UTILS
 void	rdl_signals(int sig);
 char	*mini_title(void);
-void	error_message(int error);
+void	error_messages(int error);
 
 //PARSING_UTILS
 int		file_count(char **args, int i, char ret);
+int		file_management(t_mini *mini, int i, int k);
 int		count_args(char **arg_matrix, t_mini *mini, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
-void	free_structs(t_mini *mini, int i);
 
 #endif

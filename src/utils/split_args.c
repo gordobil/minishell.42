@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/31 14:50:59 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:21:29 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char	**split_args(char *s, t_mini *mini)
 
 	mini->arg_c = arg_count(s);
 	if (mini->arg_c <= 0)
-		return (error_message(mini->arg_c), NULL);
+		return (error_messages(mini->arg_c), NULL);
 	args = malloc((mini->arg_c + 1) * sizeof(char *));
 	i = -1;
 	j = 0;
