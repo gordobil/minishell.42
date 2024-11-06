@@ -54,6 +54,10 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 			if (file_count(mini->arg_matrix, i, 'r') < 0)
 			{
 				mini->files[k] = ft_strdup(mini->arg_matrix[i]);
+				if (mini->arg_matrix[i][0] == '<')
+					mini->pipes->infile = ft_strdup(mini->arg_matrix[i]);
+				else if (mini->arg_matrix[i][0] == '>')
+					mini->pipes->outfile = ft_strdup(mini->arg_matrix[i]);
 				k++;
 			}
 		}
@@ -88,8 +92,8 @@ int	init_structs(t_mini *mini, int i, int position)
 	arguments = 0;
 	if (position == -1)
 	{
-		mini->infile = NULL;
-		mini->outfile = NULL;
+		/* mini->infile = NULL;
+		mini->outfile = NULL; */
 		mini->pipes = NULL;
 		mini->file_c = file_count(mini->arg_matrix, 0, 'c');
 		if (mini->file_c <= 0)
@@ -102,6 +106,8 @@ int	init_structs(t_mini *mini, int i, int position)
 		mini->pipes = malloc(sizeof(t_pipes));
 		mini->pipes->mini = mini;
 		mini->pipes->position = position;
+		mini->pipes->infile = NULL;
+		mini->pipes->outfile = NULL;
 		arguments = count_args(mini->arg_matrix, mini, i, 'c');
 		mini->pipes->command = malloc((arguments + 1) * sizeof(char *));
 	}

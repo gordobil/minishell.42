@@ -48,10 +48,10 @@ int	count_args(char **arg_matrix, t_mini *mini, int i, char ret)
 			break ;
 		if (arg_matrix[i][0] != '<' && arg_matrix[i][0] != '>')
 			count++;
-		else if (arg_matrix[i][0] == '<')
+		/* else if (arg_matrix[i][0] == '<')
 			mini->infile = ft_strdup(arg_matrix[i]);
 		else if (arg_matrix[i][0] == '>')
-			mini->outfile = ft_strdup(arg_matrix[i]);
+			mini->outfile = ft_strdup(arg_matrix[i]); */
 		i++;
 	}
 	if (ret == 'i')

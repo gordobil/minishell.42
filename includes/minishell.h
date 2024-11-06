@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/05 10:47:51 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:08:19 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_pipes
 {
 	char			**command;
 	int				position;
+	char			*infile;
+	char			*outfile;
 	struct s_mini	*mini;
 	struct s_pipes	*next;
 	struct s_pipes	*prev;
@@ -42,8 +44,6 @@ typedef struct s_mini
 {
 	char	**arg_matrix;
 	int		arg_c;
-	char	*infile;
-	char	*outfile;
 	int		file_c;
 	char	**files;
 	t_pipes	*pipes;
