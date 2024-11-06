@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/05 11:02:56 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:00:40 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ int	main(int argc, char **argv, char **envp)
 		if (mini.arg_matrix)
 		{
 			pipe_info(mini.arg_matrix, &mini, 0);
-			while (mini.pipes != NULL)
+				while (mini.pipes != NULL)
 			{
 				ft_printf("%m\n", mini.pipes->command);
 				mini.pipes = mini.pipes->next;
 			}
 			ft_printf("\nfiles:%d\n", mini.file_c);
 			if (mini.files)
-				ft_printf("\n%m\n\n", mini.files);
+				ft_printf("\n%m\n", mini.files);
 			ft_printf("in:%s out:%s\n", mini.infile, mini.outfile);
 		}
 		free(rdline);

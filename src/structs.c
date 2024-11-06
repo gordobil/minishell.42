@@ -49,16 +49,19 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 			j++;
 		}
 		else if ((mini->arg_matrix[i][0] == '<'
-			|| mini->arg_matrix[i][0] == '>') && (k < mini->file_c)
-				&& file_count(mini->arg_matrix, i, 'r') < 0)
+			|| mini->arg_matrix[i][0] == '>') && (k < mini->file_c))
 		{
-			mini->files[k] = ft_strdup(mini->arg_matrix[i]);
-			k++;
+			if (file_count(mini->arg_matrix, i, 'r') < 0)
+			{
+				mini->files[k] = ft_strdup(mini->arg_matrix[i]);
+				k++;
+			}
 		}
 		i++;
 	}
 	mini->pipes->command[j] = NULL;
-	mini->files[k] = NULL;
+	if (k > 0)
+		mini->files[k] = NULL;
 	return (k);
 }
 
