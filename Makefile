@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/10/31 14:54:25 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/11/08 12:23:09 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,11 +25,14 @@ LIBFT_PATH			=	./libft/
 
 SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)structs.c \
-						$(UT_PATH)split_args.c \
+						$(SRC_PATH)init_structs.c \
+
+UT_SRC				=	$(UT_PATH)split_args.c \
 						$(UT_PATH)parsing_utils.c \
 						$(UT_PATH)rdl_utils.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
+UT_OBJ				= 	$(UT_SRC:%.c=%.o)
 
 INCLUDES			=	./includes/minishell.h \
 						./includes/libft.h \
@@ -60,10 +63,12 @@ export MINISHELL
 
 all:				$(NAME) $(LIBFT)
 
-$(NAME):			$(OBJECTS) $(LIBFT) $(INCLUDES)
-					$(CC) $(CC_FLAGS) $(OBJECTS) $(LIBFT) $(RL_FLAGS) -o $(NAME)
+$(NAME):			$(OBJECTS) $(UT_OBJ) $(LIBFT) $(INCLUDES)
+					$(CC) $(CC_FLAGS) $(OBJECTS) $(UT_OBJ) $(LIBFT) $(RL_FLAGS) -o $(NAME)
 					mkdir -p $(SRC_PATH)objects/
 					mv $(OBJECTS) $(SRC_PATH)objects/
+					mkdir -p $(UT_PATH)objects/
+					mv $(UT_OBJ) $(UT_PATH)objects/
 					echo "\n························· Compilation complete ··························"
 					echo "$$MINISHELL"
 
@@ -73,6 +78,8 @@ $(LIBFT):
 clean:
 					rm -rf $(SRC_PATH)objects/
 					rm -rf $(SRC_PATH)*.o
+					rm -rf $(UT_PATH)objects/
+					rm -rf $(UT_PATH)*.o
 					@make clean --no-print-directory -C $(LIBFT_PATH)
 					echo "$(WHITE) · $(BLUE)Minishell objects removed.$(WHITE)\n"
 					

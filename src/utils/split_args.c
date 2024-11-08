@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/06 13:21:29 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/08 11:31:23 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 int	word_jump(const char *s, int i)
 {
 	if (s[i] == '|')
-		i++;
+		while (s[i] == '|' || s[i] == ' ' || s[i] == '	')
+			i++;
 	else
 	{
 		if (s[i] == '<' || s[i] == '>')
 		{
 			i++;
-			if (s[i] == '<' && s[i + 1] == '<')
+			if (s[i - 1] == '<' && s[i] == '<')
 				i++;
-			else if (s[i] == '>' && s[i + 1] == '>')
+			else if (s[i - 1] == '>' && s[i] == '>')
 				i++;
 			while (s[i] == ' ' || s[i] == '	')
 				i++;

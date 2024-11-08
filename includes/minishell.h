@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/06 13:47:27 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:07:01 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_pipes
 	int				position;
 	char			*infile;
 	char			*outfile;
+	char			*append;
 	struct s_mini	*mini;
 	struct s_pipes	*next;
 	struct s_pipes	*prev;
@@ -42,16 +43,19 @@ typedef struct s_pipes
 
 typedef struct s_mini
 {
-	char	**arg_matrix;
 	int		arg_c;
+	char	**arg_matrix;
 	int		file_c;
 	char	**files;
+	int		del_c;
+	char	**in_delimiter;
 	t_pipes	*pipes;
 }				t_mini;
 
 //MAIN
 char	**split_args(char *str, t_mini *mini);
 void	pipe_info(char **arg_matrix, t_mini *mini, int k);
+int		init_structs(t_mini *mini, int i, int position);
 
 //RDL_UTILS
 void	rdl_signals(int sig);
