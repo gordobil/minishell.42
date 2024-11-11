@@ -35,7 +35,7 @@ int	file_management(t_mini *mini, int i, int k)
 			mini->pipes->outfile->file = NULL;
 	}
 	else if (mini->arg_matrix[i][0] == '<' && mini->arg_matrix[i][1] == '<')
-		mini->pipes->delimiter = ft_strdup(mini->arg_matrix[i]);
+		mini->pipes->delimiter->file = ft_strdup(mini->arg_matrix[i]);
 	return (k);
 }
 

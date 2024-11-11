@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/11 12:55:00 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/11 13:55:19 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 void	printttttttt(t_mini	*mini)
 {
-	while (mini->pipes != NULL)
+	t_pipes	*command = mini->pipes;
+
+	while (command != NULL)
 	{
-		ft_printf("NODE [%d]\n\n%m", mini->pipes->position, mini->pipes->command);
-		ft_printf("\nFiles:\nin:%s out:%s app:%s del:%s\n\n.............\n\n", mini->pipes->infile->file, mini->pipes->outfile->file, mini->pipes->append->file, mini->pipes->delimiter);
-		mini->pipes = mini->pipes->next;
+		ft_printf("NODE [%d]\n\n%m", command->position, command->command);
+		ft_printf("\nFiles:\nin:%s out:%s app:%s del:%s\n\n.............\n\n", command->infile->file, command->outfile->file, command->append->file, command->delimiter->file);
+		command = command->next;
 	}
 	ft_printf("File count: %d\n\n", mini->file_c);
 	if (mini->files)
 		ft_printf("%m\n", mini->files);
-	ft_printf("Delimiter count: %d\n", mini->del_c);
+	ft_printf("Delimiter count: %d\n\n", mini->del_c);
 	if (mini->delimiters)
 		ft_printf("%m\n", mini->delimiters);
 }
@@ -47,6 +49,8 @@ int	main(int argc, char **argv, char **envp)
 		if (mini.arg_matrix)
 		{
 			pipe_info(mini.arg_matrix, &mini, 0);
+			if (mini.del_c > 0)
+				delimiters(&mini);
 			printttttttt(&mini);
 		}
 		free(rdline);

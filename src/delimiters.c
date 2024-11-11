@@ -12,3 +12,75 @@
 
 #include "../includes/minishell.h"
 
+char	*namefile_gen()
+{
+	char		*namefile;
+	char		*num;
+	static int	count;
+
+	count++;
+	num = ft_itoa(count);
+	namefile = ft_strjoin(".delimiter_file_", num);
+	return (namefile);
+}
+
+t_pipes	*save_files(t_pipes *command, char *namefile, int fd, int i)
+{
+	if (ft_strcmp(command->mini->delimiters[i], command->delimiter->file) == 0)
+	{
+		command->delimiter->file = ft_strdup(namefile);
+		command->delimiter->fd = fd;
+		command = command->next;
+	}
+	return (command);
+}
+
+int	del_cmp(char *delimiter, char *line)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (delimiter[i] == '<')
+		i++;
+	while (delimiter[i] == ' ' || delimiter[i] == '	')
+		i++;
+	j = 0;
+	while (delimiter[i] == line[j] && delimiter[i] != '\0' && line[j] != '\0')
+	{
+		i++;
+		j++;
+	}
+	if (delimiter[i] == '\0' && line[j] == '\0')
+		return (0);
+	return (-1);
+}
+
+void	delimiters(t_mini *mini)
+{
+	char	*namefile;
+	char	*line;
+	t_pipes	*command;
+	int		fd;
+	int		i;
+
+	command = mini->pipes;
+	i = 0;
+	while (mini->delimiters[i] != NULL)
+	{
+		namefile = namefile_gen();
+		fd = open(namefile, O_CREAT | O_EXCL | O_RDWR);
+		while (1)
+		{
+			line = readline("> ");
+			if (del_cmp(mini->delimiters[i], line) == 0)
+				break ;
+			write (fd, line, ft_strlen(line));
+			write (fd, "\n", 1);
+			free (line);
+		}
+		command = save_files(command, namefile, fd, i);
+		free(namefile);
+		i++;
+	}
+}
