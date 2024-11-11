@@ -12,15 +12,29 @@
 
 #include "../includes/minishell.h"
 
-char	*namefile_gen()
+char	*namefile_gen(int del)
 {
 	char		*namefile;
 	char		*num;
 	static int	count;
 
-	count++;
-	num = ft_itoa(count);
-	namefile = ft_strjoin(".delimiter_file_", num);
+	if (del == 0)
+	{
+		count++;
+		num = ft_itoa(count);
+		namefile = ft_strjoin(".delimiter_file_", num);
+	}
+	else if (del == 1)
+	{
+		while (count > 0)
+		{
+			num = ft_itoa(count);
+			namefile = ft_strjoin(".delimiter_file_", num);
+			unlink(namefile);
+			free(namefile);
+			count--;
+		}
+	}
 	return (namefile);
 }
 
@@ -68,7 +82,7 @@ void	delimiters(t_mini *mini)
 	i = 0;
 	while (mini->delimiters[i] != NULL)
 	{
-		namefile = namefile_gen();
+		namefile = namefile_gen(0);
 		fd = open(namefile, O_CREAT | O_EXCL | O_RDWR);
 		while (1)
 		{

@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/11 13:55:19 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:50:27 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	main(int argc, char **argv, char **envp)
 			if (mini.del_c > 0)
 				delimiters(&mini);
 			printttttttt(&mini);
+			namefile_gen(1);
 		}
 		free(rdline);
 	}
