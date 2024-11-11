@@ -23,12 +23,12 @@ void	save_delimiters(t_mini *mini)
 	{
 		if (mini->arg_matrix[i][0] == '<' && mini->arg_matrix[i][1] == '<')
 		{
-			mini->in_delimiter[j] = ft_strdup(mini->arg_matrix[i]);
+			mini->delimiters[j] = ft_strdup(mini->arg_matrix[i]);
 			j++;
 		}
 		i++;
 	}
-	mini->in_delimiter[j] = NULL;
+	mini->delimiters[j] = NULL;
 }
 
 void	start_structs(t_mini *mini)
@@ -50,11 +50,11 @@ void	start_structs(t_mini *mini)
 	}
 	if (mini->del_c > 0)
 	{
-		mini->in_delimiter = malloc((mini->del_c + 1) * sizeof(char *));
+		mini->delimiters = malloc((mini->del_c + 1) * sizeof(char *));
 		save_delimiters(mini);
 	}
 	else
-		mini->in_delimiter = NULL;
+		mini->delimiters = NULL;
 }
 
 int	init_structs(t_mini *mini, int i, int position)
@@ -69,9 +69,14 @@ int	init_structs(t_mini *mini, int i, int position)
 		mini->pipes = malloc(sizeof(t_pipes));
 		mini->pipes->mini = mini;
 		mini->pipes->position = position;
-		mini->pipes->infile = NULL;
-		mini->pipes->outfile = NULL;
-		mini->pipes->append = NULL;
+		mini->pipes->infile = malloc(sizeof(t_files));
+		mini->pipes->infile->file = NULL;
+		mini->pipes->outfile = malloc(sizeof(t_files));
+		mini->pipes->outfile->file = NULL;
+		mini->pipes->append = malloc(sizeof(t_files));
+		mini->pipes->append->file = NULL;
+		mini->pipes->delimiter = malloc(sizeof(t_files));
+		mini->pipes->delimiter->file = NULL;
 		arguments = count_args(mini->arg_matrix, mini, i, 'c');
 		mini->pipes->command = malloc((arguments + 1) * sizeof(char *));
 	}

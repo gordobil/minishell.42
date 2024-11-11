@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/08 12:26:55 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/11 12:55:00 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void	printttttttt(t_mini	*mini)
 	while (mini->pipes != NULL)
 	{
 		ft_printf("NODE [%d]\n\n%m", mini->pipes->position, mini->pipes->command);
-		ft_printf("\nFiles:\nin:%s out:%s app:%s\n\n.............\n\n", mini->pipes->infile, mini->pipes->outfile, mini->pipes->append);
+		ft_printf("\nFiles:\nin:%s out:%s app:%s del:%s\n\n.............\n\n", mini->pipes->infile->file, mini->pipes->outfile->file, mini->pipes->append->file, mini->pipes->delimiter);
 		mini->pipes = mini->pipes->next;
 	}
-	ft_printf("File count: %d\n", mini->file_c);
+	ft_printf("File count: %d\n\n", mini->file_c);
 	if (mini->files)
 		ft_printf("%m\n", mini->files);
 	ft_printf("Delimiter count: %d\n", mini->del_c);
-	if (mini->in_delimiter)
-		ft_printf("%m\n", mini->in_delimiter);
+	if (mini->delimiters)
+		ft_printf("%m\n", mini->delimiters);
 }
 
 int	main(int argc, char **argv, char **envp)

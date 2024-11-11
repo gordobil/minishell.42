@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/11/08 12:23:09 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/11/11 12:06:09 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ LIBFT_PATH			=	./libft/
 SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)structs.c \
 						$(SRC_PATH)init_structs.c \
+						$(SRC_PATH)delimiters.c \
 
 UT_SRC				=	$(UT_PATH)split_args.c \
 						$(UT_PATH)parsing_utils.c \

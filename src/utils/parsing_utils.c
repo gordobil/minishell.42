@@ -14,9 +14,6 @@
 
 int	file_management(t_mini *mini, int i, int k)
 {
-	t_pipes	*pipe;
-
-	pipe = mini->pipes;
 	if (mini->arg_matrix[i][1] != '<')
 	{
 		mini->files[k] = ft_strdup(mini->arg_matrix[i]);
@@ -24,13 +21,21 @@ int	file_management(t_mini *mini, int i, int k)
 			k++;
 	}
 	if (mini->arg_matrix[i][0] == '<' && mini->arg_matrix[i][1] != '<')
-		mini->pipes->infile = ft_strdup(mini->arg_matrix[i]);
+		mini->pipes->infile->file = ft_strdup(mini->arg_matrix[i]);
 	else if (mini->arg_matrix[i][0] == '>' && mini->arg_matrix[i][1] != '>')
-		mini->pipes->outfile = ft_strdup(mini->arg_matrix[i]);
+	{
+		mini->pipes->outfile->file = ft_strdup(mini->arg_matrix[i]);
+		if (mini->pipes->append->file != NULL)
+			mini->pipes->append->file = NULL;
+	}
 	else if (mini->arg_matrix[i][0] == '>' && mini->arg_matrix[i][1] == '>')
-		mini->pipes->append = ft_strdup(mini->arg_matrix[i]);
-	if (mini->pipes->outfile != NULL)
-		mini->pipes->append = NULL;
+	{
+		mini->pipes->append->file = ft_strdup(mini->arg_matrix[i]);
+		if (mini->pipes->outfile->file != NULL)
+			mini->pipes->outfile->file = NULL;
+	}
+	else if (mini->arg_matrix[i][0] == '<' && mini->arg_matrix[i][1] == '<')
+		mini->pipes->delimiter = ft_strdup(mini->arg_matrix[i]);
 	return (k);
 }
 

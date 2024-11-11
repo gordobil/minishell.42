@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/08 12:07:01 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/11 12:54:03 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,20 @@
 
 struct	s_mini;
 
+typedef struct s_files
+{
+	char	*file;
+	int		fd;
+}				t_files;
+
 typedef struct s_pipes
 {
 	char			**command;
 	int				position;
-	char			*infile;
-	char			*outfile;
-	char			*append;
+	t_files			*infile;
+	t_files			*outfile;
+	t_files			*append;
+	char			*delimiter;
 	struct s_mini	*mini;
 	struct s_pipes	*next;
 	struct s_pipes	*prev;
@@ -48,7 +55,7 @@ typedef struct s_mini
 	int		file_c;
 	char	**files;
 	int		del_c;
-	char	**in_delimiter;
+	char	**delimiters;
 	t_pipes	*pipes;
 }				t_mini;
 
