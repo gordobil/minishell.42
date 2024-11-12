@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/12 14:06:46 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:18:57 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		add_history(rdline);
 		mini.arg_matrix = split_args(rdline, &mini);
+		load_envp(&mini, envp);
 		if (mini.arg_matrix)
 		{
 			ft_printf("\n\nMATRIX\n----------------\n%m----------------\n\n\n", mini.arg_matrix);
