@@ -47,7 +47,7 @@ t_pipes	*save_files(t_pipes *command, char *namefile, int fd, int i)
 		if (command->mini->comm_c > 1 && command->next != NULL)
 		{
 			command = command->next;
-			while (command->delimiter == NULL && command->next != NULL)
+			while (command->delimiter->file == NULL && command->next != NULL)
 				command = command->next;
 		}
 	}
