@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/11 15:50:27 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/12 13:48:29 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	printttttttt(t_mini	*mini)
 {
 	t_pipes	*command = mini->pipes;
 
+	ft_printf("Command count: %d\n\n", mini->comm_c);
 	while (command != NULL)
 	{
 		ft_printf("NODE [%d]\n\n%m", command->position, command->command);
@@ -45,9 +46,9 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		add_history(rdline);
 		mini.arg_matrix = split_args(rdline, &mini);
-		ft_printf("\nMATRIX\n----------------\n%m----------------\n\n", mini.arg_matrix);
 		if (mini.arg_matrix)
 		{
+			ft_printf("\nMATRIX\n----------------\n%m----------------\n\n", mini.arg_matrix);
 			pipe_info(mini.arg_matrix, &mini, 0);
 			if (mini.del_c > 0)
 				delimiters(&mini);

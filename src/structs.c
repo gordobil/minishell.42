@@ -18,6 +18,7 @@ void	update_nodes(t_mini *mini, int position)
 
 	if (position == -1)
 	{
+		mini->comm_c = mini->pipes->position + 1;
 		while (mini->pipes->prev != NULL)
 			mini->pipes = mini->pipes->prev;
 	}
@@ -60,10 +61,11 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 	return (k);
 }
 
-void	single_command(char **arg_matrix, t_mini *mini)
+void	plain_command(char **arg_matrix, t_mini *mini)
 {
 	int	i;
 
+	mini->comm_c = 1;
 	i = 0;
 	while (arg_matrix[i] != NULL)
 	{
@@ -89,7 +91,7 @@ void	pipe_info(char **arg_matrix, t_mini *mini, int k)
 	{
 		arguments = init_structs(mini, i, position);
 		if (arguments == mini->arg_c)
-			return (single_command(arg_matrix, mini));
+			return (plain_command(arg_matrix, mini));
 		k = dup_args(k, mini, i, arguments);
 		update_nodes(mini, position);
 		i = count_args(arg_matrix, mini, i, 'i');

@@ -36,6 +36,7 @@ void	start_structs(t_mini *mini)
 	int	i;
 
 	mini->pipes = NULL;
+	mini->comm_c = 0;
 	mini->file_c = file_count(mini->arg_matrix, 0, 'c');
 	if (mini->file_c > 0)
 		mini->files = malloc((mini->file_c + 1) * sizeof(char *));

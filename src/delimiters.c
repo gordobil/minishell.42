@@ -44,7 +44,12 @@ t_pipes	*save_files(t_pipes *command, char *namefile, int fd, int i)
 	{
 		command->delimiter->file = ft_strdup(namefile);
 		command->delimiter->fd = fd;
-		command = command->next;
+		if (command->mini->comm_c > 1 && command->next != NULL)
+		{
+			command = command->next;
+			while (command->delimiter == NULL && command->next != NULL)
+				command = command->next;
+		}
 	}
 	return (command);
 }
