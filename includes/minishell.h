@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/13 18:16:45 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:18:06 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ typedef struct s_mini
 char	**split_args(char *str, t_mini *mini);
 void	pipe_info(char **arg_matrix, t_mini *mini, int k);
 int		init_structs(t_mini *mini, int i, int position);
+
+//ENVP
 void	load_envp(t_mini *mini, char **envp);
+char	*replace_vars(t_mini *mini, char *str);
 
 //DELIMITERS
 void	delimiters(t_mini *mini);
@@ -86,7 +89,7 @@ void	rdl_signals(int sig);
 char	*mini_title(void);
 void	error_messages(int error);
 
-//PARSING_UTILS
+//SPLIT_UTILS
 int		file_count(char **args, int i, char ret);
 int		file_management(t_mini *mini, int i, int k);
 int		count_args(char **arg_matrix, t_mini *mini, int i, char ret);

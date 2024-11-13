@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
+#    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/11/12 16:17:10 by codespace        ###   ########.fr        #
+#    Updated: 2024/11/13 19:32:34 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,15 @@ LIBFT				=	libft.a
 SRC_PATH			=	./src/
 LIBFT_PATH			=	./libft/
 
-SOURCES				=	$(SRC_PATH)minishell.c \
-						$(SRC_PATH)structs.c \
+SOURCES				=	$(SRC_PATH)delimiters.c \
+						$(SRC_PATH)envp.c \
 						$(SRC_PATH)init_structs.c \
-						$(SRC_PATH)delimiters.c \
-						$(SRC_PATH)split_args.c \
-						$(SRC_PATH)split_args_utils.c \
-						$(SRC_PATH)load_envp.c \
+						$(SRC_PATH)minishell.c \
 						$(SRC_PATH)rdl_utils.c \
+						$(SRC_PATH)replace_variables.c \
+						$(SRC_PATH)split_args_utils.c \
+						$(SRC_PATH)split_args.c \
+						$(SRC_PATH)structs.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
 

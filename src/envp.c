@@ -1,16 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_envp.c                                        :+:      :+:    :+:   */
+/*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:38 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/13 18:17:49 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:57:15 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	arg_vars(t_mini *mini)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (mini->arg_matrix[i] != NULL)
+	{
+		j = 0;
+		while (mini->arg_matrix[i][j] != '\0')
+		{
+			if (mini->arg_matrix[i][j] == '$')
+			{
+				mini->arg_matrix[i] = replace_vars(mini, mini->arg_matrix[i]);
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	nodes_envp(t_envp *envp_p, t_envp *prev, int i, char **envp)
+{
+	if (i == 0)
+		envp_p->prev = NULL;
+	else
+	{
+		envp_p->prev = prev;
+		envp_p->prev->next = envp_p;
+	}
+	if (envp[i + 1] == NULL)
+		envp_p->next = NULL;
+}
 
 void	load_name(char **envp, t_envp *envp_p, int i, int j)
 {
@@ -53,35 +88,24 @@ void	load_envp(t_mini *mini, char **envp)
 {
 	int		i;
 	int		j;
-	int		k;
-	t_envp	*envp_p;
 	t_envp	*prev;
+	t_envp	*envp_p;
 
 	i = 0;
 	mini->envp = NULL;
 	envp_p = mini->envp;
-	ft_printf("ENVP\n\n");
 	while (envp[i] != NULL)
 	{
 		envp_p = malloc (sizeof(t_envp));
 		envp_p->position = i;
-	ft_printf("ENVP:%s\n", envp[i]);
-	ft_printf("position:%d\n", envp_p->position);
 		j = load_variable(envp, envp_p, i);
-	ft_printf("variable:%s\n", envp_p->variable);
 		load_name(envp, envp_p, i, j);
-	ft_printf("name:%s\n\n", envp_p->name);
-		if (i == 0)
-			envp_p->prev = NULL;
-		else
-		{
-			envp_p->prev = prev;
-			envp_p->prev->next = envp_p;
-		}
-		if (envp[i + 1] == NULL)
-			envp_p->next = NULL;
+		nodes_envp(envp_p, prev, i, envp);
 		prev = envp_p;
+		ft_printf("var[%d]:%s\nname:%s\n\n", envp_p->position, envp_p->variable, envp_p->name);
 		i++;
 		envp_p = envp_p->next;
 	}
+	ft_printf("\n");
+	arg_vars(mini);
 }

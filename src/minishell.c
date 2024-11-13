@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/13 18:11:52 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:56:55 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	printttttttt(t_mini	*mini)
 	ft_printf("Delimiter count: %d\n\n", mini->del_c);
 	if (mini->delimiters)
 		ft_printf("%m\n", mini->delimiters);
+	
 }
 
 int	main(int argc, char **argv, char **envp)
