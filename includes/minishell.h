@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/12 16:19:18 by codespace        ###   ########.fr       */
+/*   Updated: 2024/11/13 18:16:45 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 struct	s_mini;
 
-typedef struct	s_envp
+typedef struct s_envp
 {
 	char			*variable;
 	char			*name;
@@ -39,7 +39,7 @@ typedef struct	s_envp
 	struct s_envp	*next;
 }				t_envp;
 
-typedef struct	s_files
+typedef struct s_files
 {
 	char	*file;
 	int		fd;
@@ -75,7 +75,7 @@ typedef struct s_mini
 char	**split_args(char *str, t_mini *mini);
 void	pipe_info(char **arg_matrix, t_mini *mini, int k);
 int		init_structs(t_mini *mini, int i, int position);
-void    load_envp(t_mini *mini, char **envp);
+void	load_envp(t_mini *mini, char **envp);
 
 //DELIMITERS
 void	delimiters(t_mini *mini);
