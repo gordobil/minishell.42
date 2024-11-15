@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-char	*namefile_gen(int del)
+char	*namefiles(int del)
 {
 	char		*namefile;
 	char		*num;
@@ -87,7 +87,7 @@ void	delimiters(t_mini *mini)
 	i = 0;
 	while (mini->delimiters[i] != NULL)
 	{
-		namefile = namefile_gen(0);
+		namefile = namefiles(0);
 		fd = open(namefile, O_CREAT | O_EXCL | O_RDWR);
 		while (1)
 		{

@@ -6,30 +6,30 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/15 11:13:21 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/15 11:26:26 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	printttttttt(t_mini	*mini)
+void	freeing()
 {
-	t_pipes	*command = mini->pipes;
+	namefiles(1);
+}
 
-	while (command != NULL)
-	{
-		ft_printf("NODE [%d]\n\n%m", command->position, command->command);
-		ft_printf("\nFiles:\nin:%s out:%s app:%s del:%s\n\n.............\n\n", command->infile->file, command->outfile->file, command->append->file, command->delimiter->file);
-		command = command->next;
-	}
-	ft_printf("Command count: %d\n\n", mini->comm_c);
-	ft_printf("File count: %d\n\n", mini->file_c);
-	if (mini->files)
-		ft_printf("%m\n", mini->files);
-	ft_printf("Delimiter count: %d\n\n", mini->del_c);
-	if (mini->delimiters)
-		ft_printf("%m\n", mini->delimiters);
-	
+void	executing()
+{
+	return ;
+}
+
+void	parsing(t_mini *mini, char **envp)
+{
+	load_envp(mini, envp);
+	pipe_info(mini->arg_matrix, mini, 0);
+	if (mini->del_c > 0)
+		delimiters(mini);
+
+	printttttttt(mini);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -49,13 +49,9 @@ int	main(int argc, char **argv, char **envp)
 		mini.arg_matrix = split_args(rdline, &mini);
 		if (mini.arg_matrix)
 		{
-			load_envp(&mini, envp);
-			ft_printf("\n\nMATRIX\n----------------\n%m----------------\n\n\n", mini.arg_matrix);
-			pipe_info(mini.arg_matrix, &mini, 0);
-			if (mini.del_c > 0)
-				delimiters(&mini);
-			printttttttt(&mini);
-			namefile_gen(1);
+			parsing(&mini, envp);
+			executing();
+			freeing();
 		}
 		free(rdline);
 	}

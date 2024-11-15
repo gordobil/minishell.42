@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/13 19:18:06 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/15 11:25:44 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*replace_vars(t_mini *mini, char *str);
 
 //DELIMITERS
 void	delimiters(t_mini *mini);
-char	*namefile_gen(int del);
+char	*namefiles(int del);
 
 //RDL_UTILS
 void	rdl_signals(int sig);
@@ -94,5 +94,8 @@ int		file_count(char **args, int i, char ret);
 int		file_management(t_mini *mini, int i, int k);
 int		count_args(char **arg_matrix, t_mini *mini, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
+
+//UTILS
+void	printttttttt(t_mini	*mini);
 
 #endif
