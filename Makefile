@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/11/15 11:45:07 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/11/15 13:20:35 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,15 +21,15 @@ LIBFT				=	libft.a
 SRC_PATH			=	./src/
 LIBFT_PATH			=	./libft/
 
-SOURCES				=	$(SRC_PATH)delimiters.c \
-						$(SRC_PATH)envp.c \
-						$(SRC_PATH)init_structs.c \
-						$(SRC_PATH)minishell.c \
+SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)rdl.c \
-						$(SRC_PATH)replace_variables.c \
+						$(SRC_PATH)delimiters.c \
+						$(SRC_PATH)envp.c \
+						$(SRC_PATH)envp_replace.c \
 						$(SRC_PATH)split_args_utils.c \
 						$(SRC_PATH)split_args.c \
 						$(SRC_PATH)structs.c \
+						$(SRC_PATH)structs_init.c \
 						$(SRC_PATH)printttttttt.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
