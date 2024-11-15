@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/12 13:07:28 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/15 11:10:41 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ int	arg_count(const char *s)
 	count = 0;
 	while (s[i] == ' ' || s[i] == '	')
 		i++;
-	if (s[i] != '\0')
-		count = 1;
+	if (s[i] == '\0')
+		return (0);
+	count = 1;
 	while (s[i] != '\0')
 	{
 		i = arg_jump(s, i);
