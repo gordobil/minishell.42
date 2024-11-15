@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/15 11:25:44 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/15 11:43:58 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ struct	s_mini;
 typedef struct s_envp
 {
 	char			*variable;
-	char			*name;
+	char			*content;
 	int				position;
 	struct s_envp	*prev;
 	struct s_envp	*next;
@@ -85,6 +85,7 @@ void	delimiters(t_mini *mini);
 char	*namefiles(int del);
 
 //RDL_UTILS
+char	*rdl_management(void);
 void	rdl_signals(int sig);
 char	*mini_title(void);
 void	error_messages(int error);

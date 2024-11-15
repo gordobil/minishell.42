@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   delimiters.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.com   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 12:05:41 by ngordobi          #+#    #+#             */
 /*   Updated: 2024/11/11 12:05:41 by ngordobi         ###   ########.fr       */
@@ -23,6 +23,7 @@ char	*namefiles(int del)
 		count++;
 		num = ft_itoa(count);
 		namefile = ft_strjoin(".delimiter_file_", num);
+		return (namefile);
 	}
 	else if (del == 1)
 	{
@@ -35,7 +36,7 @@ char	*namefiles(int del)
 			count--;
 		}
 	}
-	return (namefile);
+	return (NULL);
 }
 
 t_pipes	*save_files(t_pipes *command, char *namefile, int fd, int i)

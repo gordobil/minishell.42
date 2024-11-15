@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_args_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.com   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 19:18:24 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/13 19:18:24 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/11/15 11:47:22 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/11/15 11:47:22 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

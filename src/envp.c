@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:38 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/13 19:57:15 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:46:21 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,12 @@
 void	arg_vars(t_mini *mini)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (mini->arg_matrix[i] != NULL)
 	{
-		j = 0;
-		while (mini->arg_matrix[i][j] != '\0')
-		{
-			if (mini->arg_matrix[i][j] == '$')
-			{
-				mini->arg_matrix[i] = replace_vars(mini, mini->arg_matrix[i]);
-				break ;
-			}
-			j++;
-		}
+		if (mini->arg_matrix[i][0] == '$' || mini->arg_matrix[i][0] == '"')
+			mini->arg_matrix[i] = replace_vars(mini, mini->arg_matrix[i]);
 		i++;
 	}
 }
@@ -47,22 +38,22 @@ void	nodes_envp(t_envp *envp_p, t_envp *prev, int i, char **envp)
 		envp_p->next = NULL;
 }
 
-void	load_name(char **envp, t_envp *envp_p, int i, int j)
+void	load_content(char **envp, t_envp *envp_p, int i, int j)
 {
 	int	k;
 
 	k = j;
 	while (envp[i][j] != '\0')
 		j++;
-	envp_p->name = malloc((j - k + 1) * sizeof(char));
+	envp_p->content = malloc((j - k + 1) * sizeof(char));
 	j = 0;
 	while (envp[i][k] != '\0')
 	{
-		envp_p->name[j] = envp[i][k];
+		envp_p->content[j] = envp[i][k];
 		j++;
 		k++;
 	}
-	envp_p->name[j] = '\0';
+	envp_p->content[j] = '\0';
 }
 
 int	load_variable(char **envp, t_envp *envp_p, int i)
@@ -92,20 +83,18 @@ void	load_envp(t_mini *mini, char **envp)
 	t_envp	*envp_p;
 
 	i = 0;
-	mini->envp = NULL;
+	mini->envp = malloc(sizeof(t_envp));
 	envp_p = mini->envp;
 	while (envp[i] != NULL)
 	{
-		envp_p = malloc (sizeof(t_envp));
 		envp_p->position = i;
 		j = load_variable(envp, envp_p, i);
-		load_name(envp, envp_p, i, j);
+		load_content(envp, envp_p, i, j);
 		nodes_envp(envp_p, prev, i, envp);
 		prev = envp_p;
-		ft_printf("var[%d]:%s\nname:%s\n\n", envp_p->position, envp_p->variable, envp_p->name);
 		i++;
 		envp_p = envp_p->next;
+		envp_p = malloc (sizeof(t_envp));
 	}
-	ft_printf("\n");
 	arg_vars(mini);
 }

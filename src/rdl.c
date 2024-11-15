@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rdl_utils.c                                        :+:      :+:    :+:   */
+/*   rdl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.com   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 14:53:30 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/31 14:53:30 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/11/15 11:44:57 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/11/15 11:44:57 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ char	*mini_title(void)
 	title = ft_strjoin(BLUE"minishell: "YELLOW"~", getcwd(buffer, 4096));
 	title = ft_strjoin(title, BLUE"\n ¬ "WHITE);
 	return (title);
+}
+
+char	*rdl_management(void)
+{
+	signal(SIGINT, rdl_signals);
+	signal(SIGQUIT, SIG_IGN);
+	return (readline(mini_title()));
 }
 
 void	error_messages(int error)

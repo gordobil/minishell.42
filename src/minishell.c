@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/15 11:26:26 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/15 11:46:51 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	ft_printf ("\n");
 	while (1)
 	{
-		signal(SIGINT, rdl_signals);
-		signal(SIGQUIT, SIG_IGN);
-		rdline = readline(mini_title());
+		rdline = rdl_management();
 		if (!rdline || ft_strcmp(rdline, "exit") == 0)
 			break ;
 		add_history(rdline);
