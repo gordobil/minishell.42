@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+         #
+#    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/11/15 13:20:35 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/11/18 14:02:59 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				=	minishell
 
 CC					=	gcc
-CC_FLAGS			=	-g -Wall -Wextra -Werror
+CC_FLAGS			=	-g -Wall -Wextra -Werror -O0 -g
 RL_FLAGS			=	-I/usr/include/readline -lreadline
 
 LIBFT				=	libft.a
@@ -30,6 +30,7 @@ SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)split_args.c \
 						$(SRC_PATH)structs.c \
 						$(SRC_PATH)structs_init.c \
+						$(SRC_PATH)freeing.c \
 						$(SRC_PATH)printttttttt.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)

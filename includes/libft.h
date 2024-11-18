@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <stdio.h>
 
 //CHARACTERS
 int			ft_isalpha(int c);
@@ -44,7 +45,7 @@ void		*ft_calloc(size_t count, size_t size);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 
 //STRINGS
-size_t		ft_strlen(const char *s);
+int			ft_strlen(const char *s);
 size_t		ft_strlcpy(char	*dst, const char *src, size_t size);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
 int			ft_strcmp(char *s1, char *s2);
@@ -56,7 +57,7 @@ char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strdup(const char *s1);
 char		*ft_substr(const char *s, unsigned int start, size_t len);
-char		*ft_strjoin(const char *s1, const char *s2);
+char		*ft_strjoin(char *s1, char *s2);
 char		*ft_strtrim(const char *s1, const char *set);
 char		*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 char		**ft_split(const char *s, char c);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/15 11:47:35 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:10:20 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,12 @@ char	**split_args(char *s, t_mini *mini)
 	while (++i < mini->arg_c)
 	{
 		args[i] = malloc((arg_size(s, j, 'r') + 1) * sizeof(char));
-		if (!(args[i]))
+		if (!args[i] || args[i] == NULL)
 		{
-			i++;
 			while (--i >= 0)
 				free(args[i]);
-			return (free(args), NULL);
+			free(args);
+			return (NULL);
 		}
 		args[i] = ft_substr(s, arg_size(s, j, 's'), arg_size(s, j, 'r'));
 		j = arg_size(s, j, 'e');

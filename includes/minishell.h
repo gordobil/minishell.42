@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/15 11:43:58 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:54:53 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <signal.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <sys/stat.h>
 # include "./libft.h"
 
 //COLORS
@@ -75,6 +76,7 @@ typedef struct s_mini
 char	**split_args(char *str, t_mini *mini);
 void	pipe_info(char **arg_matrix, t_mini *mini, int k);
 int		init_structs(t_mini *mini, int i, int position);
+void	freeing(t_mini *mini);
 
 //ENVP
 void	load_envp(t_mini *mini, char **envp);

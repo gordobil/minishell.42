@@ -23,6 +23,7 @@ char	*namefiles(int del)
 		count++;
 		num = ft_itoa(count);
 		namefile = ft_strjoin(".delimiter_file_", num);
+		free(num);
 		return (namefile);
 	}
 	else if (del == 1)
@@ -33,6 +34,7 @@ char	*namefiles(int del)
 			namefile = ft_strjoin(".delimiter_file_", num);
 			unlink(namefile);
 			free(namefile);
+			free(num);
 			count--;
 		}
 	}
@@ -85,22 +87,22 @@ void	delimiters(t_mini *mini)
 	int		i;
 
 	command = mini->pipes;
-	i = 0;
-	while (mini->delimiters[i] != NULL)
+	i = -1;
+	while (mini->delimiters[++i] != NULL)
 	{
 		namefile = namefiles(0);
-		fd = open(namefile, O_CREAT | O_EXCL | O_RDWR);
+		fd = open(namefile, O_CREAT | O_EXCL | O_RDWR | S_IRWXU);
 		while (1)
 		{
 			line = readline("> ");
 			if (del_cmp(mini->delimiters[i], line) == 0)
 				break ;
+			line = replace_vars(mini, line);
 			write (fd, line, ft_strlen(line));
 			write (fd, "\n", 1);
 			free (line);
 		}
 		command = save_files(command, namefile, fd, i);
 		free(namefile);
-		i++;
 	}
 }

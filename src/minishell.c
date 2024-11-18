@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/15 11:46:51 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:13:34 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	freeing()
-{
-	namefiles(1);
-}
 
 void	executing()
 {
@@ -49,7 +44,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			parsing(&mini, envp);
 			executing();
-			freeing();
+			freeing(&mini);
 		}
 		free(rdline);
 	}
@@ -57,3 +52,5 @@ int	main(int argc, char **argv, char **envp)
 	clear_history();
 	return (0);
 }
+
+//valgrind --leak-check=yes ./minishell

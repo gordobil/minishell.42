@@ -24,10 +24,12 @@ void	rdl_signals(int sig)
 char	*mini_title(void)
 {
 	char	*title;
+	char	*start;
 	char	buffer[4096];
 
-	title = ft_strjoin(BLUE"minishell: "YELLOW"~", getcwd(buffer, 4096));
-	title = ft_strjoin(title, BLUE"\n ¬ "WHITE);
+	start = ft_strjoin(BLUE"minishell: "YELLOW"~", getcwd(buffer, 4096));
+	title = ft_strjoin(start, BLUE"\n ¬ "WHITE);
+	free (start);
 	return (title);
 }
 
