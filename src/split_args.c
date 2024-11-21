@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/18 15:10:20 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:20:37 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	arg_count(const char *s)
 	count = 0;
 	while (s[i] == ' ' || s[i] == '	')
 		i++;
-	if (s[i] == '\0')
+	if (s[i] == '\0' || s[0] == '\n')
 		return (0);
 	count = 1;
 	while (s[i] != '\0')
@@ -110,31 +110,30 @@ int	arg_size(char *s, int i, char mark)
 		return (i - start);
 }
 
-char	**split_args(char *s, t_mini *mini)
+int	split_args(char *s, t_mini *mini)
 {
-	char	**args;
 	int		i;
 	int		j;
 
 	mini->arg_c = arg_count(s);
 	if (mini->arg_c <= 0)
-		return (error_messages(mini->arg_c), NULL);
-	args = malloc((mini->arg_c + 1) * sizeof(char *));
+		return (error_messages(mini->arg_c), -1);
+	mini->arg_matrix = malloc((mini->arg_c + 1) * sizeof(char *));
+	if (!mini->arg_matrix)
+		return (-1);
 	i = -1;
 	j = 0;
 	while (++i < mini->arg_c)
 	{
-		args[i] = malloc((arg_size(s, j, 'r') + 1) * sizeof(char));
-		if (!args[i] || args[i] == NULL)
+		mini->arg_matrix[i] = malloc((arg_size(s, j, 'r') + 1) * sizeof(char));
+		if (!mini->arg_matrix[i])
 		{
-			while (--i >= 0)
-				free(args[i]);
-			free(args);
-			return (NULL);
+			free_matrix(mini->arg_matrix);
+			return (-1);
 		}
-		args[i] = ft_substr(s, arg_size(s, j, 's'), arg_size(s, j, 'r'));
+		mini->arg_matrix[i] = ft_substr(s, arg_size(s, j, 's'), arg_size(s, j, 'r'));
 		j = arg_size(s, j, 'e');
 	}
-	args[i] = NULL;
-	return (args);
+	mini->arg_matrix[i] = NULL;
+	return (0);
 }

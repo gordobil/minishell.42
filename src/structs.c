@@ -37,7 +37,7 @@ void	update_nodes(t_mini *mini, int position)
 
 int	dup_args(int k, t_mini *mini, int i, int arguments)
 {
-	int			j;
+	int	j;
 
 	j = 0;
 	while (mini->arg_matrix[i] != NULL

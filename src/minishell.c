@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/18 15:13:34 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:36:09 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!rdline || ft_strcmp(rdline, "exit") == 0)
 			break ;
 		add_history(rdline);
-		mini.arg_matrix = split_args(rdline, &mini);
-		if (mini.arg_matrix)
+		if (split_args(rdline, &mini) == 0 && mini.arg_c > 0)
 		{
 			parsing(&mini, envp);
 			executing();
@@ -48,9 +47,12 @@ int	main(int argc, char **argv, char **envp)
 		}
 		free(rdline);
 	}
+	if (rdline)
+		free(rdline);
 	ft_printf("exit\n\n");
 	clear_history();
 	return (0);
 }
 
 //valgrind --leak-check=yes ./minishell
+//valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes

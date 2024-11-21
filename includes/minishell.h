@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/18 13:54:53 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:30:39 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,11 @@ typedef struct s_mini
 }				t_mini;
 
 //MAIN
-char	**split_args(char *str, t_mini *mini);
+int		split_args(char *str, t_mini *mini);
 void	pipe_info(char **arg_matrix, t_mini *mini, int k);
 int		init_structs(t_mini *mini, int i, int position);
 void	freeing(t_mini *mini);
+void	free_matrix(char **matrix);
 
 //ENVP
 void	load_envp(t_mini *mini, char **envp);
