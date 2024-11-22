@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/22 11:52:29 by mafarto-         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:49:20 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_pipes
 	t_files			*outfile;
 	t_files			*append;
 	t_files			*delimiter;
+	int				var_c;
+	char			**vars;
 	struct s_mini	*mini;
 	struct s_pipes	*next;
 	struct s_pipes	*prev;
@@ -76,10 +78,12 @@ typedef struct s_mini
 }				t_mini;
 
 //MAIN
-char	**split_args(char *str, t_mini *mini);
+int		split_args(char *str, t_mini *mini);
 void	pipe_info(char **arg_matrix, t_mini *mini, int k);
 int		init_structs(t_mini *mini, int i, int position);
+int		is_it_a_var(char *str);
 void	freeing(t_mini *mini);
+void	free_matrix(char **matrix);
 
 //ENVP
 void	load_envp(t_mini *mini, char **envp);
@@ -98,7 +102,7 @@ void	error_messages(int error);
 //SPLIT_UTILS
 int		file_count(char **args, int i, char ret);
 int		file_management(t_mini *mini, int i, int k);
-int		count_args(char **arg_matrix, t_mini *mini, int i, char ret);
+int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
 
 //EXECUTE

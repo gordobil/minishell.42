@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/11/18 14:02:59 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/11/21 15:24:32 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,8 @@ clean:
 fclean:				clean
 					rm -rf $(NAME)
 					rm -rf $(LIBFT)
-					rm -rf .delimiter_file_*
+					rm -rf ./.temp_files/
+					rm -rf .temp_file_*
 					@make fclean --no-print-directory -C $(LIBFT_PATH)
 					echo "$(WHITE) · $(BLUE)Minishell executable removed.$(WHITE)\n"
 

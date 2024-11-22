@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 19:57:26 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/10/23 20:02:13 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:40:03 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_itoa(int n)
 	long	nb;
 
 	len = nlen(n);
-	s = malloc((len + 1) * sizeof(char));
+	s = ft_calloc(len + 1, sizeof(char));
 	nb = n;
 	if (s == NULL)
 		return (NULL);
