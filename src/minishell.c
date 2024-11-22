@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/22 13:29:34 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:48:16 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@ void	executing()
 	return ;
 }
 
-void	parsing(t_mini *mini, char **envp)
+int	parsing(t_mini *mini, char **envp)
 {
+	int	fd;
+
 	load_envp(mini, envp);
 	pipe_info(mini->arg_matrix, mini, 0);
 	if (mini->del_c > 0)
 		delimiters(mini);
-
 	printttttttt(mini);
+	return (0);
 }
 
 int	main(int argc, char **argv, char **envp)
