@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:27:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/18 13:56:49 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:41:41 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,13 @@ void	free_pipes(t_pipes *pipe)
 
 void	free_envp(t_envp *envp)
 {
+	while (envp->position > 0)
+		envp = envp->prev;
 	while (envp != NULL)
 	{
 		free(envp->content);
 		free(envp->variable);
-		if (envp->position > 0)
+		if (envp->prev != NULL)
 			free(envp->prev);
 		if (envp->next == NULL)
 		{

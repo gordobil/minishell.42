@@ -17,8 +17,8 @@ void	rdl_signals(int sig)
 	(void)sig;
 	ft_printf("\n");
 	rl_replace_line("", 0);
-	ft_printf("%s", mini_title());
 	rl_redisplay();
+	ft_printf("%s", mini_title());
 }
 
 char	*mini_title(void)
@@ -35,9 +35,15 @@ char	*mini_title(void)
 
 char	*rdl_management(void)
 {
+	char	*title;
+	char	*line;
+
 	signal(SIGINT, rdl_signals);
 	signal(SIGQUIT, SIG_IGN);
-	return (readline(mini_title()));
+	title = mini_title();
+	line = readline(title);
+	free(title);
+	return (line);
 }
 
 void	error_messages(int error)

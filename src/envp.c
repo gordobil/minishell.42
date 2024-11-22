@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:38 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/18 15:12:21 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:32:01 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,13 @@ void	load_envp(t_mini *mini, char **envp)
 
 	i = 0;
 	mini->envp = malloc(sizeof(t_envp));
+	if (!mini->envp)
+		return ;
 	envp_p = mini->envp;
 	while (envp[i] != NULL)
 	{
 		envp_p->position = i;
+		envp_p->exported = 1;
 		j = load_variable(envp, envp_p, i);
 		load_content(envp, envp_p, i, j);
 		nodes_envp(envp_p, prev, i, envp);
@@ -96,5 +99,6 @@ void	load_envp(t_mini *mini, char **envp)
 		envp_p = envp_p->next;
 		envp_p = malloc (sizeof(t_envp));
 	}
+	free(envp_p);
 	arg_vars(mini);
 }

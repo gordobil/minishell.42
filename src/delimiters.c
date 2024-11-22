@@ -22,7 +22,7 @@ char	*namefiles(int del)
 	{
 		count++;
 		num = ft_itoa(count);
-		namefile = ft_strjoin(".delimiter_file_", num);
+		namefile = ft_strjoin(".temp_file_", num);
 		free(num);
 		return (namefile);
 	}
@@ -31,7 +31,7 @@ char	*namefiles(int del)
 		while (count > 0)
 		{
 			num = ft_itoa(count);
-			namefile = ft_strjoin(".delimiter_file_", num);
+			namefile = ft_strjoin(".temp_file_", num);
 			unlink(namefile);
 			free(namefile);
 			free(num);
@@ -94,7 +94,7 @@ void	delimiters(t_mini *mini)
 		fd = open(namefile, O_CREAT | O_EXCL | O_RDWR | S_IRWXU);
 		while (1)
 		{
-			line = readline("> ");
+			line = readline(YELLOW"> "WHITE);
 			if (del_cmp(mini->delimiters[i], line) == 0)
 				break ;
 			line = replace_vars(mini, line);
