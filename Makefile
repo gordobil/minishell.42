@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
+#    By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/11/21 15:24:32 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/11/22 13:04:23 by mafarto-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)structs.c \
 						$(SRC_PATH)structs_init.c \
 						$(SRC_PATH)freeing.c \
+						$(SRC_PATH)execute.c \
+						$(SRC_PATH)building_utils.c \
 						$(SRC_PATH)printttttttt.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
@@ -83,8 +85,7 @@ clean:
 fclean:				clean
 					rm -rf $(NAME)
 					rm -rf $(LIBFT)
-					rm -rf ./.temp_files/
-					rm -rf .temp_file_*
+					rm -rf .delimiter_file_*
 					@make fclean --no-print-directory -C $(LIBFT_PATH)
 					echo "$(WHITE) · $(BLUE)Minishell executable removed.$(WHITE)\n"
 
