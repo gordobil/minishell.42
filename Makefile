@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
+#    By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/11/18 14:02:59 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/11/22 12:10:23 by mafarto-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)structs.c \
 						$(SRC_PATH)structs_init.c \
 						$(SRC_PATH)freeing.c \
+						$(SRC_PATH)execute.c \
+						$(SRC_PATH)building_utils.c \
 						$(SRC_PATH)printttttttt.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
