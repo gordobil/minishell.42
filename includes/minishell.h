@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/22 14:46:53 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:52:15 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include "./libft.h"
 
 //COLORS
@@ -102,6 +104,12 @@ int		file_count(char **args, int i, char ret);
 int		file_management(t_mini *mini, int i, int k);
 int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
+
+//EXECUTE
+
+void	execute(t_mini	*mini);
+void	pipex(char **str, t_envp *envp);
+void	execveloop(char **str, char **path);
 
 //UTILS
 void	printttttttt(t_mini	*mini);

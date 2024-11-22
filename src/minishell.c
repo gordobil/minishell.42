@@ -6,18 +6,18 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/22 14:48:16 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:52:49 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	executing()
+void	execute(t_mini	*mini)
 {
-	return ;
+	pipex(mini->pipes->command, mini->envp);
 }
 
-int	parsing(t_mini *mini, char **envp)
+void	parsing(t_mini *mini, char **envp)
 {
 	int	fd;
 
@@ -25,8 +25,7 @@ int	parsing(t_mini *mini, char **envp)
 	pipe_info(mini->arg_matrix, mini, 0);
 	if (mini->del_c > 0)
 		delimiters(mini);
-	printttttttt(mini);
-	return (0);
+	//printttttttt(mini);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -44,7 +43,7 @@ int	main(int argc, char **argv, char **envp)
 		if (split_args(rdline, &mini) == 0 && mini.arg_c > 0)
 		{
 			parsing(&mini, envp);
-			executing();
+			execute(&mini);
 			freeing(&mini);
 		}
 		free(rdline);
