@@ -12,6 +12,25 @@
 
 #include "../includes/minishell.h"
 
+int	is_it_a_var(char *str)
+{
+	int	i;
+	int	v;
+
+	if (str[0] == '<' || str[0] == '>' || str[0] == '"' || str[0] == '\''
+		|| str[0] == '=' || (str[0] >= '0' && str[0] <= '9'))
+		return (0);
+	i = 0;
+	v = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '=')
+			v++;
+		i++;
+	}
+	return (v);
+}
+
 void	update_nodes(t_mini *mini, int position)
 {
 	static t_pipes	*prev_node;
@@ -44,7 +63,8 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 		&& ms_strcmp(mini->arg_matrix[i], "|") != 0)
 	{
 		if (mini->arg_matrix[i][0] != '<' && mini->arg_matrix[i][0] != '>'
-			&& ms_strcmp(mini->arg_matrix[i], "|") != 0 && j < arguments)
+			&& is_it_a_var(mini->arg_matrix[i]) == 0
+			&& ms_strcmp(mini->arg_matrix[i], "|" ) && j < arguments)
 		{
 			mini->pipes->command[j] = ft_strdup(mini->arg_matrix[i]);
 			j++;
@@ -94,7 +114,7 @@ void	pipe_info(char **arg_matrix, t_mini *mini, int k)
 			return (plain_command(arg_matrix, mini));
 		k = dup_args(k, mini, i, arguments);
 		update_nodes(mini, position);
-		i = count_args(arg_matrix, mini, i, 'i');
+		i = count_args(arg_matrix, mini->pipes, i, 'i');
 		if (arg_matrix[i] == NULL)
 		{
 			mini->pipes->next = NULL;

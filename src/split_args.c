@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/21 15:20:37 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:56:11 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,12 @@ int	split_args(char *s, t_mini *mini)
 	j = 0;
 	while (++i < mini->arg_c)
 	{
-		mini->arg_matrix[i] = malloc((arg_size(s, j, 'r') + 1) * sizeof(char));
+		mini->arg_matrix[i] = ft_substr(s, arg_size(s, j, 's'), arg_size(s, j, 'r'));
 		if (!mini->arg_matrix[i])
 		{
 			free_matrix(mini->arg_matrix);
 			return (-1);
 		}
-		mini->arg_matrix[i] = ft_substr(s, arg_size(s, j, 's'), arg_size(s, j, 'r'));
 		j = arg_size(s, j, 'e');
 	}
 	mini->arg_matrix[i] = NULL;

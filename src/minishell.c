@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/21 15:36:09 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:29:34 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,4 @@ int	main(int argc, char **argv, char **envp)
 }
 
 //valgrind --leak-check=yes ./minishell
-//valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
+//valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
