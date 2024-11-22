@@ -1,4 +1,3 @@
-
 #include "../includes/minishell.h"
 
 void	printttttttt(t_mini	*mini)

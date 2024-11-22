@@ -99,7 +99,7 @@ char	**ft_split(const char *str, char c)
 		word_l = w_len(str, c, j);
 		if (str[0] == '\0')
 			return (matrix_errors(matrix, i, 1));
-		matrix[i] = ft_strjoin(ft_substr(str, j, word_l),"/");
+		matrix[i] = ft_strjoin(ft_substr(str, j, word_l), "/");
 		if (!matrix[i])
 			return (matrix_errors(matrix, i, 2));
 	}

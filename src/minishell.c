@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/18 15:13:34 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:52:19 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	executing()
+void	execute(t_mini	*mini)
 {
-	return ;
+	pipex(mini->pipes->command, mini->envp);
 }
 
 void	parsing(t_mini *mini, char **envp)
@@ -23,9 +23,8 @@ void	parsing(t_mini *mini, char **envp)
 	pipe_info(mini->arg_matrix, mini, 0);
 	if (mini->del_c > 0)
 		delimiters(mini);
-
-	printttttttt(mini);
 }
+	//printttttttt(mini);
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -43,7 +42,7 @@ int	main(int argc, char **argv, char **envp)
 		if (mini.arg_matrix)
 		{
 			parsing(&mini, envp);
-			executing();
+			execute(&mini);
 			freeing(&mini);
 		}
 		free(rdline);

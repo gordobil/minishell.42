@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/21 11:47:40 by mafarto-         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:52:29 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_envp
 	char			*variable;
 	char			*content;
 	int				position;
+	int				exported;
 	struct s_envp	*prev;
 	struct s_envp	*next;
 }				t_envp;
@@ -105,7 +106,6 @@ int		ms_strcmp(char *s1, char *s2);
 void	execute(t_mini	*mini);
 void	pipex(char **str, t_envp *envp);
 void	execveloop(char **str, char **path);
-
 
 //UTILS
 void	printttttttt(t_mini	*mini);
