@@ -43,6 +43,7 @@ SOURCES				=	$(CHAR_PATH)ft_isalpha.c \
 						$(MEM_PATH)ft_calloc.c \
 						$(STR_PATH)ft_strlen.c \
 						$(STR_PATH)ft_strlcpy.c \
+						$(STR_PATH)ft_strcat.c \
 						$(STR_PATH)ft_strlcat.c \
 						$(STR_PATH)ft_strcmp.c \
 						$(STR_PATH)ft_strncmp.c \
@@ -57,7 +58,6 @@ SOURCES				=	$(CHAR_PATH)ft_isalpha.c \
 						$(STR_PATH)ft_strmapi.c \
 						$(STR_PATH)ft_striteri.c \
 						$(STR_PATH)ft_split.c \
-						$(STR_PATH)ft_strrcat.c \
 
 PF_SOURCES			=	$(PF_PATH)ft_printf.c \
 						$(PF_PATH)ft_putchar.c \

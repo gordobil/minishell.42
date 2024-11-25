@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/11/22 12:30:43 by mafarto-         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:39:17 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	execveloop(char **str, char **path)
 	count = 0;
 	while (path[count] != 0)
 	{
-		bin = ft_strrcat(path[count], *str);
+		bin = ft_strcat(path[count], *str);
 		execve(bin, str, 0);
 		count++;
 	}
@@ -55,4 +55,5 @@ void	pipex(char **str, t_envp *envp)
 		execveloop(str, path);
 	}
 	waitpid(id, &status, 0);
+	free_matrix(path);
 }

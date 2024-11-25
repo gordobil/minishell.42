@@ -72,9 +72,11 @@ char	**matrix_errors(char **matrix, int i, int mark)
 	}
 	else
 	{
-		while (i-- >= 0)
+		i = -1;
+		while (matrix[++i] != NULL)
 			free(matrix[i]);
-		return (matrix);
+		free(matrix);
+		return (NULL);
 	}
 }
 
@@ -87,7 +89,7 @@ char	**ft_split(const char *str, char c)
 	char	**matrix;
 
 	word_c = w_count(str, c);
-	matrix = malloc(sizeof(char *) * (word_c + 1));
+	matrix = ft_calloc(word_c + 1, sizeof(char *));
 	if (!matrix || !str)
 		return (NULL);
 	i = -1;

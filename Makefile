@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
+#    By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/11/21 15:24:32 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/11/25 12:56:20 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,14 @@ SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)delimiters.c \
 						$(SRC_PATH)envp.c \
 						$(SRC_PATH)envp_replace.c \
-						$(SRC_PATH)split_args_utils.c \
+						$(SRC_PATH)parsing_utils.c \
 						$(SRC_PATH)split_args.c \
 						$(SRC_PATH)structs.c \
 						$(SRC_PATH)structs_init.c \
+						$(SRC_PATH)files.c \
 						$(SRC_PATH)freeing.c \
+						$(SRC_PATH)building_utils.c \
+						$(SRC_PATH)execute.c \
 						$(SRC_PATH)printttttttt.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:27:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/21 13:41:41 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:08:54 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,28 @@ void	free_matrix(char **matrix)
 void	free_files(t_pipes *pipe)
 {
 	if (pipe->infile->file)
+	{
 		free(pipe->infile->file);
+		close(pipe->infile->fd);
+	}
 	free(pipe->infile);
 	if (pipe->outfile->file)
+	{
 		free(pipe->outfile->file);
+		close(pipe->outfile->fd);
+	}
 	free(pipe->outfile);
 	if (pipe->append->file)
+	{
 		free(pipe->append->file);
+		close(pipe->append->fd);
+	}
 	free(pipe->append);
 	if (pipe->delimiter->file)
+	{
 		free(pipe->delimiter->file);
+		close(pipe->delimiter->fd);
+	}
 	free(pipe->delimiter);
 }
 

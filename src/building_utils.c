@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   building_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:15:27 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/11/22 12:31:40 by mafarto-         ###   ########.fr       */
+/*   Updated: 2024/11/25 10:04:54 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	building_comp(char *str)
 {
-	if	(ft_strcmp(str, "pwd") == 0)
-		return(0);
+	if (ft_strcmp(str, "pwd") == 0)
+		return (0);
 	return (-1);
-
 }
