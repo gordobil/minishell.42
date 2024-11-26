@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/11/25 12:56:20 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/11/26 12:04:38 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,12 @@ LIBFT				=	libft.a
 
 SRC_PATH			=	./src/
 LIBFT_PATH			=	./libft/
+
+FILES				=	./a \
+						./b \
+						./c \
+						./d \
+						./e \
 
 SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)rdl.c \
@@ -88,6 +94,7 @@ fclean:				clean
 					rm -rf $(LIBFT)
 					rm -rf ./.temp_files/
 					rm -rf .temp_file_*
+					rm -rf $(FILES)
 					@make fclean --no-print-directory -C $(LIBFT_PATH)
 					echo "$(WHITE) · $(BLUE)Minishell executable removed.$(WHITE)\n"
 

@@ -80,23 +80,49 @@ char	*get_namefile(char *file, char type)
 void	open_fds(t_mini *mini)
 {
 	t_pipes	*pipe;
-	char	*file;
 
 	pipe = mini->pipes;
 	while (pipe != NULL)
 	{
 		if (pipe->infile->file != NULL)
+		{
 			pipe->infile->fd = open(get_namefile(pipe->infile->file, '<'),
-					O_CREAT | O_EXCL | O_RDONLY);
+					O_RDONLY);
+			if (pipe->infile->fd < 0)
+			{
+				ft_printf("bash: %s: No such file or directory\n",
+					pipe->outfile->file);
+				return (-1);
+			}
+		}
 		if (pipe->outfile->file != NULL)
+		{
 			pipe->outfile->fd = open(get_namefile(pipe->outfile->file, '>'),
-					O_CREAT | O_EXCL | O_RDWR);
+					O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
+			if (pipe->outfile->fd < 0)
+			{
+				ft_printf("minishell: %s: Error\n", pipe->outfile->file);
+				return (-1);
+			}
+		}
 		if (pipe->append->file != NULL)
+		{ 
 			pipe->infile->fd = open(get_namefile(pipe->append->file, '>'),
-					O_CREAT | O_EXCL | O_APPEND);
+					O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
+			if (pipe->infile->fd < 0)
+				pipe->infile->fd = open(get_namefile(pipe->append->file, '>'),
+						O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
+		}
 		if (pipe->delimiter->file != NULL)
 			pipe->delimiter->fd = open(get_namefile(pipe->delimiter->file, '>'),
-					O_CREAT | O_EXCL | O_RDONLY);
+					O_RDONLY);
 		pipe = pipe->next;
 	}
+}
+
+void	close_fds(int fd, char *file)
+{
+	free(file);
+	if (fd != 0 && fd != -1)
+		close(fd);
 }

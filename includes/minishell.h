@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/25 13:04:20 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/26 11:50:52 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ char	*namefiles(int del);
 int		file_count(char **args, int i, char ret);
 int		file_management(t_mini *mini, int i, int k);
 void	open_fds(t_mini *mini);
+void	close_fds(int fd, char *file);
 
 //EXECUTE
 void	execute(t_mini	*mini);
