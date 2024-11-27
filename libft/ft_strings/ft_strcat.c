@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:37:16 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/25 11:45:45 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:42:10 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 char	*ft_strcat(char *src, char *str)
 {
-	int		i;
-	int		j;
+	int		count;
 	int		size;
-	int		src_size;
 	char	*dest;
 
-	src_size = ft_strlen(src);
-	size = src_size + ft_strlen(str);
-	dest = ft_calloc(size + 1, sizeof(int));
-	if (!dest)
-		return (NULL);
-	i = -1;
-	while (++i < size && i < src_size)
-		dest[i] = src[i];
-	j = -1;
-	while (++i < size && ++j < ft_strlen(str))
-		dest[i] = str[j];
-	dest[i] = '\0';
+	count = 0;
+	size = ft_strlen(src) + ft_strlen(str);
+	dest = malloc(sizeof(int) * (size + 1));
+	while (count < size)
+	{
+		if (count < ft_strlen(src))
+			dest[count] = src[count];
+		else
+			dest[count] = str[count - ft_strlen(src)];
+		count++;
+	}
+	dest[count] = '\0';
 	return (dest);
 }

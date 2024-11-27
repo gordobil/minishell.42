@@ -6,13 +6,13 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/11/27 19:06:32 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:46:04 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_envp	*litnew(char	**variable, t_envp *envp)
+t_envp	*litnew(char **variable, t_envp *envp)
 {
 	struct s_envp	*temp_envp;
 
@@ -75,9 +75,9 @@ void	execveloop(char **str, char **path)
 	{
 		bin = ft_strcat(path[count], *str);
 		execve(bin, str, 0);
+		free (bin);
 		count++;
 	}
-	free (bin);
 	ft_printf("%s: command not found\n", *str);
 	exit(127);
 }
@@ -106,5 +106,4 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 		execveloop(pipes->command, path);
 	}
 	waitpid(id, &status, 0);
-	free_matrix(path);
 }
