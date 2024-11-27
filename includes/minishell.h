@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/26 11:50:52 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:48:13 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int		ms_strcmp(char *s1, char *s2);
 char	*rdl_management(void);
 void	rdl_signals(int sig);
 char	*mini_title(void);
-void	error_messages(int error);
 
 //ENVP
 void	load_envp(t_mini *mini, char **envp);
@@ -107,8 +106,11 @@ char	*namefiles(int del);
 
 //FILES
 int		file_count(char **args, int i, char ret);
-int		file_management(t_mini *mini, int i, int k);
-void	open_fds(t_mini *mini);
+int		file_saving(t_mini *mini, int i, int k);
+int		open_fds(t_mini *mini);
+
+//FILES_UTILS
+char	*get_namefile(char *file, char type);
 void	close_fds(int fd, char *file);
 
 //EXECUTE
@@ -120,6 +122,9 @@ int		building_comp(char *str);
 //FREEING
 void	freeing(t_mini *mini);
 void	free_matrix(char **matrix);
+
+//ERRORS
+void	error_messages(int error, char *str);
 
 //UTILS
 void	printttttttt(t_mini	*mini);

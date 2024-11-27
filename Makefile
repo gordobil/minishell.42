@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+         #
+#    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/11/26 12:04:38 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/11/27 15:28:36 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,12 +31,14 @@ SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)rdl.c \
 						$(SRC_PATH)delimiters.c \
 						$(SRC_PATH)envp.c \
+						$(SRC_PATH)errors.c \
 						$(SRC_PATH)envp_replace.c \
 						$(SRC_PATH)parsing_utils.c \
 						$(SRC_PATH)split_args.c \
 						$(SRC_PATH)structs.c \
 						$(SRC_PATH)structs_init.c \
 						$(SRC_PATH)files.c \
+						$(SRC_PATH)files_utils.c \
 						$(SRC_PATH)freeing.c \
 						$(SRC_PATH)building_utils.c \
 						$(SRC_PATH)execute.c \

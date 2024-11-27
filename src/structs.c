@@ -72,7 +72,7 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 		else if ((mini->arg_matrix[i][0] == '<'
 			|| mini->arg_matrix[i][0] == '>'))
 			if (file_count(mini->arg_matrix, i, 'r') < 0)
-				k = file_management(mini, i, k);
+				k = file_saving(mini, i, k);
 		i++;
 	}
 	mini->pipes->command[j] = NULL;

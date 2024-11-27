@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-int	file_management(t_mini *mini, int i, int k)
+int	file_saving(t_mini *mini, int i, int k)
 {
 	if (mini->arg_matrix[i][1] != '<')
 	{
@@ -66,18 +66,28 @@ int	file_count(char **args, int i, char ret)
 	return (count);
 }
 
-char	*get_namefile(char *file, char type)
+int	in_out_files(t_pipes *pipe, char file)
 {
-	while (*file == type)
-		file++;
-	while (*file == ' ' || *file == '	')
-		file++;
-	if (*file == '\0')
-		return (NULL);
-	return (file);
+	if (file == 'i')
+	{
+		pipe->infile->fd = open(get_namefile(pipe->infile->file, '<'),
+				O_RDONLY);
+		if (pipe->infile->fd < 0)
+			return (error_messages(-3,
+					get_namefile(pipe->infile->file, '<')), -1);
+	}
+	else if (file == 'o')
+	{
+		pipe->outfile->fd = open(get_namefile(pipe->outfile->file, '>'),
+				O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
+		if (pipe->outfile->fd < 0)
+			return (error_messages(-4,
+					get_namefile(pipe->outfile->file, '>')), -1);
+	}
+	return (0);
 }
 
-void	open_fds(t_mini *mini)
+int	open_fds(t_mini *mini)
 {
 	t_pipes	*pipe;
 
@@ -85,28 +95,13 @@ void	open_fds(t_mini *mini)
 	while (pipe != NULL)
 	{
 		if (pipe->infile->file != NULL)
-		{
-			pipe->infile->fd = open(get_namefile(pipe->infile->file, '<'),
-					O_RDONLY);
-			if (pipe->infile->fd < 0)
-			{
-				ft_printf("bash: %s: No such file or directory\n",
-					pipe->outfile->file);
+			if (in_out_files(pipe, 'i') != 0)
 				return (-1);
-			}
-		}
 		if (pipe->outfile->file != NULL)
-		{
-			pipe->outfile->fd = open(get_namefile(pipe->outfile->file, '>'),
-					O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
-			if (pipe->outfile->fd < 0)
-			{
-				ft_printf("minishell: %s: Error\n", pipe->outfile->file);
+			if (in_out_files(pipe, 'o') != 0)
 				return (-1);
-			}
-		}
 		if (pipe->append->file != NULL)
-		{ 
+		{
 			pipe->infile->fd = open(get_namefile(pipe->append->file, '>'),
 					O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
 			if (pipe->infile->fd < 0)
@@ -118,11 +113,4 @@ void	open_fds(t_mini *mini)
 					O_RDONLY);
 		pipe = pipe->next;
 	}
-}
-
-void	close_fds(int fd, char *file)
-{
-	free(file);
-	if (fd != 0 && fd != -1)
-		close(fd);
 }

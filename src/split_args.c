@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/25 11:48:27 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:08:21 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	split_args(char *s, t_mini *mini)
 
 	mini->arg_c = arg_count(s);
 	if (mini->arg_c <= 0)
-		return (error_messages(mini->arg_c), -1);
+		return (error_messages(mini->arg_c, NULL), -1);
 	mini->arg_matrix = malloc((mini->arg_c + 1) * sizeof(char *));
 	if (!mini->arg_matrix)
 		return (-1);
