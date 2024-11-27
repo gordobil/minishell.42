@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/22 13:57:38 by mafarto-         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:20:54 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,11 @@ int		ms_strcmp(char *s1, char *s2);
 //EXECUTE
 
 void	execute(t_mini	*mini);
-void	pipex(char **str, t_envp *envp);
+void	pipex(t_pipes *pipes, t_envp *envp);
 void	execveloop(char **str, char **path);
+
+//BUILD
+
 int		building_comp(char *str);
 
 //UTILS
