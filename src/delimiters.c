@@ -43,8 +43,11 @@ char	*namefiles(int del)
 
 t_pipes	*save_files(t_pipes *command, char *namefile, int fd, int i)
 {
+	close(fd);
 	if (ft_strcmp(command->mini->delimiters[i], command->delimiter->file) == 0)
 	{
+		if (command->delimiter->file != NULL)
+			free (command->delimiter->file);
 		command->delimiter->file = ft_strdup(namefile);
 		command->delimiter->fd = fd;
 		if (command->mini->comm_c > 1 && command->next != NULL)
@@ -91,7 +94,7 @@ void	delimiters(t_mini *mini)
 	while (mini->delimiters[++i] != NULL)
 	{
 		namefile = namefiles(0);
-		fd = open(namefile, O_CREAT | O_EXCL | O_RDWR | S_IRWXU);
+		fd = open(namefile, O_CREAT | O_EXCL | S_IRWXU);
 		while (1)
 		{
 			line = readline(YELLOW"> "WHITE);

@@ -25,7 +25,7 @@ char	**save_vars(t_mini *mini, int count, int i)
 	{
 		if (is_it_a_var(mini->arg_matrix[i]) > 0)
 		{
-			vars[j]	= ft_strdup(mini->arg_matrix[i]);
+			vars[j] = ft_strdup(mini->arg_matrix[i]);
 			j++;
 			count--;
 		}

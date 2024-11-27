@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/26 13:22:40 by mafarto-         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:15:52 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ void	parsing(t_mini *mini, char **envp)
 	pipe_info(mini->arg_matrix, mini, 0);
 	if (mini->del_c > 0)
 		delimiters(mini);
-}
+	open_fds(mini);
 	//printttttttt(mini);
+}
 
 int	main(int argc, char **argv, char **envp)
 {

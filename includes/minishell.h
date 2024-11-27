@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/22 14:20:54 by mafarto-         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:15:35 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,39 +77,54 @@ typedef struct s_mini
 	t_envp	*envp;
 }				t_mini;
 
-//MAIN
+//SPLIT_ARGS
 int		split_args(char *str, t_mini *mini);
-void	pipe_info(char **arg_matrix, t_mini *mini, int k);
-int		init_structs(t_mini *mini, int i, int position);
-int		is_it_a_var(char *str);
-void	freeing(t_mini *mini);
-void	free_matrix(char **matrix);
+
+//PARSING_UTILS
+int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
+int		ms_strcmp(char *s1, char *s2);
+
+//RDL
+char	*rdl_management(void);
+void	rdl_signals(int sig);
+char	*mini_title(void);
 
 //ENVP
 void	load_envp(t_mini *mini, char **envp);
 char	*replace_vars(t_mini *mini, char *str);
 
+//STRUCTS
+void	pipe_info(char **arg_matrix, t_mini *mini, int k);
+int		is_it_a_var(char *str);
+
+//STRUCTS_INIT
+int		init_structs(t_mini *mini, int i, int position);
+
 //DELIMITERS
 void	delimiters(t_mini *mini);
 char	*namefiles(int del);
 
-//RDL_UTILS
-char	*rdl_management(void);
-void	rdl_signals(int sig);
-char	*mini_title(void);
-void	error_messages(int error);
-
-//SPLIT_UTILS
+//FILES
 int		file_count(char **args, int i, char ret);
-int		file_management(t_mini *mini, int i, int k);
-int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
-int		ms_strcmp(char *s1, char *s2);
+int		file_saving(t_mini *mini, int i, int k);
+int		open_fds(t_mini *mini);
+
+//FILES_UTILS
+char	*get_namefile(char *file, char type);
+void	close_fds(int fd, char *file);
 
 //EXECUTE
-
 void	execute(t_mini	*mini);
 void	pipex(t_pipes *pipes, t_envp *envp);
 void	execveloop(char **str, char **path);
+int		building_comp(char *str);
+
+//FREEING
+void	freeing(t_mini *mini);
+void	free_matrix(char **matrix);
+
+//ERRORS
+void	error_messages(int error, char *str);
 
 //BUILD
 

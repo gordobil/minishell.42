@@ -1,70 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_args_utils.c                                 :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.com   +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 11:47:22 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/15 11:47:22 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/11/25 12:14:25 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/11/25 12:14:25 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	file_management(t_mini *mini, int i, int k)
-{
-	if (mini->arg_matrix[i][1] != '<')
-	{
-		mini->files[k] = ft_strdup(mini->arg_matrix[i]);
-		if (k < mini->file_c)
-			k++;
-	}
-	if (mini->arg_matrix[i][0] == '<' && mini->arg_matrix[i][1] != '<')
-		mini->pipes->infile->file = ft_strdup(mini->arg_matrix[i]);
-	else if (mini->arg_matrix[i][0] == '>' && mini->arg_matrix[i][1] != '>')
-	{
-		mini->pipes->outfile->file = ft_strdup(mini->arg_matrix[i]);
-		if (mini->pipes->append->file != NULL)
-			mini->pipes->append->file = NULL;
-	}
-	else if (mini->arg_matrix[i][0] == '>' && mini->arg_matrix[i][1] == '>')
-	{
-		mini->pipes->append->file = ft_strdup(mini->arg_matrix[i]);
-		if (mini->pipes->outfile->file != NULL)
-			mini->pipes->outfile->file = NULL;
-	}
-	else if (mini->arg_matrix[i][0] == '<' && mini->arg_matrix[i][1] == '<')
-		mini->pipes->delimiter->file = ft_strdup(mini->arg_matrix[i]);
-	return (k);
-}
-
-int	file_count(char **args, int i, char ret)
-{
-	int	j;
-	int	count;
-
-	count = 0;
-	while (args[i] != NULL)
-	{
-		j = i - 1;
-		if (args[i][0] == '>' || (args[i][0] == '<' && args[i][1] != '<'))
-		{
-			while (j >= 0 && ms_strcmp(args[i], args[j]) != 0)
-				j--;
-			if (j < 0)
-				count++;
-			if (ret == 'r')
-				return (j);
-		}
-		if (args[i][0] == '<' && args[i][1] == '<' && ret == 'r')
-			return (-1);
-		i++;
-	}
-	if (ret == 'r')
-		return (0);
-	return (count);
-}
 
 int	count_args(char **arg_matrix, t_pipes *pipe, int i, char ret)
 {

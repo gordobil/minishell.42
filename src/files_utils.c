@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   building_utils.c                                   :+:      :+:    :+:   */
+/*   files_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 12:15:27 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/11/27 16:15:59 by mafarto-         ###   ########.fr       */
+/*   Created: 2024/11/27 15:28:01 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/11/27 15:29:54 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	building_comp(char *str)
+char	*get_namefile(char *file, char type)
 {
-	if	(ft_strcmp(str, "pwd") == 0)
-		return(0);
-	if	(ft_strcmp(str, "export") == 0)
-		return(1);
-	if	(ft_strcmp(str, "env") == 0)
-		return(2);
-	return (-1);
+	while (*file == type)
+		file++;
+	while (*file == ' ' || *file == '	')
+		file++;
+	if (*file == '\0')
+		return (NULL);
+	return (file);
+}
+
+void	close_fds(int fd, char *file)
+{
+	free(file);
+	if (fd != 0 && fd != -1)
+		close(fd);
 }

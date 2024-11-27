@@ -45,11 +45,3 @@ char	*rdl_management(void)
 	free(title);
 	return (line);
 }
-
-void	error_messages(int error)
-{
-	if (error == -1)
-		ft_printf("error: unclosed quotes\n");
-	else if (error == -2)
-		ft_printf("error: unclosed double quotes\n");
-}

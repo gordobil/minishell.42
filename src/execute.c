@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/11/27 15:04:54 by mafarto-         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:17:25 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	execveloop(char **str, char **path)
 	count = 0;
 	while (path[count] != 0)
 	{
-		bin = ft_strrcat(path[count], *str);
+		bin = ft_strcat(path[count], *str);
 		execve(bin, str, 0);
 		count++;
 	}
@@ -107,4 +107,5 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 		execveloop(pipes->command, path);
 	}
 	waitpid(id, &status, 0);
+	free_matrix(path);
 }

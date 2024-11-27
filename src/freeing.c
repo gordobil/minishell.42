@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:27:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/21 13:41:41 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:58:46 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ void	free_matrix(char **matrix)
 
 void	free_files(t_pipes *pipe)
 {
-	if (pipe->infile->file)
-		free(pipe->infile->file);
+	if (pipe->infile->file != NULL)
+		close_fds(pipe->infile->fd, pipe->infile->file);
 	free(pipe->infile);
-	if (pipe->outfile->file)
-		free(pipe->outfile->file);
+	if (pipe->outfile->file != NULL)
+		close_fds(pipe->outfile->fd, pipe->outfile->file);
 	free(pipe->outfile);
-	if (pipe->append->file)
-		free(pipe->append->file);
+	if (pipe->append->file != NULL)
+		close_fds(0, pipe->append->file);
 	free(pipe->append);
-	if (pipe->delimiter->file)
-		free(pipe->delimiter->file);
+	if (pipe->delimiter->file != NULL)
+		close_fds(pipe->delimiter->fd, pipe->delimiter->file);
 	free(pipe->delimiter);
 }
 
