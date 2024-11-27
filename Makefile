@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+         #
+#    By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2024/11/22 13:55:52 by mafarto-         ###   ########.fr        #
-=======
-#    Updated: 2024/11/27 15:28:36 by ngordobi         ###   ########.fr        #
->>>>>>> noah
+#    Updated: 2024/11/27 17:23:06 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,13 +40,8 @@ SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)files.c \
 						$(SRC_PATH)files_utils.c \
 						$(SRC_PATH)freeing.c \
-<<<<<<< HEAD
-						$(SRC_PATH)execute.c \
-						$(SRC_PATH)building_utils.c \
-=======
 						$(SRC_PATH)building_utils.c \
 						$(SRC_PATH)execute.c \
->>>>>>> noah
 						$(SRC_PATH)printttttttt.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
@@ -103,13 +94,9 @@ clean:
 fclean:				clean
 					rm -rf $(NAME)
 					rm -rf $(LIBFT)
-<<<<<<< HEAD
-					rm -rf .delimiter_file_*
-=======
 					rm -rf ./.temp_files/
 					rm -rf .temp_file_*
 					rm -rf $(FILES)
->>>>>>> noah
 					@make fclean --no-print-directory -C $(LIBFT_PATH)
 					echo "$(WHITE) · $(BLUE)Minishell executable removed.$(WHITE)\n"
 
