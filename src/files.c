@@ -109,8 +109,8 @@ int	open_fds(t_mini *mini)
 						O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
 		}
 		if (pipe->delimiter->file != NULL)
-			pipe->delimiter->fd = open(get_namefile(pipe->delimiter->file, '>'),
-					O_RDONLY);
+			pipe->delimiter->fd = open(pipe->delimiter->file, O_RDONLY);
 		pipe = pipe->next;
 	}
+	return (0);
 }
