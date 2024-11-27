@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/27 15:53:48 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:10:22 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	execute(t_mini	*mini)
 {
-	//pipex(mini->pipes->command, mini->envp);
+	pipex(mini->pipes, mini->envp);
 }
 
 void	parsing(t_mini *mini, char **envp)

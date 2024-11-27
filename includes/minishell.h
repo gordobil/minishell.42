@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/27 15:48:13 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:03:14 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	close_fds(int fd, char *file);
 
 //EXECUTE
 void	execute(t_mini	*mini);
-void	pipex(char **str, t_envp *envp);
+void	pipex(t_pipes *pipes, t_envp *envp);
 void	execveloop(char **str, char **path);
 int		building_comp(char *str);
 
@@ -125,6 +125,9 @@ void	free_matrix(char **matrix);
 
 //ERRORS
 void	error_messages(int error, char *str);
+
+//BUILD
+int		building_comp(char *str);
 
 //UTILS
 void	printttttttt(t_mini	*mini);
