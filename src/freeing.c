@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:27:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/26 11:52:00 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:58:46 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_files(t_pipes *pipe)
 		close_fds(pipe->outfile->fd, pipe->outfile->file);
 	free(pipe->outfile);
 	if (pipe->append->file != NULL)
-		close_fds(pipe->append->fd, pipe->append->file);
+		close_fds(0, pipe->append->file);
 	free(pipe->append);
 	if (pipe->delimiter->file != NULL)
 		close_fds(pipe->delimiter->fd, pipe->delimiter->file);
