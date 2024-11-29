@@ -12,6 +12,37 @@
 
 #include "../includes/minishell.h"
 
+int	del_quotes(char *path)
+{
+	int		i;
+	int		count;
+	char	type;
+
+	i = -1;
+	if ((path[0] == '"' || path[0] == '\'')
+		&& (path[1] == '"' || path[1] == '\''))
+	{
+		count = 0;
+		type = path[0];
+		while (path[++i] == '"' || path[i] == '\'')
+		{
+			if (path[i] == type)
+				count++;
+		}
+		if (count % 2 != 0)
+		{
+			i--;
+			while (path[i] != type && path[i] >= 0)
+				i--;
+		}
+		return (i);
+	}
+	else if ((path[0] == '"' || path[0] == '\'')
+		&& (path[1] != '"' && path[1] != '\''))
+		return (1);
+	return (0);
+}
+
 char	*get_path(t_pipes *pipe)
 {
 	int		i;
@@ -22,11 +53,8 @@ char	*get_path(t_pipes *pipe)
 	path = NULL;
 	while (pipe->command[i] != NULL)
 	{
-		if (path != NULL)
-			ft_printf("gp:%s\n", path);
-		j = 0;
-		while (pipe->command[i][j] == '"' || pipe->command[i][j] == '\'')
-			j++;
+		j = del_quotes(pipe->command[i]);
+		ft_printf("q[%d/%d]%s\n", j, ft_strlen(pipe->command[i]), pipe->command[i]);
 		if (path == NULL && pipe->command[i][j] != '\0')
 			path = ft_substr(pipe->command[i], j,
 					ft_strlen(pipe->command[i]) - j);
