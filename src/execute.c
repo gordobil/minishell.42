@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/11/27 19:46:04 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:08:02 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,30 @@ void	print_envp(t_envp *envp)
 	}
 }
 
-void	building_execute(int comand, t_pipes *pipes, t_envp *envp)
+void	building_execute(int command, t_pipes *pipes, t_envp *envp)
 {
 	char	**temp;
 
 	temp = ft_split(pipes->vars[0], '=');
-	if (comand == 0)
+	if (command == 0)
 	{
 		while (ft_strcmp(envp->variable, "PWD") != 0)
 			envp = envp->prev;
 		ft_printf("%s\n", envp->content);
 	}
-	else if (comand == 1)
+	else if (command == 1)
 	{
 		envp = litnew(temp, envp);
 		return ;
 	}
-	else if (comand == 2)
+	else if (command == 2)
 		print_envp(envp);
+	else if (command == 3)
+	{
+		ft_printf("cd\n");
+		if (cd(pipes, envp) != 0)
+			exit(-1);
+	}
 	exit(0);
 }
 

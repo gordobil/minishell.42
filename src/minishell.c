@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/27 19:50:09 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:38:31 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	execute(t_mini	*mini)
 {
-	//pipex(mini->pipes, mini->envp);
+	pipex(mini->pipes, mini->envp);
+	//cd(mini->pipes, mini->envp);
 }
 
 void	parsing(t_mini *mini, char **envp)

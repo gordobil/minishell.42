@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   building_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:15:27 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/11/27 19:04:33 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/11/29 13:35:34 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ int	building_comp(char *str)
 		return (1);
 	if (ft_strcmp(str, "env") == 0)
 		return (2);
+	if (ft_strcmp(str, "cd") == 0)
+		return (3);
 	return (-1);
 }
