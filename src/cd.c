@@ -32,7 +32,7 @@ char	*get_path(t_pipes *pipe)
 					ft_strlen(pipe->command[i]) - j);
 		else if (path != NULL && pipe->command[i][j] != '\0'
 				&& pipe->command[i] != NULL)
-			return(ft_printf("cd: too many arguments\n"), NULL);
+			return (ft_printf("cd: too many arguments\n"), NULL);
 		i++;
 	}
 	if (path == NULL)
