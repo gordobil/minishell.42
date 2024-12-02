@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/11/29 14:08:02 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:43:27 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ void	building_execute(int command, t_pipes *pipes, t_envp *envp)
 		print_envp(envp);
 	else if (command == 3)
 	{
-		ft_printf("cd\n");
 		if (cd(pipes, envp) != 0)
 			exit(-1);
 	}
+	else if (command == 4)
+		echo(pipes);
 	exit(0);
 }
 
