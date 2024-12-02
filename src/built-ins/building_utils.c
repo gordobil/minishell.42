@@ -6,11 +6,11 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:15:27 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/12/02 12:40:56 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:44:10 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	building_comp(char *str)
 {
