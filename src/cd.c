@@ -12,34 +12,38 @@
 
 #include "../includes/minishell.h"
 
-int	del_quotes(char *path)
+char	*path_substr(char *command, int i, int j)
 {
-	int		i;
-	int		count;
-	char	type;
+	char	*path;
 
-	i = -1;
-	if ((path[0] == '"' || path[0] == '\'')
-		&& (path[1] == '"' || path[1] == '\''))
+	path = NULL;
+	if (j > 0)
+		path = ft_substr(command, j, ft_strlen(command )- (j + 1));
+	else if (j == 0)
+		path = ft_substr(command, j, ft_strlen(command) - j);
+	if (path != NULL)
+		return (path);
+	return (command);
+}
+
+int	del_quotes(char *path, char type)
+{
+	int		j;
+	char	x_type;
+
+	if (type == '"')
+		x_type = '\'';
+	else
+		x_type = '"';
+	j = 0;
+	if (path[0] == '"' || path[0] == '\'')
 	{
-		count = 0;
-		type = path[0];
-		while (path[++i] == '"' || path[i] == '\'')
-		{
-			if (path[i] == type)
-				count++;
-		}
-		if (count % 2 != 0)
-		{
-			i--;
-			while (path[i] != type && path[i] >= 0)
-				i--;
-		}
-		return (i);
+		while (path[j] == type)
+			j++;
+		if (path[j] == x_type)
+			return (-1);
+		return (j);
 	}
-	else if ((path[0] == '"' || path[0] == '\'')
-		&& (path[1] != '"' && path[1] != '\''))
-		return (1);
 	return (0);
 }
 
@@ -49,19 +53,20 @@ char	*get_path(t_pipes *pipe)
 	int		j;
 	char	*path;
 
-	i = 1;
+	i = 0;
 	path = NULL;
-	while (pipe->command[i] != NULL)
+	while (pipe->command[++i] != NULL)
 	{
-		j = del_quotes(pipe->command[i]);
-		ft_printf("q[%d/%d]%s\n", j, ft_strlen(pipe->command[i]), pipe->command[i]);
-		if (path == NULL && pipe->command[i][j] != '\0')
-			path = ft_substr(pipe->command[i], j,
-					ft_strlen(pipe->command[i]) - j);
+		j = del_quotes(pipe->command[i], pipe->command[1][0]);
+		if (j < 0)
+			return (pipe->command[i]);
+		if (path == NULL && pipe->command[i][j] != '\0'
+			&& pipe->command[i][j] != '"' && pipe->command[i][j] != '\'')
+			path = path_substr(pipe->command[i], i, j);
 		else if (path != NULL && pipe->command[i][j] != '\0'
-				&& pipe->command[i] != NULL)
+				&& pipe->command[i] != NULL && pipe->command[i][j] != '"'
+				&& pipe->command[i][j] != '\'')
 			return (ft_printf("cd: too many arguments\n"), NULL);
-		i++;
 	}
 	if (path == NULL)
 		return (NULL);
@@ -79,6 +84,7 @@ int	cd(t_pipes *pipe, t_envp *envp)
 	if (chdir(path) != 0)
 	{
 		ft_printf("cd: %s: No such file or directory\n", path);
+		free(path);
 		return (-2);
 	}
 	while (envp->prev != 0)
