@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/29 13:48:02 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:16:15 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,9 @@ void	execveloop(char **str, char **path);
 //BUILD
 int		building_comp(char *str);
 
-//BUILTINS
-int		cd(t_pipes *pipes, t_envp *envp);
+//BUILT-INS
+int		cd(t_pipes *pipe, t_envp *envp);
+void	echo(t_pipes *pipe);
 
 //FREEING
 void	freeing(t_mini *mini);

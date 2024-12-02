@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:15:27 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/11/29 13:35:34 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:11:02 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ int	building_comp(char *str)
 		return (2);
 	if (ft_strcmp(str, "cd") == 0)
 		return (3);
+	if (ft_strcmp(str, "echo") == 0)
+		return (4);
 	return (-1);
 }

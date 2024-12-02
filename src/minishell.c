@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/29 14:49:04 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:10:11 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	execute(t_mini	*mini)
 {
 	//pipex(mini->pipes, mini->envp);
-	cd(mini->pipes, mini->envp);
+	//cd(mini->pipes, mini->envp);
+	echo(mini->pipes);
 }
 
 void	parsing(t_mini *mini, char **envp)

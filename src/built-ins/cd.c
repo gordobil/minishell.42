@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	*path_substr(char *command, int i, int j)
 {
@@ -18,7 +18,7 @@ char	*path_substr(char *command, int i, int j)
 
 	path = NULL;
 	if (j > 0)
-		path = ft_substr(command, j, ft_strlen(command )- (j + 1));
+		path = ft_substr(command, j, ft_strlen(command) - (j + 1));
 	else if (j == 0)
 		path = ft_substr(command, j, ft_strlen(command) - j);
 	if (path != NULL)

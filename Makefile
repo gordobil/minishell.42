@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/11/29 13:40:12 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/12/02 12:25:52 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ RL_FLAGS			=	-I/usr/include/readline -lreadline
 LIBFT				=	libft.a
 
 SRC_PATH			=	./src/
+BI_PATH				=	./src/built-ins/
 LIBFT_PATH			=	./libft/
 
 FILES				=	./a \
@@ -42,7 +43,8 @@ SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)freeing.c \
 						$(SRC_PATH)building_utils.c \
 						$(SRC_PATH)execute.c \
-						$(SRC_PATH)cd.c \
+						$(BI_PATH)cd.c \
+						$(BI_PATH)echo.c \
 						$(SRC_PATH)printttttttt.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
