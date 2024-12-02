@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:27:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/27 15:58:46 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:13:23 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	free_envp(t_envp *envp)
 void	freeing(t_mini *mini)
 {
 	namefiles(1);
-	free_envp(mini->envp);
 	free_pipes(mini->pipes);
 	free_matrix(mini->arg_matrix);
 	if (mini->files)

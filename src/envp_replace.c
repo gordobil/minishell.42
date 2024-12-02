@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp_replace.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:18:44 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/18 14:01:21 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:16:01 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,17 @@ char	*replace_vars(t_mini *mini, char *str)
 		i++;
 	}
 	return (str);
+}
+
+void	arg_vars(t_mini *mini)
+{
+	int	i;
+
+	i = 0;
+	while (mini->arg_matrix[i] != NULL)
+	{
+		if (mini->arg_matrix[i][0] == '$' || mini->arg_matrix[i][0] == '"')
+			mini->arg_matrix[i] = replace_vars(mini, mini->arg_matrix[i]);
+		i++;
+	}
 }

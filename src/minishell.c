@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/02 13:32:55 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:18:28 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,17 @@ void	execute(t_mini	*mini)
 		return ;
 	else if (comm == 3)
 		ms_cd(mini->pipes, mini->envp);
-	else if (comm = 4)
+	else if (comm == 4)
 		ms_echo(mini->pipes);
+	else if (comm == 5)
+		ms_unset(mini->pipes, mini->envp);
 
 
 }
 
 void	parsing(t_mini *mini, char **envp)
 {
-	load_envp(mini, envp);
+	arg_vars(mini);
 	pipe_info(mini->arg_matrix, mini, 0);
 	if (mini->del_c > 0)
 		delimiters(mini);
@@ -42,24 +44,28 @@ void	parsing(t_mini *mini, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	char	*rdline;
-	t_mini	mini;
+	t_mini	*mini;
 
 	ft_printf ("\n");
+	mini = malloc(sizeof(t_mini));
+	load_envp(mini, envp);
 	while (1)
 	{
 		rdline = rdl_management();
 		if (!rdline || ft_strcmp(rdline, "exit") == 0)
 			break ;
 		add_history(rdline);
-		if (split_args(rdline, &mini) == 0 && mini.arg_c > 0)
+		if (split_args(rdline, mini) == 0 && mini->arg_c > 0)
 		{
-			parsing(&mini, envp);
-			execute(&mini);
+			parsing(mini, envp);
+			execute(mini);
 			//printttttttt(&mini);
-			freeing(&mini);
+			freeing(mini);
 		}
 		free(rdline);
 	}
+	free(mini);
+	free_envp(mini->envp);
 	if (rdline)
 		free(rdline);
 	ft_printf("exit\n\n");

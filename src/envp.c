@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:38 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/22 12:32:01 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:15:58 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	arg_vars(t_mini *mini)
-{
-	int	i;
-
-	i = 0;
-	while (mini->arg_matrix[i] != NULL)
-	{
-		if (mini->arg_matrix[i][0] == '$' || mini->arg_matrix[i][0] == '"')
-			mini->arg_matrix[i] = replace_vars(mini, mini->arg_matrix[i]);
-		i++;
-	}
-}
 
 void	nodes_envp(t_envp *envp_p, t_envp *prev, int i, char **envp)
 {
@@ -100,5 +87,4 @@ void	load_envp(t_mini *mini, char **envp)
 		envp_p = malloc (sizeof(t_envp));
 	}
 	free(envp_p);
-	arg_vars(mini);
 }
