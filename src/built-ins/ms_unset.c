@@ -12,6 +12,19 @@
 
 #include "../../includes/minishell.h"
 
+void	envp_position(t_envp *p_envp)
+{
+	while (p_envp != NULL)
+	{
+		if (p_envp->position > p_envp->prev->position + 1)
+		{
+			while (p_envp->position > p_envp->prev->position + 1)
+				p_envp->position = p_envp->position - 1;
+		}
+		p_envp = p_envp->next;
+	}
+}
+
 void	ms_unset(t_pipes *pipe, t_envp *envp)
 {
 	t_envp	*p_envp;
@@ -29,6 +42,7 @@ void	ms_unset(t_pipes *pipe, t_envp *envp)
 				p_envp->next->prev = p_envp->prev;
 				free(p_envp->content);
 				free(p_envp->variable);
+				envp_position(p_envp);
 				free(p_envp);
 				break ;
 			}

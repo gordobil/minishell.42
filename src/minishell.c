@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/02 14:18:28 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:41:33 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	execute(t_mini	*mini)
 {
 	//pipex(mini->pipes, mini->envp);
-	
 
 
 ////////////  B U I L T - I N S   T E S T I N G  ////////////
@@ -28,7 +27,6 @@ void	execute(t_mini	*mini)
 		ms_echo(mini->pipes);
 	else if (comm == 5)
 		ms_unset(mini->pipes, mini->envp);
-
 
 }
 
