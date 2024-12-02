@@ -12,15 +12,15 @@
 
 #include "../../includes/minishell.h"
 
-void	echo(t_pipes *pipe)
+void	ms_echo(t_pipes *pipe)
 {
 	int	i;
 	int	flag;
 
+	i = 1;
 	flag = 0;
-	if (pipe->command[1] != NULL)
+	if (pipe->command[i] != NULL)
 	{
-		i = 1;
 		if (ft_strcmp(pipe->command[i], "-n") == 0)
 		{
 			i++;

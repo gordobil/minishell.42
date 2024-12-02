@@ -6,7 +6,7 @@
 #    By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:12:49 by ngordobi          #+#    #+#              #
-#    Updated: 2024/12/02 12:41:19 by ngordobi         ###   ########.fr        #
+#    Updated: 2024/12/02 13:17:34 by ngordobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,8 @@ SOURCES				=	$(SRC_PATH)minishell.c \
 						$(SRC_PATH)freeing.c \
 						$(SRC_PATH)execute.c \
 						$(BI_PATH)building_utils.c \
-						$(BI_PATH)cd.c \
-						$(BI_PATH)echo.c \
+						$(BI_PATH)ms_cd.c \
+						$(BI_PATH)ms_echo.c \
 						$(SRC_PATH)printttttttt.c \
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)

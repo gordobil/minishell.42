@@ -73,7 +73,7 @@ char	*get_path(t_pipes *pipe)
 	return (path);
 }
 
-int	cd(t_pipes *pipe, t_envp *envp)
+int	ms_cd(t_pipes *pipe, t_envp *envp)
 {
 	char	*path;
 	char	buffer[4096];

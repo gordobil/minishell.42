@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/12/02 12:43:56 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:25:19 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_envp(t_envp *envp)
 {
 	while (envp->prev->position != 0)
 		envp = envp->prev;
-	envp = envp->prev;
+//	envp = envp->prev;
 	while (envp != NULL)
 	{
 		if (envp->exported == 1)
@@ -48,7 +48,8 @@ void	building_execute(int command, t_pipes *pipes, t_envp *envp)
 {
 	char	**temp;
 
-	temp = ft_split(pipes->vars[0], '=');
+	if (pipes->var_c > 0)
+		temp = ft_split(pipes->vars[0], '=');
 	if (command == 0)
 	{
 		while (ft_strcmp(envp->variable, "PWD") != 0)
@@ -63,10 +64,12 @@ void	building_execute(int command, t_pipes *pipes, t_envp *envp)
 	else if (command == 2)
 		print_envp(envp);
 	else if (command == 3)
-		if (cd(pipes, envp) != 0)
+	{
+		if (ms_cd(pipes, envp) != 0)
 			exit(-1);
+	}
 	else if (command == 4)
-		echo(pipes);
+		ms_echo(pipes);
 	exit(0);
 }
 
@@ -101,10 +104,7 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 	while (path[++count] != 0)
 		path[count] = ft_strjoin(path[count], "/");
 	if (building_comp(pipes->command[0]) >= 0)
-	{
-		printf("%s", pipes->command[0]);
 		building_execute(building_comp(pipes->command[0]), pipes, envp);
-	}
 	id = fork();
 	if (id == 0)
 	{
