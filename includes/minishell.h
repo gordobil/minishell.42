@@ -81,6 +81,8 @@ typedef struct s_mini
 int		split_args(char *str, t_mini *mini);
 
 //PARSING_UTILS
+char	*rm_quotes(char *arg);
+int		quotes_content(char	*arg);
 int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
 

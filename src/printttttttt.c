@@ -37,10 +37,10 @@ void	printttttttt(t_mini	*mini)
 	if (mini->delimiters)
 		ft_printf("%m\n\n", mini->delimiters);
 
-	ft_printf("\n\n-------------------------------------\n		ENVP\n-------------------------------------\n\n");
+	/* ft_printf("\n\n-------------------------------------\n		ENVP\n-------------------------------------\n\n");
 	while (envp != NULL)
 	{
 		ft_printf("[%d] %s\n%s\n\n", envp->position, envp->variable, envp->content);
 		envp = envp->next;
-	}
+	} */
 }

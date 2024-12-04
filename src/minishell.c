@@ -57,13 +57,13 @@ int	main(int argc, char **argv, char **envp)
 		{
 			parsing(mini, envp);
 			execute(mini);
-			//printttttttt(&mini);
+			printttttttt(mini);
 			freeing(mini);
 		}
 		free(rdline);
 	}
-	free(mini);
 	free_envp(mini->envp);
+	free(mini);
 	if (rdline)
 		free(rdline);
 	ft_printf("exit\n\n");

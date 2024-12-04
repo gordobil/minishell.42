@@ -89,7 +89,10 @@ void	plain_command(char **arg_matrix, t_mini *mini)
 	i = 0;
 	while (arg_matrix[i] != NULL)
 	{
-		mini->pipes->command[i] = ft_strdup(arg_matrix[i]);
+		if (quotes_content(arg_matrix[i]) == 0)
+			mini->pipes->command[i] = ft_strdup(arg_matrix[i]);
+		else if (quotes_content(arg_matrix[i]) > 0)
+			mini->pipes->command[i] = rm_quotes(arg_matrix[i]);
 		i++;
 	}
 	mini->pipes->command[i] = NULL;

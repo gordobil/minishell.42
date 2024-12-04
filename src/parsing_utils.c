@@ -12,6 +12,33 @@
 
 #include "../includes/minishell.h"
 
+char	*rm_quotes(char *arg)
+{
+	int		len;
+	char	*new_arg;
+
+	len = ft_strlen(arg);
+	new_arg = ft_substr(arg, 1, len - 2);
+	return (new_arg);
+}
+
+int	quotes_content(char	*arg)
+{
+	int		i;
+	char	q;
+
+	q = arg[0];
+	if (q == '"' || q == '\'')
+	{
+		i = 0;
+		while (arg[i] == q && arg[i] != '\0')
+			i++;
+		if (arg[i] == '\0')
+			return (-1);
+		return (i);
+	}
+	return (0);
+}
 int	count_args(char **arg_matrix, t_pipes *pipe, int i, char ret)
 {
 	int	count;
@@ -22,7 +49,8 @@ int	count_args(char **arg_matrix, t_pipes *pipe, int i, char ret)
 		if (ms_strcmp(arg_matrix[i], "|") == 0)
 			break ;
 		if (arg_matrix[i][0] != '<' && arg_matrix[i][0] != '>'
-			&& is_it_a_var(arg_matrix[i]) == 0)
+			&& is_it_a_var(arg_matrix[i]) == 0
+			&& quotes_content(arg_matrix[i]) >= 0)
 			count++;
 		if (is_it_a_var(arg_matrix[i]) > 0 && ret == 'c')
 			pipe->var_c++;
