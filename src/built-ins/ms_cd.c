@@ -68,8 +68,8 @@ char	*get_path(t_pipes *pipe)
 				&& pipe->command[i][j] != '\'')
 			return (ft_printf("cd: too many arguments\n"), NULL);
 	}
-	if (path == NULL)
-		return (NULL);
+	if (path == NULL || ft_strcmp(path, "~") == 0)
+		return (ft_strdup("/"));
 	return (path);
 }
 
@@ -81,7 +81,7 @@ int	ms_cd(t_pipes *pipe, t_envp *envp)
 	path = get_path(pipe);
 	if (path == NULL)
 		return (-1);
-	if (chdir(path) != 0)
+	else if (chdir(path) != 0)
 	{
 		ft_printf("cd: %s: No such file or directory\n", path);
 		free(path);
