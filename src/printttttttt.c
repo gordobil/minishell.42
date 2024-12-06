@@ -20,7 +20,9 @@ void	printttttttt(t_mini	*mini)
 	ft_printf("\n\n-------------------------------------\n		MATRIX\n-------------------------------------\n%m-------------------------------------\n\n\n", mini->arg_matrix);
 	while (command != NULL)
 	{
-		ft_printf("NODE [%d]\n\n%m", command->position, command->command);
+		ft_printf("NODE [%d]\n", command->position);
+		if (command->command)
+			ft_printf("\n%m", command->command);
 		ft_printf("\nVariables[%d]", command->var_c);
 		if (command->vars)
 			ft_printf(":\n%m", command->vars);

@@ -6,11 +6,11 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:38 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/02 14:15:58 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:26:05 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	nodes_envp(t_envp *envp_p, t_envp *prev, int i, char **envp)
 {

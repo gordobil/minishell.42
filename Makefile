@@ -20,6 +20,7 @@ LIBFT				=	libft.a
 
 SRC_PATH			=	./src/
 BI_PATH				=	./src/built-ins/
+PRS_PATH			=	./src/parsing/
 LIBFT_PATH			=	./libft/
 
 FILES				=	./a \
@@ -28,20 +29,21 @@ FILES				=	./a \
 						./d \
 						./e \
 
-SOURCES				=	$(SRC_PATH)minishell.c \
-						$(SRC_PATH)rdl.c \
-						$(SRC_PATH)delimiters.c \
-						$(SRC_PATH)envp.c \
-						$(SRC_PATH)errors.c \
-						$(SRC_PATH)envp_replace.c \
-						$(SRC_PATH)parsing_utils.c \
-						$(SRC_PATH)split_args.c \
-						$(SRC_PATH)structs.c \
-						$(SRC_PATH)structs_init.c \
-						$(SRC_PATH)files.c \
-						$(SRC_PATH)files_utils.c \
-						$(SRC_PATH)freeing.c \
+SOURCES				=	$(SRC_PATH)errors.c \
 						$(SRC_PATH)execute.c \
+						$(SRC_PATH)freeing.c \
+						$(SRC_PATH)minishell.c \
+						$(PRS_PATH)delimiters.c \
+						$(PRS_PATH)envp.c \
+						$(PRS_PATH)envp_replace.c \
+						$(PRS_PATH)files.c \
+						$(PRS_PATH)files_utils.c \
+						$(PRS_PATH)parsing_utils.c \
+						$(PRS_PATH)rdl.c \
+						$(PRS_PATH)split_args.c \
+						$(PRS_PATH)split_args_utils.c \
+						$(PRS_PATH)structs.c \
+						$(PRS_PATH)structs_init.c \
 						$(BI_PATH)building_utils.c \
 						$(BI_PATH)ms_cd.c \
 						$(BI_PATH)ms_echo.c \
@@ -92,6 +94,8 @@ $(LIBFT):
 clean:
 					rm -rf $(SRC_PATH)objects/
 					rm -rf $(SRC_PATH)*.o
+					rm -rf $(BI_PATH)*.o
+					rm -rf $(PRS_PATH)*.o
 					@make clean --no-print-directory -C $(LIBFT_PATH)
 					echo "$(WHITE) · $(BLUE)Minishell objects removed.$(WHITE)\n"
 					

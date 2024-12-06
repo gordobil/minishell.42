@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	is_it_a_var(char *str)
 {
@@ -64,7 +64,8 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 	{
 		if (mini->arg_matrix[i][0] != '<' && mini->arg_matrix[i][0] != '>'
 			&& is_it_a_var(mini->arg_matrix[i]) == 0
-			&& ms_strcmp(mini->arg_matrix[i], "|" ) && j < arguments)
+			&& ms_strcmp(mini->arg_matrix[i], "|" ) && j < arguments
+			&& mini->pipes->command)
 		{
 			mini->pipes->command[j] = ft_strdup(mini->arg_matrix[i]);
 			j++;
@@ -75,7 +76,8 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 				k = file_saving(mini, i, k);
 		i++;
 	}
-	mini->pipes->command[j] = NULL;
+	if (mini->pipes->command)
+		mini->pipes->command[j] = NULL;
 	if (k > 0)
 		mini->files[k] = NULL;
 	return (k);
@@ -89,10 +91,7 @@ void	plain_command(char **arg_matrix, t_mini *mini)
 	i = 0;
 	while (arg_matrix[i] != NULL)
 	{
-		if (quotes_content(arg_matrix[i]) == 0)
-			mini->pipes->command[i] = ft_strdup(arg_matrix[i]);
-		else if (quotes_content(arg_matrix[i]) > 0)
-			mini->pipes->command[i] = rm_quotes(arg_matrix[i]);
+		mini->pipes->command[i] = rm_quotes(arg_matrix[i]);
 		i++;
 	}
 	mini->pipes->command[i] = NULL;

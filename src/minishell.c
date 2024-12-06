@@ -18,25 +18,29 @@ void	execute(t_mini	*mini)
 
 
 ////////////  B U I L T - I N S   T E S T I N G  ////////////
-	int	comm = building_comp(mini->pipes->command[0]);
-	if (comm == -1)
-		return ;
-	else if (comm == 3)
-		ms_cd(mini->pipes, mini->envp);
-	else if (comm == 4)
-		ms_echo(mini->pipes);
-	else if (comm == 5)
-		ms_unset(mini->pipes, mini->envp);
-
+	if (mini->pipes->command)
+	{
+		int	comm = building_comp(mini->pipes->command[0]);
+		if (comm == -1)
+			return ;
+		else if (comm == 3)
+			ms_cd(mini->pipes, mini->envp);
+		else if (comm == 4)
+			ms_echo(mini->pipes);
+		else if (comm == 5)
+			ms_unset(mini->pipes, mini->envp);
+	}
 }
 
-void	parsing(t_mini *mini, char **envp)
+int	parsing(t_mini *mini, char **envp)
 {
 	arg_vars(mini);
 	pipe_info(mini->arg_matrix, mini, 0);
 	if (mini->del_c > 0)
 		delimiters(mini);
-	open_fds(mini);
+	if (open_fds(mini) != 0)
+		return (-1);
+	return (0);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -55,9 +59,9 @@ int	main(int argc, char **argv, char **envp)
 		add_history(rdline);
 		if (split_args(rdline, mini) == 0 && mini->arg_c > 0)
 		{
-			parsing(mini, envp);
-			execute(mini);
-			printttttttt(mini);
+			if (parsing(mini, envp) == 0)
+				execute(mini);
+			//printttttttt(mini);
 			freeing(mini);
 		}
 		free(rdline);

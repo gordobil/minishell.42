@@ -79,10 +79,16 @@ typedef struct s_mini
 
 //SPLIT_ARGS
 int		split_args(char *str, t_mini *mini);
+int		arg_jump(char *s, int i);
+
+//SPLIT_ARGS_UTILS
+int		check_unclosed(char *s);
+int		jump_spaces(char *s, int i);
+int		empty_quotes(char *s, int i);
+int		jump_empty(char *s, int i);
 
 //PARSING_UTILS
 char	*rm_quotes(char *arg);
-int		quotes_content(char	*arg);
 int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
 

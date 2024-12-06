@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:27:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/02 14:13:23 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:57:00 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ void	free_pipes(t_pipes *pipe)
 	while (pipe != NULL)
 	{
 		i = -1;
-		while (pipe->command[++i] != NULL)
-			free(pipe->command[i]);
-		free(pipe->command);
+		if (pipe->command)
+			free_matrix(pipe->command);
+		if (pipe->vars)
+			free_matrix(pipe->vars);
 		free_files(pipe);
 		if (pipe->position > 0)
 			free(pipe->prev);
