@@ -12,6 +12,19 @@
 
 #include "../includes/minishell.h"
 
+void	printtt_envp(t_envp *envp)
+{
+	while (envp->prev != NULL)
+		envp = envp->prev;
+
+	ft_printf("\n\n-------------------------------------\n		ENVP\n-------------------------------------\n\n");
+	while (envp != NULL)
+	{
+		ft_printf("[%d] %s\n%s\n\n", envp->position, envp->variable, envp->content);
+		envp = envp->next;
+	}
+}
+
 void	printttttttt(t_mini	*mini)
 {
 	t_pipes	*command = mini->pipes;
@@ -39,10 +52,5 @@ void	printttttttt(t_mini	*mini)
 	if (mini->delimiters)
 		ft_printf("%m\n\n", mini->delimiters);
 
-	/* ft_printf("\n\n-------------------------------------\n		ENVP\n-------------------------------------\n\n");
-	while (envp != NULL)
-	{
-		ft_printf("[%d] %s\n%s\n\n", envp->position, envp->variable, envp->content);
-		envp = envp->next;
-	} */
+	//print_envp(envp);
 }

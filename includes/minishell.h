@@ -145,5 +145,6 @@ void	error_messages(int error, char *str);
 
 //UTILS
 void	printttttttt(t_mini	*mini);
+void	printtt_envp(t_envp *envp);
 
 #endif

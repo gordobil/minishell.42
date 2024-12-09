@@ -61,7 +61,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			if (parsing(mini, envp) == 0)
 				execute(mini);
-			//printttttttt(mini);
+			printttttttt(mini);
 			freeing(mini);
 		}
 		free(rdline);
