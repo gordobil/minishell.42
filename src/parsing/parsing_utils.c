@@ -12,6 +12,31 @@
 
 #include "../../includes/minishell.h"
 
+char	**save_vars(t_mini *mini, int count)
+{
+	int		i;
+	int		j;
+	char	**vars;
+
+	if (count <= 0)
+		return (NULL);
+	vars = malloc((count + 1) * sizeof(char *));
+	i = 0;
+	j = 0;
+	while (count > 0 && mini->arg_matrix[i] != NULL)
+	{
+		if (is_it_a_var(mini->arg_matrix[i]) > 0)
+		{
+			vars[j] = ft_strdup(mini->arg_matrix[i]);
+			j++;
+			count--;
+		}
+		i++;
+	}
+	vars[j] = NULL;
+	return (vars);
+}
+
 char	*rm_quotes(char *arg)
 {
 	int		len;
@@ -40,7 +65,7 @@ int	count_args(char **arg_matrix, t_pipes *pipe, int i, char ret)
 			&& is_it_a_var(arg_matrix[i]) == 0)
 			count++;
 		if (is_it_a_var(arg_matrix[i]) > 0 && ret == 'c')
-			pipe->var_c++;
+			pipe->mini->var_c++;
 		i++;
 	}
 	if (ret == 'i')

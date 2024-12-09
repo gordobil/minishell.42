@@ -35,7 +35,7 @@ SOURCES				=	$(SRC_PATH)errors.c \
 						$(SRC_PATH)minishell.c \
 						$(PRS_PATH)delimiters.c \
 						$(PRS_PATH)envp.c \
-						$(PRS_PATH)envp_replace.c \
+						$(PRS_PATH)envp_arg_replace.c \
 						$(PRS_PATH)files.c \
 						$(PRS_PATH)files_utils.c \
 						$(PRS_PATH)parsing_utils.c \
