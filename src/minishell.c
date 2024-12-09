@@ -12,10 +12,19 @@
 
 #include "../includes/minishell.h"
 
+void	end_mini(t_mini *mini, char *rdline)
+{
+	free_envp(mini->envp);
+	free(mini);
+	if (rdline)
+		free(rdline);
+	ft_printf("exit\n\n");
+	clear_history();
+}
+
 void	execute(t_mini	*mini)
 {
 	//pipex(mini->pipes, mini->envp);
-
 
 ////////////  B U I L T - I N S   T E S T I N G  ////////////
 	if (mini->pipes->command)
@@ -32,12 +41,14 @@ void	execute(t_mini	*mini)
 	}
 }
 
-int	parsing(t_mini *mini, char **envp)
+int	parsing(t_mini *mini)
 {
 	arg_vars(mini);
-	pipe_info(mini->arg_matrix, mini, 0);
+	pipe_info(mini->arg_matrix, mini, 0, 0);
 	if (mini->del_c > 0)
 		delimiters(mini);
+	if (mini->var_c > 0)
+		add_vars(mini);
 	if (open_fds(mini) != 0)
 		return (-1);
 	return (0);
@@ -59,19 +70,14 @@ int	main(int argc, char **argv, char **envp)
 		add_history(rdline);
 		if (split_args(rdline, mini) == 0 && mini->arg_c > 0)
 		{
-			if (parsing(mini, envp) == 0)
+			if (parsing(mini) == 0)
 				execute(mini);
-			//printttttttt(mini);
+			printttttttt(mini);
 			freeing(mini);
 		}
 		free(rdline);
 	}
-	free_envp(mini->envp);
-	free(mini);
-	if (rdline)
-		free(rdline);
-	ft_printf("exit\n\n");
-	clear_history();
+	end_mini(mini, rdline);
 	return (0);
 }
 

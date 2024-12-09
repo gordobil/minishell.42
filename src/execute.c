@@ -47,8 +47,6 @@ void	building_execute(int command, t_pipes *pipes, t_envp *envp)
 {
 	char	**temp;
 
-	if (pipes->var_c > 0)
-		temp = ft_split(pipes->vars[0], '=');
 	if (command == 0)
 	{
 		while (ft_strcmp(envp->variable, "PWD") != 0)

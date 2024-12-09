@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:38 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/06 18:26:05 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:27:28 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,33 @@ void	load_envp(t_mini *mini, char **envp)
 		envp_p = malloc (sizeof(t_envp));
 	}
 	free(envp_p);
+}
+
+int	add_vars(t_mini *mini)
+{
+	int		i;
+	int		j;
+	t_envp	*envp;
+
+	if (!mini->vars)
+		return (-1);
+	envp = mini->envp;
+	while (envp->next != NULL)
+		envp = envp->next;
+	i = 0;
+	while (mini->vars[i] != NULL)
+	{
+		envp->next = malloc(sizeof(t_envp));
+		if (!envp->next)
+			return (-1);
+		j = load_variable(mini->vars, envp->next, i);
+		load_content(mini->vars, envp->next, i, j);
+		envp->next->position = envp->position + 1;
+		envp->next->exported = 0;
+		envp->next->prev = envp;
+		envp->next->next = NULL;
+		envp = envp->next;
+		i++;
+	}
+	return (0);
 }

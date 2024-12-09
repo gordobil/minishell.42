@@ -45,8 +45,8 @@ typedef struct s_envp
 
 typedef struct s_files
 {
-	char	*file;
-	int		fd;
+	char			*file;
+	int				fd;
 }				t_files;
 
 typedef struct s_pipes
@@ -57,8 +57,6 @@ typedef struct s_pipes
 	t_files			*outfile;
 	t_files			*append;
 	t_files			*delimiter;
-	int				var_c;
-	char			**vars;
 	struct s_mini	*mini;
 	struct s_pipes	*next;
 	struct s_pipes	*prev;
@@ -66,15 +64,17 @@ typedef struct s_pipes
 
 typedef struct s_mini
 {
-	int		arg_c;
-	char	**arg_matrix;
-	int		file_c;
-	char	**files;
-	int		del_c;
-	char	**delimiters;
-	int		comm_c;
-	t_pipes	*pipes;
-	t_envp	*envp;
+	int				arg_c;
+	char			**arg_matrix;
+	int				file_c;
+	char			**files;
+	int				del_c;
+	char			**delimiters;
+	int				var_c;
+	char			**vars;
+	int				comm_c;
+	t_pipes			*pipes;
+	t_envp			*envp;
 }				t_mini;
 
 //SPLIT_ARGS
@@ -88,6 +88,7 @@ int		empty_quotes(char *s, int i);
 int		jump_empty(char *s, int i);
 
 //PARSING_UTILS
+char	**save_vars(t_mini *mini, int count);
 char	*rm_quotes(char *arg);
 int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
@@ -99,11 +100,14 @@ char	*mini_title(void);
 
 //ENVP
 void	load_envp(t_mini *mini, char **envp);
+int		add_vars(t_mini *mini);
+
+//ENVP_ARG_REPLACE
 void	arg_vars(t_mini *mini);
 char	*replace_vars(t_mini *mini, char *str);
 
 //STRUCTS
-void	pipe_info(char **arg_matrix, t_mini *mini, int k);
+void	pipe_info(char **arg_matrix, t_mini *mini, int i, int j);
 int		is_it_a_var(char *str);
 
 //STRUCTS_INIT
