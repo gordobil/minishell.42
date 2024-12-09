@@ -35,7 +35,6 @@ void	print_envp(t_envp *envp)
 {
 	while (envp->prev->position != 0)
 		envp = envp->prev;
-//	envp = envp->prev;
 	while (envp != NULL)
 	{
 		if (envp->exported == 1)
