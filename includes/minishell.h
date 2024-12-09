@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/27 19:32:11 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:20:06 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,16 @@ typedef struct s_mini
 
 //SPLIT_ARGS
 int		split_args(char *str, t_mini *mini);
+int		arg_jump(char *s, int i);
+
+//SPLIT_ARGS_UTILS
+int		check_unclosed(char *s);
+int		jump_spaces(char *s, int i);
+int		empty_quotes(char *s, int i);
+int		jump_empty(char *s, int i);
 
 //PARSING_UTILS
+char	*rm_quotes(char *arg);
 int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
 
@@ -91,6 +99,7 @@ char	*mini_title(void);
 
 //ENVP
 void	load_envp(t_mini *mini, char **envp);
+void	arg_vars(t_mini *mini);
 char	*replace_vars(t_mini *mini, char *str);
 
 //STRUCTS
@@ -121,14 +130,21 @@ void	execveloop(char **str, char **path);
 //BUILD
 int		building_comp(char *str);
 
+//BUILT-INS
+int		ms_cd(t_pipes *pipe, t_envp *envp);
+void	ms_echo(t_pipes *pipe);
+void	ms_unset(t_pipes *pipe, t_envp *envp);
+
 //FREEING
 void	freeing(t_mini *mini);
 void	free_matrix(char **matrix);
+void	free_envp(t_envp *envp);
 
 //ERRORS
 void	error_messages(int error, char *str);
 
 //UTILS
 void	printttttttt(t_mini	*mini);
+void	printtt_envp(t_envp *envp);
 
 #endif

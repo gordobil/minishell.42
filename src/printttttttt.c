@@ -12,6 +12,19 @@
 
 #include "../includes/minishell.h"
 
+void	printtt_envp(t_envp *envp)
+{
+	while (envp->prev != NULL)
+		envp = envp->prev;
+
+	ft_printf("\n\n-------------------------------------\n		ENVP\n-------------------------------------\n\n");
+	while (envp != NULL)
+	{
+		ft_printf("[%d] %s\n%s\n\n", envp->position, envp->variable, envp->content);
+		envp = envp->next;
+	}
+}
+
 void	printttttttt(t_mini	*mini)
 {
 	t_pipes	*command = mini->pipes;
@@ -20,7 +33,9 @@ void	printttttttt(t_mini	*mini)
 	ft_printf("\n\n-------------------------------------\n		MATRIX\n-------------------------------------\n%m-------------------------------------\n\n\n", mini->arg_matrix);
 	while (command != NULL)
 	{
-		ft_printf("NODE [%d]\n\n%m", command->position, command->command);
+		ft_printf("NODE [%d]\n", command->position);
+		if (command->command)
+			ft_printf("\n%m", command->command);
 		ft_printf("\nVariables[%d]", command->var_c);
 		if (command->vars)
 			ft_printf(":\n%m", command->vars);
@@ -37,10 +52,5 @@ void	printttttttt(t_mini	*mini)
 	if (mini->delimiters)
 		ft_printf("%m\n\n", mini->delimiters);
 
-/* 	ft_printf("\n\n-------------------------------------\n		ENVP\n-------------------------------------\n\n");
-	while (envp != NULL)
-	{
-		ft_printf("[%d] %s\n%s\n\n", envp->position, envp->variable, envp->content);
-		envp = envp->next;
-	} */
+	//print_envp(envp);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	**save_vars(t_mini *mini, int count, int i)
 {
@@ -85,7 +85,6 @@ int	init_structs(t_mini *mini, int i, int position)
 {
 	int	arguments;
 
-	arguments = 0;
 	if (position == -1)
 		start_structs(mini);
 	else
@@ -93,6 +92,7 @@ int	init_structs(t_mini *mini, int i, int position)
 		mini->pipes = malloc(sizeof(t_pipes));
 		mini->pipes->mini = mini;
 		mini->pipes->position = position;
+		mini->pipes->command = NULL;
 		mini->pipes->infile = malloc(sizeof(t_files));
 		mini->pipes->infile->file = NULL;
 		mini->pipes->outfile = malloc(sizeof(t_files));
@@ -103,7 +103,8 @@ int	init_structs(t_mini *mini, int i, int position)
 		mini->pipes->delimiter->file = NULL;
 		mini->pipes->var_c = 0;
 		arguments = count_args(mini->arg_matrix, mini->pipes, i, 'c');
-		mini->pipes->command = malloc((arguments + 1) * sizeof(char *));
+		if (arguments > 0)
+			mini->pipes->command = malloc((arguments + 1) * sizeof(char *));
 		mini->pipes->vars = save_vars(mini, mini->pipes->var_c, i);
 	}
 	return (arguments);
