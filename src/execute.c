@@ -80,6 +80,12 @@ void	execveloop(char **str, char **path)
 	int		count;
 
 	count = 0;
+	if (ft_strcmp(*str, "/bin/") == 0)
+	{
+		printf("Concha entro\n");
+		bin = "ls";
+		execve(*str, bin, 0);
+	}
 	while (path[count] != 0)
 	{
 		bin = ft_strcat(path[count], *str);
@@ -105,7 +111,10 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 	while (path[++count] != 0)
 		path[count] = ft_strjoin(path[count], "/");
 	if (building_comp(pipes->command[0]) >= 0)
+	{
+		printf("%s", pipes->command[0]);
 		building_execute(building_comp(pipes->command[0]), pipes, envp);
+	}
 	id = fork();
 	if (id == 0)
 	{
