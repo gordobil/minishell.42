@@ -10,7 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
+
+char	*rm_quotes(char *arg)
+{
+	int		len;
+	char	*new_arg;
+
+	if (arg[0] == '\'' || arg[0] == '"')
+	{
+		len = ft_strlen(arg);
+		new_arg = ft_substr(arg, 1, len - 2);
+		return (new_arg);
+	}
+	return (ft_strdup(arg));
+}
+
 
 int	count_args(char **arg_matrix, t_pipes *pipe, int i, char ret)
 {

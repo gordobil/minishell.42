@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/27 16:44:30 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:26:22 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	word_jump(const char *s, int i)
 {
@@ -36,28 +36,27 @@ int	word_jump(const char *s, int i)
 	return (i);
 }
 
-int	arg_jump(const char *s, int i)
+int	arg_jump(char *s, int i)
 {
-	if (s[i] == '"')
+	int	start;
+
+	i = jump_spaces(s, i);
+	start = i;
+	if (s[i] == '"' || s[i] == '\'')
 	{
 		i++;
-		while (s[i] != '"')
+		while (s[i] != s[start])
 		{
 			i++;
 			if (s[i] == '\0')
-				return (-2);
-		}
-		i++;
-	}
-	else if (s[i] == '\'')
-	{
-		i++;
-		while (s[i] != '\'')
-		{
-			i++;
-			if (s[i] == '\0')
+			{
+				if (s[start] == '"')
+					return (-2);
 				return (-1);
+			}
 		}
+		if (i == start + 1)
+			return (arg_jump(s, i + 1));
 		i++;
 	}
 	else
@@ -65,28 +64,26 @@ int	arg_jump(const char *s, int i)
 	return (i);
 }
 
-int	arg_count(const char *s)
+int	arg_count(char *s)
 {
 	int	i;
 	int	count;
+	int	start;
 
-	if (s[0] == '\n' && s[1] == '\0')
-		return (0);
-	i = 0;
-	count = 0;
-	while (s[i] == ' ' || s[i] == '	')
-		i++;
-	if (s[i] == '\0' || s[0] == '\n')
+	if ((s[0] == '\n' && s[1] == '\0') || check_unclosed(s) < 0)
+		return (check_unclosed(s));
+	i = jump_empty(s, 0);
+	if (s[i] == '\0' || s[i] == '\n')
 		return (0);
 	count = 1;
 	while (s[i] != '\0')
 	{
+		i = jump_empty(s, i);
 		i = arg_jump(s, i);
 		if (i <= 0)
 			return (i);
-		while (s[i] == ' ' || s[i] == '	')
-			i++;
-		if (s[i] != '\0')
+		i = jump_empty(s, i);
+		if (s[i] != '\0' && s[i] != '\n')
 			count++;
 		else
 			break ;
@@ -96,10 +93,14 @@ int	arg_count(const char *s)
 
 int	arg_size(char *s, int i, char mark)
 {
-	int	start;
+	int		start;
+	int		q_start;
+	char	q;
 
-	while (s[i] == ' ' || s[i] == '	')
-		i++;
+	i = jump_spaces(s, i);
+	q_start = i;
+	if (s[i] == '"' || s[i] == '\'')
+		i = empty_quotes(s, i);
 	if (mark == 's')
 		return (i);
 	start = i;
