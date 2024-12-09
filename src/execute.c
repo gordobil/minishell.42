@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/11/27 19:46:04 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:34:52 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,12 @@ void	execveloop(char **str, char **path)
 	int		count;
 
 	count = 0;
+	if (ft_strcmp(*str, "/bin/") == 0)
+	{
+		printf("Concha entro\n");
+		bin = "ls";
+		execve(*str, bin, 0);
+	}
 	while (path[count] != 0)
 	{
 		bin = ft_strcat(path[count], *str);
