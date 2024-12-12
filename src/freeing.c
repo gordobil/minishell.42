@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:27:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/09 13:47:59 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:52:43 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	free_pipes(t_pipes *pipe)
 		i = -1;
 		if (pipe->command)
 			free_matrix(pipe->command);
-/* 		if (pipe->vars)
-			free_matrix(pipe->vars); */
 		free_files(pipe);
 		if (pipe->position > 0)
 			free(pipe->prev);

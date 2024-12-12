@@ -6,13 +6,13 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/12/02 14:18:52 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/12 01:47:02 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_envp	*litnew(char **variable, t_envp *envp)
+/* t_envp	*litnew(char **variable, t_envp *envp)
 {
 	struct s_envp	*temp_envp;
 
@@ -29,49 +29,25 @@ t_envp	*litnew(char **variable, t_envp *envp)
 	temp_envp->exported = 0;
 	temp_envp->next = NULL;
 	return (envp);
-}
+} */
 
-void	print_envp(t_envp *envp)
+int	building_execute(t_pipes *pipes, t_envp *envp)
 {
-	while (envp->prev->position != 0)
-		envp = envp->prev;
-	while (envp != NULL)
-	{
-		if (envp->exported == 1)
-			ft_printf("%s=%s\n", envp->variable, envp->content);
-		envp = envp->next;
-	}
-}
-
-void	building_execute(int command, t_pipes *pipes, t_envp *envp)
-{
-	char	**temp;
-
-	if (pipes->var_c > 0)
-		temp = ft_split(pipes->vars[0], '=');
-	if (command == 0)
-	{
-		while (ft_strcmp(envp->variable, "PWD") != 0)
-			envp = envp->prev;
-		ft_printf("%s\n", envp->content);
-	}
-	else if (command == 1)
-	{
-		envp = litnew(temp, envp);
-		return ;
-	}
-	else if (command == 2)
-		print_envp(envp);
-	else if (command == 3)
-	{
-		if (ms_cd(pipes, envp) != 0)
-			exit(-1);
-	}
-	else if (command == 4)
+	if (ft_strcmp(pipes->command[0], "pwd") == 0)
+		ms_pwd(envp);
+	else if (ft_strcmp(pipes->command[0], "export") == 0)
+		ms_export(pipes, envp);
+	else if (ft_strcmp(pipes->command[0], "env") == 0)
+		ms_env(envp);
+	else if (ft_strcmp(pipes->command[0], "cd") == 0)
+		ms_cd(pipes, envp);
+	else if (ft_strcmp(pipes->command[0], "echo") == 0)
 		ms_echo(pipes);
-	else if (command == 5)
+	else if (ft_strcmp(pipes->command[0], "unset") == 0)
 		ms_unset(pipes, envp);
-	exit(0);
+	else
+		return (-1);
+	return (0);
 }
 
 void	execveloop(char **str, char **path)
@@ -80,12 +56,12 @@ void	execveloop(char **str, char **path)
 	int		count;
 
 	count = 0;
-	if (ft_strcmp(*str, "/bin/") == 0)
+/* 	if (ft_strcmp(*str, "/bin/") == 0)
 	{
 		printf("Concha entro\n");
 		bin = "ls";
 		execve(*str, bin, 0);
-	}
+	} */
 	while (path[count] != 0)
 	{
 		bin = ft_strcat(path[count], *str);
@@ -110,15 +86,13 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 	count = -1;
 	while (path[++count] != 0)
 		path[count] = ft_strjoin(path[count], "/");
-	if (building_comp(pipes->command[0]) >= 0)
+	if (building_execute(pipes, envp) == -1)
 	{
-		printf("%s", pipes->command[0]);
-		building_execute(building_comp(pipes->command[0]), pipes, envp);
+		id = fork();
+		if (id == 0)
+		{
+			execveloop(pipes->command, path);
+		}
+		waitpid(id, &status, 0);
 	}
-	id = fork();
-	if (id == 0)
-	{
-		execveloop(pipes->command, path);
-	}
-	waitpid(id, &status, 0);
 }

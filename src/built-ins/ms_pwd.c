@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   building_utils.c                                   :+:      :+:    :+:   */
+/*   ms_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 12:15:27 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/12/02 13:47:13 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/12/12 00:00:12 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/12/12 00:00:12 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	building_comp(char *str)
+void	ms_pwd(t_envp *envp)
 {
-	if (ft_strcmp(str, "pwd") == 0)
-		return (0);
-	if (ft_strcmp(str, "export") == 0)
-		return (1);
-	if (ft_strcmp(str, "env") == 0)
-		return (2);
-	if (ft_strcmp(str, "cd") == 0)
-		return (3);
-	if (ft_strcmp(str, "echo") == 0)
-		return (4);
-	if (ft_strcmp(str, "unset") == 0)
-		return (5);
-	return (-1);
+	t_envp	*var;
+
+	while (envp->position > 0)
+		envp = envp->prev;
+	var = envp;
+	while (ft_strcmp(envp->variable, "PWD") != 0)
+		envp = envp->next;
+	ft_printf("%s\n", envp->content);
 }

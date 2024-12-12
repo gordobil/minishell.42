@@ -131,14 +131,13 @@ void	execute(t_mini	*mini);
 void	pipex(t_pipes *pipes, t_envp *envp);
 void	execveloop(char **str, char **path);
 
-//BUILD
-int		building_comp(char *str);
-
 //BUILT-INS
 int		ms_cd(t_pipes *pipe, t_envp *envp);
 void	ms_echo(t_pipes *pipe);
+void	ms_env(t_envp *envp);
+void	ms_export(t_pipes *pipes, t_envp *envp);
+void	ms_pwd(t_envp *envp);
 void	ms_unset(t_pipes *pipe, t_envp *envp);
-
 //FREEING
 void	freeing(t_mini *mini);
 void	free_matrix(char **matrix);

@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/02 14:41:33 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/12 01:48:27 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,7 @@ void	end_mini(t_mini *mini, char *rdline)
 
 void	execute(t_mini	*mini)
 {
-	//pipex(mini->pipes, mini->envp);
-
-////////////  B U I L T - I N S   T E S T I N G  ////////////
-	if (mini->pipes->command)
-	{
-		int	comm = building_comp(mini->pipes->command[0]);
-		if (comm == -1)
-			return ;
-		else if (comm == 3)
-			ms_cd(mini->pipes, mini->envp);
-		else if (comm == 4)
-			ms_echo(mini->pipes);
-		else if (comm == 5)
-			ms_unset(mini->pipes, mini->envp);
-	}
+	pipex(mini->pipes, mini->envp);
 }
 
 int	parsing(t_mini *mini)
@@ -72,7 +58,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			if (parsing(mini) == 0)
 				execute(mini);
-			printttttttt(mini);
+			//printttttttt(mini);
 			freeing(mini);
 		}
 		free(rdline);
