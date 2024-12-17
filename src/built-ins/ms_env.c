@@ -12,11 +12,20 @@
 
 #include "../../includes/minishell.h"
 
-void	ms_env(t_envp *envp)
+void	ms_env(t_envp *envp, t_pipes *pipe)
 {
 	t_envp	*var;
 
+	if (!envp || envp == NULL)
+		return ;
 	var = envp;
+	if (pipe->command[1] != NULL)
+	{
+		if (ft_strcmp(pipe->command[1], "-a") == 0)
+			printtt_envp(var);
+		error_messages(-5, "env");
+		return ;
+	}
 	while (var != NULL)
 	{
 		if (var->exported == 1 && var->variable != NULL

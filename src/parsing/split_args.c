@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/17 13:07:42 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/17 20:43:01 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ int	split_args(char *s, t_mini *mini)
 	int		i;
 	int		j;
 
+	if (!mini->envp)
+		return (error_messages(-8, NULL));
 	mini->arg_c = arg_count(s);
 	if (mini->arg_c <= 0)
 		return (error_messages(mini->arg_c, NULL), -1);
@@ -129,10 +131,7 @@ int	split_args(char *s, t_mini *mini)
 		mini->arg_matrix[i] = ft_substr(s, arg_size(s, j, 's'),
 				arg_size(s, j, 'r'));
 		if (!mini->arg_matrix[i])
-		{
-			free_matrix(mini->arg_matrix);
-			return (-1);
-		}
+			return (free_matrix(mini->arg_matrix), -1);
 		j = arg_size(s, j, 'e');
 	}
 	mini->arg_matrix[i] = NULL;

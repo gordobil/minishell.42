@@ -6,30 +6,11 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/12/17 14:30:08 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/17 21:54:39 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-/* t_envp	*litnew(char **variable, t_envp *envp)
-{
-	struct s_envp	*temp_envp;
-
-	temp_envp = malloc(sizeof(struct s_envp));
-	while (envp->prev->position != 0)
-		envp = envp->prev;
-	while (envp->next != NULL)
-		envp = envp->next;
-	temp_envp->position = envp->position + 1;
-	temp_envp->prev = envp;
-	envp->next = temp_envp;
-	temp_envp->variable = variable[0];
-	temp_envp->content = variable[1];
-	temp_envp->exported = 0;
-	temp_envp->next = NULL;
-	return (envp);
-} */
 
 int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp)
 {
@@ -40,11 +21,11 @@ int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp)
 		else if (ft_strcmp(pipe->command[0], "echo") == 0)
 			ms_echo(pipe);
 		else if (ft_strcmp(pipe->command[0], "env") == 0)
-			ms_env(envp);
+			ms_env(envp, pipe);
 		else if (ft_strcmp(pipe->command[0], "export") == 0)
 			ms_export(pipe, envp);
 		else if (ft_strcmp(pipe->command[0], "pwd") == 0)
-			ms_pwd(envp);
+			ms_pwd(envp, pipe);
 		else if (ft_strcmp(pipe->command[0], "unset") == 0)
 			ms_unset(pipe, envp);
 		else if (pipe->args == pipe->var_c)
@@ -63,12 +44,6 @@ void	execveloop(char **str, char **path)
 	while (is_it_a_var(*str) > 0)
 		*str++;
 	count = 0;
-/* 	if (ft_strcmp(*str, "/bin/") == 0)
-	{
-		printf("Concha entro\n");
-		bin = "ls";
-		execve(*str, bin, 0);
-	} */
 	while (path[count] != 0)
 	{
 		bin = ft_strcat(path[count], *str);
@@ -87,16 +62,18 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 	int		count;
 	char	**path;
 
-	if (!pipes || !pipes->command || !pipes->command[0])
+	if (!pipes || !pipes->command || !pipes->command[0] || envp == NULL)
 		return ;
-	while (ft_strcmp(envp->variable, "PATH") != 0)
+	while (envp != NULL && ft_strcmp(envp->variable, "PATH") != 0)
 		envp = envp->next;
-	path = ft_split(envp->content, ':');
-	count = -1;
-	while (path[++count] != 0)
-		path[count] = ft_strjoin(path[count], "/");
-	while (envp->prev != NULL && envp->position != 0)
-		envp = envp->prev;
+	if (envp != NULL)
+	{
+		path = ft_split(envp->content, ':');
+		count = -1;
+		while (path[++count] != 0)
+			path[count] = ft_strjoin(path[count], "/");
+	}
+	envp = get_edge_node(pipes->mini->envp, 's');
 	if (building_execute(pipes->mini, pipes, envp) == -1)
 	{
 		id = fork();

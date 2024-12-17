@@ -42,29 +42,48 @@ t_envp	*get_first(char *variable, t_envp *envp)
 	return (first);
 }
 
+char	*get_var(char *arg)
+{
+	char	*var;
+	int		i;
+
+	if (is_it_a_var(arg) > 0)
+	{
+		i = 0;
+		while (arg[i] != '=' && arg[i] != '\0')
+			i++;
+		var = ft_substr(arg, 0, i);
+	}
+	else
+		var = ft_strdup(arg);
+	return (var);
+}
+
 void	ms_export(t_pipes *pipes, t_envp *envp)
 {
 	t_envp	*first;
 	t_envp	*last;
-	char	*content;
+	char	*var;
 	int		i;
 
 	add_vars(pipes, pipes->mini);
-	i = 1;
-	while (pipes->command[i] != NULL)
+	i = 0;
+	while (pipes->command[++i] != NULL)
 	{
-		first = get_first(pipes->command[i], envp);
+		var = get_var(pipes->command[i]);
+		first = get_first(var, envp);
 		if (first != NULL)
 		{
-			last = get_last(pipes->command[i], envp);
+			last = get_last(var, envp);
 			if (last != NULL && first->position != last->position)
 			{
 				free(first->content);
 				first->content = ft_strdup(last->content);
-				unset_var(pipes->command[i], first->next);
+				envp = unset_var(var, first->next);
 			}
 			first->exported = 1;
 		}
-		i++;
+		free(var);
 	}
+	pipes->mini->envp = envp;
 }

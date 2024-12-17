@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:27:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/17 14:27:48 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/17 20:39:49 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	free_matrix(char **matrix)
 
 void	free_envp(t_envp *envp)
 {
+	if (!envp)
+		return ;
 	while (envp->position > 0)
 		envp = envp->prev;
 	while (envp != NULL)

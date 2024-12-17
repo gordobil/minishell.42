@@ -16,7 +16,7 @@ void	envp_position(t_envp *var)
 {
 	while (var != NULL)
 	{
-		if (var->prev != NULL && var->position > var->prev->position + 1)
+		if (var->position > 0 && var->position > var->prev->position + 1)
 		{
 			while (var->position > var->prev->position + 1)
 				var->position = var->position - 1;
@@ -24,59 +24,78 @@ void	envp_position(t_envp *var)
 		var = var->next;
 	}
 }
+void	unset_middle_var(t_envp *var)
+{
+	t_envp	*del;
 
-void	unset_var(char *variable, t_envp *envp)
+	del = var;
+	var = var->prev;
+	del->prev->next = del->next;
+	del->next->prev = del->prev;
+	envp_position(var);
+	free(del);
+}
+
+t_envp	*unset_edge_var(t_envp *var, t_envp *envp)
+{
+ 	if (var->next == NULL && var->prev != NULL)
+	{
+		var = var->prev;
+		free(var->next);
+		var->next = NULL;
+	}
+	else if (var->prev == NULL && var->next != NULL)
+	{
+		var = var->next;
+		free(var->prev);
+		var->prev = NULL;
+		var->position = 0;
+		envp_position(var);
+		return (var);
+	}
+	else if (var->prev == NULL && var->next == NULL)
+	{
+		free(var);
+		var = NULL;
+		envp = NULL;
+	}
+	return (NULL);
+}
+
+t_envp	*unset_var(char *variable, t_envp *envp)
 {
 	t_envp	*var;
 	t_envp	*del;
+	t_envp	*ret;
 
 	var = envp;
+	ret = NULL;
 	while (var != NULL)
 	{
 		if (ft_strcmp(var->variable, variable) == 0)
 		{
 			free(var->content);
 			free(var->variable);
-			if (var->next == NULL)
-			{
-				var = var->prev;
-				free(var->next);
-				var->next = NULL;
-				break ;
-			}
-			else if (var->prev == NULL)
-			{
-				del = var;
-				var = var->next;
-				free(var->prev);
-				var->prev = NULL;
-				var->position--;
-				envp_position(var);
-				envp = envp->next;
-				free(envp->prev);
-			}
+			if (var->next == NULL || var->prev == NULL)
+				ret = unset_edge_var(var, envp);
 			else
-			{
-				del = var;
-				var = var->prev;
-				del->prev->next = del->next;
-				del->next->prev = del->prev;
-				envp_position(var);
-				free(del);
-			}
+				unset_middle_var(var);
 		}
+		if (var->next == NULL)
+			break ;
 		var = var->next;
 	}
+	if (ret == NULL)
+		return (get_edge_node(var, 's'));
+	return (ret);
 }
 
 void	ms_unset(t_pipes *pipe, t_envp *envp)
 {
 	int	i;
 
-	i = 1;
-	while (pipe->command[i] != NULL)
-	{
-		unset_var(pipe->command[i], envp);
-		i++;
-	}
+	i = 0;
+	while (pipe->command[++i] != NULL)
+		envp = unset_var(pipe->command[i], envp);
+	pipe->mini->envp = envp;
 }

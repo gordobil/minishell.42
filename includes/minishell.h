@@ -101,7 +101,9 @@ char	*mini_title(void);
 
 //ENVP
 void	load_envp(t_mini *mini, char **envp);
+void	nodes_envp(t_envp *envp_p, t_envp *prev, int i, char **envp);
 int		add_vars(t_pipes *pipe, t_mini *mini);
+t_envp	*get_edge_node(t_envp *envp, char edge);
 
 //ENVP_ARG_REPLACE
 void	arg_vars(t_mini *mini);
@@ -135,11 +137,11 @@ void	execveloop(char **str, char **path);
 //BUILT-INS
 int		ms_cd(t_pipes *pipe, t_envp *envp);
 void	ms_echo(t_pipes *pipe);
-void	ms_env(t_envp *envp);
+void	ms_env(t_envp *envp, t_pipes *pipe);
 void	ms_export(t_pipes *pipes, t_envp *envp);
-void	ms_pwd(t_envp *envp);
+void	ms_pwd(t_envp *envp, t_pipes *pipe);
 void	ms_unset(t_pipes *pipe, t_envp *envp);
-void	unset_var(char *variable, t_envp *envp);
+t_envp	*unset_var(char *variable, t_envp *envp);
 
 //FREEING
 void	freeing(t_mini *mini);
