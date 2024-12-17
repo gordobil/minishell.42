@@ -130,7 +130,6 @@ char	*get_namefile(char *file, char type);
 void	close_fds(int fd, char *file);
 
 //EXECUTE
-void	execute(t_mini	*mini);
 void	pipex(t_pipes *pipes, t_envp *envp);
 void	execveloop(char **str, char **path);
 
