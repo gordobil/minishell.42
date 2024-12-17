@@ -56,13 +56,10 @@ void	start_structs(t_mini *mini)
 	}
 	else
 		mini->delimiters = NULL;
-	mini->var_c = 0;
 }
 
 int	init_structs(t_mini *mini, int i, int position)
 {
-	int	arguments;
-
 	if (position == -1)
 		start_structs(mini);
 	else
@@ -71,6 +68,9 @@ int	init_structs(t_mini *mini, int i, int position)
 		mini->pipes->mini = mini;
 		mini->pipes->position = position;
 		mini->pipes->command = NULL;
+		mini->pipes->args = 0;
+		mini->pipes->var_c = 0;
+		mini->pipes->vars = NULL;
 		mini->pipes->infile = malloc(sizeof(t_files));
 		mini->pipes->infile->file = NULL;
 		mini->pipes->outfile = malloc(sizeof(t_files));
@@ -79,9 +79,9 @@ int	init_structs(t_mini *mini, int i, int position)
 		mini->pipes->append->file = NULL;
 		mini->pipes->delimiter = malloc(sizeof(t_files));
 		mini->pipes->delimiter->file = NULL;
-		arguments = count_args(mini->arg_matrix, mini->pipes, i, 'c');
-		if (arguments > 0)
-			mini->pipes->command = malloc((arguments + 1) * sizeof(char *));
+		count_args(mini->arg_matrix, mini->pipes, i, 'c');
+		if (mini->pipes->args > 0)
+			mini->pipes->command = malloc((mini->pipes->args + 1)
+					* sizeof(char *));
 	}
-	return (arguments);
 }

@@ -16,8 +16,6 @@ void	ms_pwd(t_envp *envp)
 {
 	t_envp	*var;
 
-	while (envp->position > 0)
-		envp = envp->prev;
 	var = envp;
 	while (ft_strcmp(envp->variable, "PWD") != 0)
 		envp = envp->next;

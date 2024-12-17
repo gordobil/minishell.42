@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/12 01:48:27 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:13:04 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	end_mini(t_mini *mini, char *rdline)
 
 void	execute(t_mini	*mini)
 {
+	//printtt_envp(mini->envp);
 	pipex(mini->pipes, mini->envp);
+	//printtt_envp(mini->envp);
 }
 
 int	parsing(t_mini *mini)
@@ -33,8 +35,6 @@ int	parsing(t_mini *mini)
 	pipe_info(mini->arg_matrix, mini, 0, 0);
 	if (mini->del_c > 0)
 		delimiters(mini);
-	if (mini->var_c > 0)
-		add_vars(mini);
 	if (open_fds(mini) != 0)
 		return (-1);
 	return (0);
@@ -58,7 +58,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			if (parsing(mini) == 0)
 				execute(mini);
-			//printttttttt(mini);
+			printttttttt(mini);
 			freeing(mini);
 		}
 		free(rdline);

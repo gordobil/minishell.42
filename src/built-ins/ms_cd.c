@@ -33,6 +33,7 @@ int	ms_cd(t_pipes *pipe, t_envp *envp)
 {
 	char	*path;
 	char	buffer[4096];
+	t_envp	*var;
 
 	path = get_path(pipe);
 	if (path == NULL)
@@ -42,11 +43,10 @@ int	ms_cd(t_pipes *pipe, t_envp *envp)
 		error_messages(-6, path);
 		return (free(path), -2);
 	}
-	while (envp->prev != 0)
-		envp = envp->prev;
-	while (ft_strcmp(envp->variable, "PWD") != 0)
-		envp = envp->next;
-	free (envp->content);
-	envp->content = ft_strdup(getcwd(buffer, 4096));
+	var = envp;
+	while (ft_strcmp(var->variable, "PWD") != 0)
+		var = var->next;
+	free (var->content);
+	var->content = ft_strdup(getcwd(buffer, 4096));
 	return (free(path), 0);
 }

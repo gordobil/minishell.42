@@ -16,12 +16,11 @@ void	ms_env(t_envp *envp)
 {
 	t_envp	*var;
 
-	while (envp->prev->position != 0)
-		envp = envp->prev;
 	var = envp;
 	while (var != NULL)
 	{
-		if (var->exported == 1 && var->variable && var->content)
+		if (var->exported == 1 && var->variable != NULL
+			&& var->content != NULL)
 			ft_printf("%s=%s\n", var->variable, var->content);
 		var = var->next;
 	}

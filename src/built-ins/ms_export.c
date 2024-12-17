@@ -12,29 +12,59 @@
 
 #include "../../includes/minishell.h"
 
+t_envp	*get_last(char *variable, t_envp *envp)
+{
+	t_envp	*last;
+
+	last = envp;
+	while (last->next != NULL)
+		last = last->next;
+	while (last != NULL)
+	{
+		if (ft_strcmp(variable, last->variable) == 0)
+			break ;
+		last = last->prev;
+	}
+	return (last);
+}
+
+t_envp	*get_first(char *variable, t_envp *envp)
+{
+	t_envp	*first;
+
+	first = envp;
+	while (first != NULL)
+	{
+		if (ft_strcmp(variable, first->variable) == 0)
+			break ;
+		first = first->next;
+	}
+	return (first);
+}
+
 void	ms_export(t_pipes *pipes, t_envp *envp)
 {
-	t_envp	*var;
+	t_envp	*first;
+	t_envp	*last;
 	char	*content;
 	int		i;
 
-	while (envp->prev != NULL)
-		envp = envp->prev;
+	add_vars(pipes, pipes->mini);
 	i = 1;
 	while (pipes->command[i] != NULL)
 	{
-		var = envp;
-		while (var != NULL)
+		first = get_first(pipes->command[i], envp);
+		if (first != NULL)
 		{
-			if (ft_strcmp(pipes->command[i], var->variable) == 0)
+			last = get_last(pipes->command[i], envp);
+			if (last != NULL && first->position != last->position)
 			{
-				if (content != NULL)
-					free(content);
-				content = ft_strdup(var->content);
+				free(first->content);
+				first->content = ft_strdup(last->content);
+				unset_var(pipes->command[i], first->next);
 			}
-			var = var->next;
+			first->exported = 1;
 		}
-		var = envp;
 		i++;
 	}
 }

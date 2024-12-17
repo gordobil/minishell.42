@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/06 18:26:22 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:07:42 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,5 @@ int	split_args(char *s, t_mini *mini)
 		j = arg_size(s, j, 'e');
 	}
 	mini->arg_matrix[i] = NULL;
-	return (0);
+	return (error_messages(-7, mini->arg_matrix[0]));
 }

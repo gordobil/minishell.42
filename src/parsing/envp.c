@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:38 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/09 15:27:28 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:38:20 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	nodes_envp(t_envp *envp_p, t_envp *prev, int i, char **envp)
 {
-	if (i == 0)
+	if (i == 0 && envp_p->position == 0)
 		envp_p->prev = NULL;
 	else
 	{
@@ -89,31 +89,31 @@ void	load_envp(t_mini *mini, char **envp)
 	free(envp_p);
 }
 
-int	add_vars(t_mini *mini)
+int	add_vars(t_pipes *pipe, t_mini *mini)
 {
 	int		i;
 	int		j;
 	t_envp	*envp;
+	t_envp	*prev;
 
-	if (!mini->vars)
+	if (!pipe->vars)
 		return (-1);
 	envp = mini->envp;
 	while (envp->next != NULL)
 		envp = envp->next;
-	i = 0;
-	while (mini->vars[i] != NULL)
+	i = -1;
+	while (pipe->vars[++i] != NULL)
 	{
-		envp->next = malloc(sizeof(t_envp));
-		if (!envp->next)
-			return (-1);
-		j = load_variable(mini->vars, envp->next, i);
-		load_content(mini->vars, envp->next, i, j);
-		envp->next->position = envp->position + 1;
-		envp->next->exported = 0;
-		envp->next->prev = envp;
-		envp->next->next = NULL;
+		prev = envp;
 		envp = envp->next;
-		i++;
+		envp = malloc(sizeof(t_envp));
+		if (!envp)
+			return (-1);
+		envp->position = prev->position + 1;
+		envp->exported = 0;
+		j = load_variable(pipe->vars, envp, i);
+		load_content(pipe->vars, envp, i, j);
+		nodes_envp(envp, prev, i, pipe->vars);
 	}
 	return (0);
 }

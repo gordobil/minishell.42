@@ -52,7 +52,10 @@ typedef struct s_files
 typedef struct s_pipes
 {
 	char			**command;
+	int				args;
 	int				position;
+	int				var_c;
+	char			**vars;
 	t_files			*infile;
 	t_files			*outfile;
 	t_files			*append;
@@ -70,8 +73,6 @@ typedef struct s_mini
 	char			**files;
 	int				del_c;
 	char			**delimiters;
-	int				var_c;
-	char			**vars;
 	int				comm_c;
 	t_pipes			*pipes;
 	t_envp			*envp;
@@ -88,7 +89,7 @@ int		empty_quotes(char *s, int i);
 int		jump_empty(char *s, int i);
 
 //PARSING_UTILS
-char	**save_vars(t_mini *mini, int count);
+void	save_vars(t_pipes *pipe, int count);
 char	*rm_quotes(char *arg);
 int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
@@ -100,7 +101,7 @@ char	*mini_title(void);
 
 //ENVP
 void	load_envp(t_mini *mini, char **envp);
-int		add_vars(t_mini *mini);
+int		add_vars(t_pipes *pipe, t_mini *mini);
 
 //ENVP_ARG_REPLACE
 void	arg_vars(t_mini *mini);
@@ -138,13 +139,15 @@ void	ms_env(t_envp *envp);
 void	ms_export(t_pipes *pipes, t_envp *envp);
 void	ms_pwd(t_envp *envp);
 void	ms_unset(t_pipes *pipe, t_envp *envp);
+void	unset_var(char *variable, t_envp *envp);
+
 //FREEING
 void	freeing(t_mini *mini);
 void	free_matrix(char **matrix);
 void	free_envp(t_envp *envp);
 
 //ERRORS
-void	error_messages(int error, char *str);
+int		error_messages(int error, char *str);
 
 //UTILS
 void	printttttttt(t_mini	*mini);
