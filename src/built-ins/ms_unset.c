@@ -24,6 +24,7 @@ void	envp_position(t_envp *var)
 		var = var->next;
 	}
 }
+
 void	unset_middle_var(t_envp *var)
 {
 	t_envp	*del;
@@ -38,7 +39,7 @@ void	unset_middle_var(t_envp *var)
 
 t_envp	*unset_edge_var(t_envp *var, t_envp *envp)
 {
- 	if (var->next == NULL && var->prev != NULL)
+	if (var->next == NULL && var->prev != NULL)
 	{
 		var = var->prev;
 		free(var->next);

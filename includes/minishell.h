@@ -136,7 +136,7 @@ void	execveloop(char **str, char **path);
 //BUILT-INS
 int		ms_cd(t_pipes *pipe, t_envp *envp);
 void	ms_echo(t_pipes *pipe);
-void	ms_env(t_envp *envp, t_pipes *pipe);
+int		ms_env(t_envp *envp, t_pipes *pipe);
 void	ms_export(t_pipes *pipes, t_envp *envp);
 void	ms_pwd(t_envp *envp, t_pipes *pipe);
 void	ms_unset(t_pipes *pipe, t_envp *envp);

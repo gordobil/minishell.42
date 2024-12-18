@@ -25,7 +25,7 @@ char	*get_path(t_pipes *pipe)
 		&& pipe->command[2] == NULL)
 		return (ft_strdup(pipe->command[1]));
 	else if (pipe->command[1] != NULL && pipe->command[2] != NULL)
-		return(error_messages(-5, "cd"), NULL);
+		return (error_messages(-5, "cd"), NULL);
 	return (NULL);
 }
 

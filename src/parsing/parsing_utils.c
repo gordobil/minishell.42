@@ -48,7 +48,6 @@ char	*rm_quotes(char *arg)
 	return (ft_strdup(arg));
 }
 
-
 int	count_args(char **arg_matrix, t_pipes *pipe, int i, char ret)
 {
 	pipe->args = 0;

@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/12/17 21:54:39 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:17:13 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 			execveloop(pipes->command, path);
 		waitpid(id, &status, 0);
 	}
+	free_matrix(path);
 }

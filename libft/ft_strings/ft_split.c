@@ -100,7 +100,7 @@ char	**ft_split(const char *str, char c)
 		j = w_start(str, c, j, word_l);
 		word_l = w_len(str, c, j);
 		if (str[0] == '\0')
-			return (matrix_errors(matrix, i, 1));
+			return (matrix_errors(matrix, i, 2));
 		matrix[i] = ft_substr(str, j, word_l);
 		if (!matrix[i])
 			return (matrix_errors(matrix, i, 2));
