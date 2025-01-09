@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2024/12/02 14:18:52 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:14:31 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	building_execute(int command, t_pipes *pipes, t_envp *envp)
 		temp = ft_split(pipes->vars[0], '=');
 	if (command == 0)
 	{
+		printf("Hola\n");
 		while (ft_strcmp(envp->variable, "PWD") != 0)
 			envp = envp->prev;
 		ft_printf("%s\n", envp->content);
@@ -112,6 +113,7 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 		path[count] = ft_strjoin(path[count], "/");
 	if (building_comp(pipes->command[0]) >= 0)
 	{
+		printf("Soy conchi entro\n");
 		printf("%s", pipes->command[0]);
 		building_execute(building_comp(pipes->command[0]), pipes, envp);
 	}
