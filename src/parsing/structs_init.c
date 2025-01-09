@@ -12,29 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-char	**save_vars(t_mini *mini, int count, int i)
-{
-	int		j;
-	char	**vars;
-
-	if (count <= 0)
-		return (NULL);
-	vars = malloc((count + 1) * sizeof(char *));
-	j = 0;
-	while (count > 0 && mini->arg_matrix[i] != NULL)
-	{
-		if (is_it_a_var(mini->arg_matrix[i]) > 0)
-		{
-			vars[j] = ft_strdup(mini->arg_matrix[i]);
-			j++;
-			count--;
-		}
-		i++;
-	}
-	vars[j] = NULL;
-	return (vars);
-}
-
 void	save_delimiters(t_mini *mini)
 {
 	int	i;
@@ -83,8 +60,6 @@ void	start_structs(t_mini *mini)
 
 int	init_structs(t_mini *mini, int i, int position)
 {
-	int	arguments;
-
 	if (position == -1)
 		start_structs(mini);
 	else
@@ -93,6 +68,9 @@ int	init_structs(t_mini *mini, int i, int position)
 		mini->pipes->mini = mini;
 		mini->pipes->position = position;
 		mini->pipes->command = NULL;
+		mini->pipes->args = 0;
+		mini->pipes->var_c = 0;
+		mini->pipes->vars = NULL;
 		mini->pipes->infile = malloc(sizeof(t_files));
 		mini->pipes->infile->file = NULL;
 		mini->pipes->outfile = malloc(sizeof(t_files));
@@ -101,11 +79,9 @@ int	init_structs(t_mini *mini, int i, int position)
 		mini->pipes->append->file = NULL;
 		mini->pipes->delimiter = malloc(sizeof(t_files));
 		mini->pipes->delimiter->file = NULL;
-		mini->pipes->var_c = 0;
-		arguments = count_args(mini->arg_matrix, mini->pipes, i, 'c');
-		if (arguments > 0)
-			mini->pipes->command = malloc((arguments + 1) * sizeof(char *));
-		mini->pipes->vars = save_vars(mini, mini->pipes->var_c, i);
+		count_args(mini->arg_matrix, mini->pipes, i, 'c');
+		if (mini->pipes->args > 0)
+			mini->pipes->command = malloc((mini->pipes->args + 1)
+					* sizeof(char *));
 	}
-	return (arguments);
 }

@@ -12,6 +12,28 @@
 
 #include "../../includes/minishell.h"
 
+void	save_vars(t_pipes *pipe, int count)
+{
+	int		i;
+	int		j;
+
+	if (count <= 0)
+		return ;
+	pipe->vars = malloc((count + 1) * sizeof(char *));
+	i = 0;
+	j = 0;
+	while (j < count && pipe->command[i] != NULL)
+	{
+		if (is_it_a_var(pipe->command[i]) > 0)
+		{
+			pipe->vars[j] = ft_strdup(pipe->command[i]);
+			j++;
+		}
+		i++;
+	}
+	pipe->vars[j] = NULL;
+}
+
 char	*rm_quotes(char *arg)
 {
 	int		len;
@@ -26,26 +48,22 @@ char	*rm_quotes(char *arg)
 	return (ft_strdup(arg));
 }
 
-
 int	count_args(char **arg_matrix, t_pipes *pipe, int i, char ret)
 {
-	int	count;
-
-	count = 0;
+	pipe->args = 0;
 	while (arg_matrix[i] != NULL)
 	{
 		if (ms_strcmp(arg_matrix[i], "|") == 0)
 			break ;
-		if (arg_matrix[i][0] != '<' && arg_matrix[i][0] != '>'
-			&& is_it_a_var(arg_matrix[i]) == 0)
-			count++;
+		if (arg_matrix[i][0] != '<' && arg_matrix[i][0] != '>')
+			pipe->args++;
 		if (is_it_a_var(arg_matrix[i]) > 0 && ret == 'c')
 			pipe->var_c++;
 		i++;
 	}
 	if (ret == 'i')
 		return (i);
-	return (count);
+	return (pipe->args);
 }
 
 int	ms_strcmp_pipes(char *s1, char *s2)
