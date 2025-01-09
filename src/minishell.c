@@ -6,36 +6,26 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/02 14:41:33 by ngordobi         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:20:39 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	execute(t_mini	*mini)
+void	end_mini(t_mini *mini, char *rdline)
 {
-	//pipex(mini->pipes, mini->envp);
-
-
-////////////  B U I L T - I N S   T E S T I N G  ////////////
-	if (mini->pipes->command)
-	{
-		int	comm = building_comp(mini->pipes->command[0]);
-		if (comm == -1)
-			return ;
-		else if (comm == 3)
-			ms_cd(mini->pipes, mini->envp);
-		else if (comm == 4)
-			ms_echo(mini->pipes);
-		else if (comm == 5)
-			ms_unset(mini->pipes, mini->envp);
-	}
+	free_envp(mini->envp);
+	free(mini);
+	if (rdline)
+		free(rdline);
+	ft_printf("exit\n\n");
+	clear_history();
 }
 
-int	parsing(t_mini *mini, char **envp)
+int	parsing(t_mini *mini)
 {
 	arg_vars(mini);
-	pipe_info(mini->arg_matrix, mini, 0);
+	pipe_info(mini->arg_matrix, mini, 0, 0);
 	if (mini->del_c > 0)
 		delimiters(mini);
 	if (open_fds(mini) != 0)
@@ -59,21 +49,17 @@ int	main(int argc, char **argv, char **envp)
 		add_history(rdline);
 		if (split_args(rdline, mini) == 0 && mini->arg_c > 0)
 		{
-			if (parsing(mini, envp) == 0)
-				execute(mini);
-			//printttttttt(mini);
+			if (parsing(mini) == 0)
+				pipex(mini->pipes, mini->envp);
 			freeing(mini);
 		}
 		free(rdline);
 	}
-	free_envp(mini->envp);
-	free(mini);
-	if (rdline)
-		free(rdline);
-	ft_printf("exit\n\n");
-	clear_history();
+	end_mini(mini, rdline);
 	return (0);
 }
 
+ /* LEAKS EN UNSET */
+ 
 //valgrind --leak-check=yes ./minishell
 //valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
