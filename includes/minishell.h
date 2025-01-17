@@ -128,6 +128,7 @@ int		open_fds(t_mini *mini);
 //FILES_UTILS
 char	*get_namefile(char *file, char type);
 void	close_fds(int fd, char *file);
+int		count_files(t_mini *mini, int i, int k);
 
 //EXECUTE
 void	pipex(t_pipes *pipes, t_envp *envp);
