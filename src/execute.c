@@ -64,27 +64,25 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 {
 	int		status;
 	int		id;
-	int		count;
 	char	**path;
 
 	if (!pipes || !pipes->command || !pipes->command[0] || envp == NULL)
 		return ;
-	while (envp != NULL && ft_strcmp(envp->variable, "PATH") != 0)
-		envp = envp->next;
-	if (envp != NULL)
-	{
-		path = ft_split(envp->content, ':');
-		count = -1;
-		while (path[++count] != 0)
-			path[count] = ft_strjoin(path[count], "/");
-	}
+	path = get_pathsenv(envp);
 	envp = get_edge_node(pipes->mini->envp, 's');
-	if (building_execute(pipes->mini, pipes, envp) == -1)
+	if (pipes->next == NULL)
 	{
-		id = fork();
-		if (id == 0)
-			execveloop(pipes->command, path);
-		waitpid(id, &status, 0);
+		if (building_execute(pipes->mini, pipes, envp) == -1)
+		{
+			id = fork();
+			if (id == 0)
+				execveloop(pipes->command, path);
+			waitpid(id, &status, 0);
+		}
+	}
+	else
+	{
+		execute_pipeline(pipes, envp);
 	}
 	free_matrix(path);
 }
