@@ -131,7 +131,16 @@ void	close_fds(int fd, char *file);
 
 //EXECUTE
 void	pipex(t_pipes *pipes, t_envp *envp);
+int		building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp);
 void	execveloop(char **str, char **path);
+
+//PIPEX
+char    **get_pathsenv(t_envp *envp);
+void    execute_single_command(t_pipes *current, char **paths, t_envp *env_list);
+void    create_pipes_for_pipeline(int command_count, int **pipes);
+void    setup_redirections(int i, int **pipes, t_pipes *current, int command_count);
+void    close_pipes_and_wait(int command_count, int **pipes, pid_t *pids);
+void    execute_pipeline(t_pipes *pipeline, t_envp *env_list);
 
 //BUILT-INS
 int		ms_cd(t_pipes *pipe, t_envp *envp);
