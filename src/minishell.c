@@ -58,8 +58,18 @@ int	main(int argc, char **argv, char **envp)
 	end_mini(mini, rdline);
 	return (0);
 }
-
- /* LEAKS EN UNSET */
  
+ 
+/******** FALTA ********/
+// redirecciones
+// redirecciones en único comando
+ 
+/******* ERRORES *******/
+// expansión variables
+// ejecutables
+// comillas vacías
+
+
+
 //valgrind --leak-check=yes ./minishell
 //valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell

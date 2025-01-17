@@ -128,6 +128,7 @@ int		open_fds(t_mini *mini);
 //FILES_UTILS
 char	*get_namefile(char *file, char type);
 void	close_fds(int fd, char *file);
+int		count_files(t_mini *mini, int i, int k);
 
 //EXECUTE
 void	pipex(t_pipes *pipes, t_envp *envp);
@@ -143,12 +144,12 @@ void    close_pipes_and_wait(int command_count, int **pipes, pid_t *pids);
 void    execute_pipeline(t_pipes *pipeline, t_envp *env_list);
 
 //BUILT-INS
-int		ms_cd(t_pipes *pipe, t_envp *envp);
-void	ms_echo(t_pipes *pipe);
-int		ms_env(t_envp *envp, t_pipes *pipe);
-void	ms_export(t_pipes *pipes, t_envp *envp);
+int		ms_cd(t_pipes *pipe, t_envp *envp, int i);
+void	ms_echo(t_pipes *pipe, int i);
 void	ms_pwd(t_envp *envp, t_pipes *pipe);
-void	ms_unset(t_pipes *pipe, t_envp *envp);
+int		ms_env(t_envp *envp, t_pipes *pipe, int i);
+void	ms_export(t_pipes *pipes, t_envp *envp);
+void	ms_unset(t_pipes *pipe, t_envp *envp, int i);
 t_envp	*unset_var(char *variable, t_envp *envp);
 
 //FREEING
