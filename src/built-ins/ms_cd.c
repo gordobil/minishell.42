@@ -12,30 +12,27 @@
 
 #include "../../includes/minishell.h"
 
-char	*get_path(t_pipes *pipe)
+char	*get_path(t_pipes *pipe, int i)
 {
-	int		i;
-	int		j;
-	char	*path;
-
-	if ((pipe->command[1] == NULL || ft_strcmp(pipe->command[1], "~") == 0)
-		&& pipe->command[2] == NULL)
+	i++;
+	if ((pipe->command[i] == NULL || ft_strcmp(pipe->command[i], "~") == 0)
+		&& pipe->command[i + 1] == NULL)
 		return (ft_strdup("/"));
-	else if (pipe->command[1] != NULL && ft_strcmp(pipe->command[1], "~") != 0
-		&& pipe->command[2] == NULL)
-		return (ft_strdup(pipe->command[1]));
-	else if (pipe->command[1] != NULL && pipe->command[2] != NULL)
+	else if (pipe->command[i] != NULL && ft_strcmp(pipe->command[i], "~") != 0
+		&& pipe->command[i + 1] == NULL)
+		return (ft_strdup(pipe->command[i]));
+	else if (pipe->command[i] != NULL && pipe->command[i + 1] != NULL)
 		return (error_messages(-5, "cd"), NULL);
 	return (NULL);
 }
 
-int	ms_cd(t_pipes *pipe, t_envp *envp)
+int	ms_cd(t_pipes *pipe, t_envp *envp, int i)
 {
 	char	*path;
 	char	buffer[4096];
 	t_envp	*var;
 
-	path = get_path(pipe);
+	path = get_path(pipe, i);
 	if (path == NULL)
 		return (-1);
 	else if (chdir(path) != 0)

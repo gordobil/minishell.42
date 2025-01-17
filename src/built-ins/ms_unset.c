@@ -91,11 +91,8 @@ t_envp	*unset_var(char *variable, t_envp *envp)
 	return (ret);
 }
 
-void	ms_unset(t_pipes *pipe, t_envp *envp)
+void	ms_unset(t_pipes *pipe, t_envp *envp, int i)
 {
-	int	i;
-
-	i = 0;
 	while (pipe->command[++i] != NULL)
 		envp = unset_var(pipe->command[i], envp);
 	pipe->mini->envp = envp;
