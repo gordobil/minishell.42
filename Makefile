@@ -51,6 +51,9 @@ SOURCES				=	$(SRC_PATH)errors.c \
 						$(BI_PATH)ms_pwd.c \
 						$(BI_PATH)ms_unset.c \
 						$(SRC_PATH)printttttttt.c \
+						$(SRC_PATH)pipexmini.c \
+						$(SRC_PATH)pipexutils.c \
+						
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
 
