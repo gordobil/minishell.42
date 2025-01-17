@@ -12,12 +12,11 @@
 
 #include "../../includes/minishell.h"
 
-void	ms_echo(t_pipes *pipe)
+void	ms_echo(t_pipes *pipe, int i)
 {
-	int	i;
 	int	flag;
 
-	i = 1;
+	i++;
 	flag = 0;
 	if (pipe->command[i] != NULL)
 	{
