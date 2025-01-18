@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp_replace.c                                     :+:      :+:    :+:   */
+/*   envp_arg_replace.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:18:44 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/06 18:26:01 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/18 22:57:56 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
+/* (str[i + 1] < '0' || str[i + 1] > '9') &&  */
+//free(comp), i
 int	var_404(char *str, int i, char *comp)
 {
 	char	*start;
 	char	*end;
 
-	if ((str[i + 1] < '0' || str[i + 1] > '9') && ft_strcmp(comp, str) != 0)
-		return (free(comp), i);
+	if (ft_strcmp(comp, str) != 0)
+		return (0);
 	start = ft_substr(str, 0, i);
 	i++;
 	if (str[i] < '0' || str[i] > '9')
@@ -60,8 +61,9 @@ char	*found_var(t_envp *envp, char *str, int i, int j)
 
 char	*compare_var(char *str, t_envp *envp, int i)
 {
-	int	j;
-	int	k;
+	int		j;
+	int		k;
+	char	*temp;
 
 	j = i + 1;
 	k = 0;
@@ -72,7 +74,9 @@ char	*compare_var(char *str, t_envp *envp, int i)
 		k++;
 		j++;
 	}
-	if (envp->variable[k] == '\0')
+	if (envp->variable[k] == '\0' && (str[j] == '\0' || str[j] == '<'
+			|| str[j] == '>' || str[j] == ' ' || str[j] == '	'
+			|| str[j] == '\n' || str[j] == '$'))
 		str = found_var(envp, str, i, j);
 	return (str);
 }
@@ -107,12 +111,21 @@ char	*replace_vars(t_mini *mini, char *str)
 void	arg_vars(t_mini *mini)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (mini->arg_matrix[i] != NULL)
 	{
-		if (mini->arg_matrix[i][0] == '$' || mini->arg_matrix[i][0] == '"')
-			mini->arg_matrix[i] = replace_vars(mini, mini->arg_matrix[i]);
+		j = 0;
+		while (mini->arg_matrix[i][j] != '\0')
+		{
+			if (mini->arg_matrix[i][j] == '$')
+			{
+				mini->arg_matrix[i] = replace_vars(mini, mini->arg_matrix[i]);
+				break ;
+			}
+			j++;
+		}
 		i++;
 	}
 }
