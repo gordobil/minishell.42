@@ -87,6 +87,7 @@ int		check_unclosed(char *s);
 int		jump_spaces(char *s, int i);
 int		empty_quotes(char *s, int i);
 int		jump_empty(char *s, int i);
+int		all_same_quotes(char *s);
 
 //PARSING_UTILS
 void	save_vars(t_pipes *pipe, int count);
@@ -115,6 +116,7 @@ int		is_it_a_var(char *str);
 
 //STRUCTS_INIT
 int		init_structs(t_mini *mini, int i, int position);
+int		pipes_end(char **arg_matrix, int i, t_mini *mini);
 
 //DELIMITERS
 void	delimiters(t_mini *mini);

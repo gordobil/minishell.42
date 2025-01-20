@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/20 12:10:26 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:09:44 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
  
 /******* ERRORES *******/
 // ejecutables
-// comillas vacías
+// COMILLAS / split
 
 
 

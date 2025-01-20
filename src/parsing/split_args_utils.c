@@ -59,3 +59,19 @@ int	jump_empty(char *s, int i)
 	i = empty_quotes(s, i);
 	return (i);
 }
+
+int	all_same_quotes(char *s)
+{
+	int		i;
+	char	q;
+	i = jump_spaces(s, 0);
+	if (s[i] == '\'' || s[i] == '"')
+		q = s[i];
+	else
+		return (0);
+	while (s[i] == q && s[i] != '\0')
+		i++;
+	if (s[i] == '\0')
+		return (1);
+	return (-1);
+}

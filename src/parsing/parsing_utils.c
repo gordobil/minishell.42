@@ -39,7 +39,7 @@ char	*rm_quotes(char *arg)
 	int		len;
 	char	*new_arg;
 
-	if (arg[0] == '\'' || arg[0] == '"')
+	if ((arg[0] == '\'' || arg[0] == '"') && ft_strcmp(arg, "''") != 0)
 	{
 		len = ft_strlen(arg);
 		new_arg = ft_substr(arg, 1, len - 2);
