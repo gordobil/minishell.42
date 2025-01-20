@@ -111,7 +111,7 @@ void	arg_vars(t_mini *mini);
 char	*replace_vars(t_mini *mini, char *str);
 
 //STRUCTS
-void	pipe_info(char **arg_matrix, t_mini *mini, int i, int j);
+int		pipe_info(char **arg_matrix, t_mini *mini, int i, int j);
 int		is_it_a_var(char *str);
 
 //STRUCTS_INIT

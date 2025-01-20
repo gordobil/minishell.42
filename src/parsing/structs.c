@@ -82,7 +82,7 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 	return (k);
 }
 
-void	plain_command(char **arg_matrix, t_mini *mini)
+int	plain_command(char **arg_matrix, t_mini *mini)
 {
 	int	i;
 	int	j;
@@ -92,7 +92,7 @@ void	plain_command(char **arg_matrix, t_mini *mini)
 	j = 0;
 	while (arg_matrix[j] != NULL)
 	{
-		if (arg_matrix[j][0] != '|')
+		if (ms_strcmp(arg_matrix[j], "|") != 0)
 		{
 			mini->pipes->command[i] = rm_quotes(arg_matrix[i]);
 			i++;
@@ -104,9 +104,12 @@ void	plain_command(char **arg_matrix, t_mini *mini)
 	mini->pipes->prev = NULL;
 	mini->pipes->next = NULL;
 	mini->files = NULL;
+	if (ms_strcmp(arg_matrix[j - 1], "|") == 0)
+		return (error_messages(-9, NULL), -2);
+	return (0);
 }
 
-void	pipe_info(char **arg_matrix, t_mini *mini, int i, int j)
+int	pipe_info(char **arg_matrix, t_mini *mini, int i, int j)
 {
 	int		position;
 
@@ -130,4 +133,5 @@ void	pipe_info(char **arg_matrix, t_mini *mini, int i, int j)
 		mini->pipes = mini->pipes->next;
 	}
 	update_nodes(mini, -1);
+	return (i);
 }

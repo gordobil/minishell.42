@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/20 15:09:44 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:15:07 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ void	end_mini(t_mini *mini, char *rdline)
 int	parsing(t_mini *mini)
 {
 	arg_vars(mini);
-	pipe_info(mini->arg_matrix, mini, 0, 0);
+	if (pipe_info(mini->arg_matrix, mini, 0, 0) == -2)
+		return (-1);
 	if (mini->del_c > 0)
 		delimiters(mini);
 	if (open_fds(mini) != 0)
-		return (-1);
+		return (-2);
 	return (0);
 }
 

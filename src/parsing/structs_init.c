@@ -98,7 +98,7 @@ int	pipes_end(char **arg_matrix, int i, t_mini *mini)
 	if (arg_matrix[i] == NULL)
 	{
 		mini->pipes->next = NULL;
-		return (-2);
+		return (error_messages(-9, NULL), -2);
 	}
 	return (i);
 }
