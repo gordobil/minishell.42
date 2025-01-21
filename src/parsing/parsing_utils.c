@@ -34,20 +34,6 @@ void	save_vars(t_pipes *pipe, int count)
 	pipe->vars[j] = NULL;
 }
 
-char	*rm_quotes(char *arg)
-{
-	int		len;
-	char	*new_arg;
-
-	if ((arg[0] == '\'' || arg[0] == '"') && ft_strcmp(arg, "''") != 0)
-	{
-		len = ft_strlen(arg);
-		new_arg = ft_substr(arg, 1, len - 2);
-		return (new_arg);
-	}
-	return (ft_strdup(arg));
-}
-
 int	count_args(char **arg_matrix, t_pipes *pipe, int i, char ret)
 {
 	pipe->args = 0;

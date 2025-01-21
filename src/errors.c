@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:06:42 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/20 15:21:31 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:23:48 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	error_messages(int error, char *str)
 	else if (error == -7 && str[0] != '|')
 		return (0);
 	else if (error == -8)
-		ft_printf("error: no enviroment variables left\n");
+		ft_printf("error: no enviroment variables\n");
 	else if (error == -9)
 		ft_printf("error: unclosed pipe\n");
 	return (error);

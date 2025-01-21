@@ -83,17 +83,17 @@ int		split_args(char *str, t_mini *mini);
 int		arg_jump(char *s, int i);
 
 //SPLIT_ARGS_UTILS
-int		check_unclosed(char *s);
 int		jump_spaces(char *s, int i);
-int		empty_quotes(char *s, int i);
-int		jump_empty(char *s, int i);
 int		all_same_quotes(char *s);
 
 //PARSING_UTILS
 void	save_vars(t_pipes *pipe, int count);
-char	*rm_quotes(char *arg);
+char	*rm_quotes(char *arg, int i);
 int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
+
+//RM_QUOTES
+char	*rm_quotes(char *arg, int i);
 
 //RDL
 char	*rdl_management(void);
@@ -138,12 +138,14 @@ int		building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp);
 void	execveloop(char **str, char **path);
 
 //PIPEX
-char    **get_pathsenv(t_envp *envp);
-void    execute_single_command(t_pipes *current, char **paths, t_envp *env_list);
-void    create_pipes_for_pipeline(int command_count, int **pipes);
-void    setup_redirections(int i, int **pipes, t_pipes *current, int command_count);
-void    close_pipes_and_wait(int command_count, int **pipes, pid_t *pids);
-void    execute_pipeline(t_pipes *pipeline, t_envp *env_list);
+char	**get_pathsenv(t_envp *envp);
+void	execute_single_command(t_pipes *current, char **paths,
+			t_envp *env_list);
+void	create_pipes_for_pipeline(int command_count, int **pipes);
+void	setup_redirections(int i, int **pipes, t_pipes *current,
+			int command_count);
+void	close_pipes_and_wait(int command_count, int **pipes, pid_t *pids);
+void	execute_pipeline(t_pipes *pipeline, t_envp *env_list);
 
 //BUILT-INS
 int		ms_cd(t_pipes *pipe, t_envp *envp, int i);

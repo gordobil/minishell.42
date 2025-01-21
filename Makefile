@@ -34,6 +34,7 @@ SOURCES				=	$(SRC_PATH)errors.c \
 						$(PRS_PATH)files_utils.c \
 						$(PRS_PATH)parsing_utils.c \
 						$(PRS_PATH)rdl.c \
+						$(PRS_PATH)rm_quotes.c \
 						$(PRS_PATH)split_args.c \
 						$(PRS_PATH)split_args_utils.c \
 						$(PRS_PATH)structs.c \

@@ -94,7 +94,8 @@ int	plain_command(char **arg_matrix, t_mini *mini)
 	{
 		if (ms_strcmp(arg_matrix[j], "|") != 0)
 		{
-			mini->pipes->command[i] = rm_quotes(arg_matrix[i]);
+			mini->pipes->command[i] = rm_quotes(arg_matrix[i], 0);
+			ft_printf("%s\n\n", mini->pipes->command[i]);
 			i++;
 		}
 		j++;

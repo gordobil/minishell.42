@@ -1,62 +1,106 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_args.c                                       :+:      :+:    :+:   */
+/*   split_args copy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/21 12:19:05 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:35:41 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	file_found(char *s, int i)
+int	word_jump_copy(const char *s, int i)
 {
-	i++;
-	if (s[i - 1] == '<' && s[i] == '<')
-		i++;
-	else if (s[i - 1] == '>' && s[i] == '>')
-		i++;
-	i = jump_spaces(s, i);
-	return (i);
-}
-
-int	arg_jump(char *s, int i)
-{
-	char	q;
-
-	q = '0';
 	if (s[i] == '|')
 		while (s[i] == '|' || s[i] == ' ' || s[i] == '	')
 			i++;
 	else
 	{
 		if (s[i] == '<' || s[i] == '>')
-			i = file_found(s, i);
-		while (s[i] != '\0' && ((q == '"' || q == '\'') || (s[i] != ' '
-			&& s[i] != '|' && s[i] != '<' && s[i] != '>' && s[i] != '	')))
 		{
-			if (q == '0' && (s[i] == '"' || s[i] == '\''))
-				q = s[i];
-			else if (s[i] == q && (s[i] == '"' || s[i] == '\''))
-				q = '0';
 			i++;
+			if (s[i - 1] == '<' && s[i] == '<')
+				i++;
+			else if (s[i - 1] == '>' && s[i] == '>')
+				i++;
+			while (s[i] == ' ' || s[i] == '	')
+				i++;
 		}
-		if (q == '\'')
-			return (-1);
-		else if (q == '"')
-			return (-2);
+		while (s[i] != ' ' && s[i] != '|' && s[i] != '\0' && s[i] != '<'
+			&& s[i] != '>' && s[i] != '	')
+			i++;
 	}
 	return (i);
 }
 
-int	arg_size(char *s, int i, char mark)
+int	arg_jump_copy(char *s, int i)
 {
-	int		start;
+	int	start;
 
 	i = jump_spaces(s, i);
+	start = i;
+	if (s[i] == '"' || s[i] == '\'')
+	{
+		i++;
+		while (s[i] != s[start])
+		{
+			i++;
+			if (s[i] == '\0')
+			{
+				if (s[start] == '"')
+					return (-2);
+				return (-1);
+			}
+		}
+		if (i == start + 1)
+			return (arg_jump(s, i + 1));
+		i++;
+	}
+	else
+		i = word_jump(s, i);
+	return (i);
+}
+
+int	arg_count_copy(char *s)
+{
+	int	i;
+	int	count;
+	int	start;
+
+	if (s[0] == '\n' || s[0] == '\0' || check_unclosed(s) < 0)
+		return (check_unclosed(s));
+	i = jump_empty(s, 0);
+	if (s[i] == '\0' || s[i] == '\n')
+		return (1);
+	count = 1;
+	while (s[i] != '\0')
+	{
+		i = jump_empty(s, i);
+		i = arg_jump(s, i);
+		if (i <= 0)
+			return (i);
+		i = jump_empty(s, i);
+		if (s[i] != '\0' && s[i] != '\n')
+			count++;
+		else
+			break ;
+	}
+	return (count);
+}
+
+int	arg_size_copy(char *s, int i, char mark)
+{
+	int		start;
+	int		q_start;
+	char	q;
+
+	i = jump_spaces(s, i);
+	q_start = i;
+	if (s[i] == '"' || s[i] == '\'')
+		i = empty_quotes(s, i);
 	if (mark == 's')
 		return (i);
 	start = i;
@@ -67,29 +111,7 @@ int	arg_size(char *s, int i, char mark)
 		return (i - start);
 }
 
-int	arg_count(char *s)
-{
-	int	i;
-	int	count;
-	int	start;
-
-	if (s[0] == '\n' || s[0] == '\0')
-		return (0);
-	count = 0;
-	i = jump_spaces(s, 0);
-	while (s[i] != '\0')
-	{
-		start = i;
-		count++;
-		i = arg_jump(s, i);
-		if (i < 0)
-			return (i);
-		i = jump_spaces(s, i);
-	}
-	return (count);
-}
-
-int	split_args(char *s, t_mini *mini)
+int	split_args_copy(char *s, t_mini *mini)
 {
 	int		i;
 	int		j;
