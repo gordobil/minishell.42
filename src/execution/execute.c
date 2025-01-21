@@ -6,11 +6,11 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/17 12:48:59 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:07:56 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp)
 {

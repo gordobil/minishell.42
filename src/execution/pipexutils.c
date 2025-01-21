@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipexutils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:00:37 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/17 12:00:53 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:08:05 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	**get_pathsenv(t_envp *envp)
 {

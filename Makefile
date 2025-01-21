@@ -19,18 +19,12 @@ RL_FLAGS			=	-I/usr/include/readline -lreadline
 LIBFT				=	libft.a
 
 SRC_PATH			=	./src/
-BI_PATH				=	./src/built-ins/
+BI_PATH				=	./src/execution/built-ins/
 PRS_PATH			=	./src/parsing/
+EXC_PATH			=	./src/execution/
 LIBFT_PATH			=	./libft/
 
-FILES				=	./a \
-						./b \
-						./c \
-						./d \
-						./e \
-
 SOURCES				=	$(SRC_PATH)errors.c \
-						$(SRC_PATH)execute.c \
 						$(SRC_PATH)freeing.c \
 						$(SRC_PATH)minishell.c \
 						$(PRS_PATH)delimiters.c \
@@ -44,6 +38,9 @@ SOURCES				=	$(SRC_PATH)errors.c \
 						$(PRS_PATH)split_args_utils.c \
 						$(PRS_PATH)structs.c \
 						$(PRS_PATH)structs_init.c \
+						$(EXC_PATH)execute.c \
+						$(EXC_PATH)pipexmini.c \
+						$(EXC_PATH)pipexutils.c \
 						$(BI_PATH)ms_cd.c \
 						$(BI_PATH)ms_echo.c \
 						$(BI_PATH)ms_env.c \
@@ -51,8 +48,6 @@ SOURCES				=	$(SRC_PATH)errors.c \
 						$(BI_PATH)ms_pwd.c \
 						$(BI_PATH)ms_unset.c \
 						$(SRC_PATH)printttttttt.c \
-						$(SRC_PATH)pipexmini.c \
-						$(SRC_PATH)pipexutils.c \
 						
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
@@ -99,17 +94,16 @@ $(LIBFT):
 clean:
 					rm -rf $(SRC_PATH)objects/
 					rm -rf $(SRC_PATH)*.o
-					rm -rf $(BI_PATH)*.o
 					rm -rf $(PRS_PATH)*.o
+					rm -rf $(EXC_PATH)*.o
+					rm -rf $(BI_PATH)*.o
 					@make clean --no-print-directory -C $(LIBFT_PATH)
 					echo "$(WHITE) · $(BLUE)Minishell objects removed.$(WHITE)\n"
 					
 fclean:				clean
 					rm -rf $(NAME)
 					rm -rf $(LIBFT)
-					rm -rf ./.temp_files/
 					rm -rf .temp_file_*
-					rm -rf $(FILES)
 					@make fclean --no-print-directory -C $(LIBFT_PATH)
 					echo "$(WHITE) · $(BLUE)Minishell executable removed.$(WHITE)\n"
 
