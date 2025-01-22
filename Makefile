@@ -27,21 +27,21 @@ LIBFT_PATH			=	./libft/
 SOURCES				=	$(SRC_PATH)errors.c \
 						$(SRC_PATH)freeing.c \
 						$(SRC_PATH)minishell.c \
+						$(SRC_PATH)readline.c \
 						$(PRS_PATH)delimiters.c \
 						$(PRS_PATH)envp.c \
 						$(PRS_PATH)envp_arg_replace.c \
 						$(PRS_PATH)files.c \
 						$(PRS_PATH)files_utils.c \
 						$(PRS_PATH)parsing_utils.c \
-						$(PRS_PATH)rdl.c \
 						$(PRS_PATH)rm_quotes.c \
 						$(PRS_PATH)split_args.c \
 						$(PRS_PATH)split_args_utils.c \
 						$(PRS_PATH)structs.c \
 						$(PRS_PATH)structs_init.c \
 						$(EXC_PATH)execute.c \
-						$(EXC_PATH)pipexmini.c \
-						$(EXC_PATH)pipexutils.c \
+						$(EXC_PATH)pipex_mini.c \
+						$(EXC_PATH)pipex_utils.c \
 						$(BI_PATH)ms_cd.c \
 						$(BI_PATH)ms_echo.c \
 						$(BI_PATH)ms_env.c \
