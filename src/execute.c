@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/18 19:21:17 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:46:57 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ void	execveloop(char **str, char **path)
 		free (bin);
 		count++;
 	}
+	bin = ft_strcat("./", *str);
+	execve(bin, str, 0);
+	free (bin);
 	ft_printf("%s: command not found\n", *str);
 	exit(127);
 }
@@ -70,17 +73,7 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 		return ;
 	path = get_pathsenv(envp);
 	envp = get_edge_node(pipes->mini->envp, 's');
-	if (pipes->next == NULL)
-	{
-		if (building_execute(pipes->mini, pipes, envp) == -1)
-		{
-			id = fork();
-			if (id == 0)
-				execveloop(pipes->command, path);
-			waitpid(id, &status, 0);
-		}
-	}
-	else
+	if (building_execute(pipes->mini, pipes, envp) == -1)
 	{
 		execute_pipeline(pipes, envp);
 	}

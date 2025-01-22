@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:53:44 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/20 09:49:58 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:46:15 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,17 @@ void	create_pipes_for_pipeline(int command_count, int **pipes)
 void	setup_redirections(int i, int **pipes, t_pipes *current,
 	int command_count)
 {
-	if (i > 0)
+	if (current->infile->file)
+		dup2(current->infile->fd, STDIN_FILENO);
+	else if (current->delimiter->file)
+		dup2(current->delimiter->fd, STDIN_FILENO);
+	else if (i > 0)
 		dup2(pipes[i - 1][0], STDIN_FILENO);
-	if (current->next)
+	if (current->outfile->file)
+		dup2(current->outfile->fd, STDOUT_FILENO);
+	else if (current->append->file)
+		dup2(current->append->fd, STDOUT_FILENO);
+	else if (current->next)
 		dup2(pipes[i][1], STDOUT_FILENO);
 }
 
