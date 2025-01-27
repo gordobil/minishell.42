@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/27 12:20:58 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:16:39 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	main(int argc, char **argv, char **envp)
 		add_history(rdline);
 		if (split_args(rdline, mini) == 0 && mini->arg_c > 0)
 		{
-			ft_printf("%m\n", mini->arg_matrix);
 			if (parsing(mini) == 0)
 				pipex(mini->pipes, mini->envp);
 			freeing(mini);
