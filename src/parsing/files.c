@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
 void	infiles_saving(t_mini *mini, int i)
 {
 	if (mini->arg_matrix[i][0] == '<' && mini->arg_matrix[i][1] != '<')

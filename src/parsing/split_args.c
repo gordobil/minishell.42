@@ -6,17 +6,14 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/27 12:32:17 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:13:06 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	arg_jump(char *s, int i)
+int	arg_jump(char *s, int i, char q)
 {
-	char	q;
-
-	q = '0';
 	if (s[i] == '|')
 		while (s[i] == '|' || s[i] == ' ' || s[i] == '	')
 			i++;
@@ -25,7 +22,8 @@ int	arg_jump(char *s, int i)
 		if (s[i] == '<' || s[i] == '>')
 			i = file_found(s, i);
 		while (s[i] != '\0' && ((q == '"' || q == '\'') || (s[i] != ' '
-			&& s[i] != '|' && s[i] != '<' && s[i] != '>' && s[i] != '	')))
+					&& s[i] != '|' && s[i] != '<' && s[i] != '>'
+					&& s[i] != '\t')))
 		{
 			if (q == '0' && (s[i] == '"' || s[i] == '\''))
 				q = s[i];
@@ -49,7 +47,7 @@ int	arg_size(char *s, int i, char mark)
 	if (mark == 's')
 		return (i);
 	start = i;
-	i = arg_jump(s, i);
+	i = arg_jump(s, i, '0');
 	if (mark == 'e' || i < 0)
 		return (i);
 	else
@@ -70,7 +68,7 @@ int	arg_count(char *s)
 	{
 		start = i;
 		count++;
-		i = arg_jump(s, i);
+		i = arg_jump(s, i, '0');
 		if (i < 0)
 			return (i);
 		i = jump_spaces(s, i);

@@ -81,7 +81,7 @@ typedef struct s_mini
 /****************************** PARSING ******************************/
 //SPLIT_ARGS
 int		split_args(char *str, t_mini *mini);
-int		arg_jump(char *s, int i);
+int		arg_jump(char *s, int i, char q);
 
 //SPLIT_ARGS_UTILS
 int		jump_spaces(char *s, int i);

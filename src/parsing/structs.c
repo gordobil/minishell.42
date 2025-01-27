@@ -121,7 +121,7 @@ int	pipe_info(char **arg_matrix, t_mini *mini, int i, int j)
 		init_structs(mini, i, position);
 		if (mini->pipes->args == mini->arg_c
 			|| (mini->pipes->args == mini->arg_c - 1
-			&& ms_strcmp(mini->arg_matrix[mini->pipes->args], "|") == 0))
+				&& ms_strcmp(mini->arg_matrix[mini->pipes->args], "|") == 0))
 			return (plain_command(arg_matrix, mini));
 		j = dup_args(j, mini, i, mini->pipes->args);
 		update_nodes(mini, position);

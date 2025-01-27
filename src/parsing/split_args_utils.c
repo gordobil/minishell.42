@@ -23,6 +23,7 @@ int	all_same_quotes(char *s)
 {
 	int		i;
 	char	q;
+
 	i = jump_spaces(s, 0);
 	if (s[i] == '\'' || s[i] == '"')
 		q = s[i];
