@@ -19,9 +19,9 @@ RL_FLAGS			=	-I/usr/include/readline -lreadline
 LIBFT				=	libft.a
 
 SRC_PATH			=	./src/
-BI_PATH				=	./src/execution/built-ins/
 PRS_PATH			=	./src/parsing/
 EXC_PATH			=	./src/execution/
+BI_PATH				=	./src/execution/built-ins/
 LIBFT_PATH			=	./libft/
 
 SOURCES				=	$(SRC_PATH)errors.c \
@@ -84,8 +84,8 @@ all:				$(NAME) $(LIBFT)
 
 $(NAME):			$(OBJECTS) $(LIBFT) $(INCLUDES)
 					$(CC) $(CC_FLAGS) $(OBJECTS) $(LIBFT) $(RL_FLAGS) -o $(NAME)
-					mkdir -p $(SRC_PATH)objects/
-					mv $(OBJECTS) $(SRC_PATH)objects/
+					mkdir -p $(SRC_PATH).objects/
+					mv $(OBJECTS) $(SRC_PATH).objects/
 					echo "\n························· Compilation complete ··························"
 					echo "$$MINISHELL"
 
@@ -93,7 +93,7 @@ $(LIBFT):
 					@make --no-print-directory -C $(LIBFT_PATH)
 
 clean:
-					rm -rf $(SRC_PATH)objects/
+					rm -rf $(SRC_PATH).objects/
 					rm -rf $(SRC_PATH)*.o
 					rm -rf $(PRS_PATH)*.o
 					rm -rf $(EXC_PATH)*.o

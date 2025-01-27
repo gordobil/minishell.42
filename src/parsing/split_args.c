@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/21 12:19:05 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:32:17 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	file_found(char *s, int i)
-{
-	i++;
-	if (s[i - 1] == '<' && s[i] == '<')
-		i++;
-	else if (s[i - 1] == '>' && s[i] == '>')
-		i++;
-	i = jump_spaces(s, i);
-	return (i);
-}
 
 int	arg_jump(char *s, int i)
 {
@@ -89,6 +78,19 @@ int	arg_count(char *s)
 	return (count);
 }
 
+char	*arg_dup(char *s, int j)
+{
+	char	*arg;
+
+	arg = ft_substr(s, arg_size(s, j, 's'), arg_size(s, j, 'r'));
+	if (all_same_quotes(arg) == 1)
+	{
+		free (arg);
+		arg = ft_strdup("''");
+	}
+	return (arg);
+}
+
 int	split_args(char *s, t_mini *mini)
 {
 	int		i;
@@ -107,8 +109,7 @@ int	split_args(char *s, t_mini *mini)
 		if (all_same_quotes(s) == 1)
 			mini->arg_matrix[i] = ft_strdup("''");
 		else
-			mini->arg_matrix[i] = ft_substr(s, arg_size(s, j, 's'),
-				arg_size(s, j, 'r'));
+			mini->arg_matrix[i] = arg_dup(s, j);
 		if (!mini->arg_matrix[i])
 			return (free_matrix(mini->arg_matrix), -1);
 		j = arg_size(s, j, 'e');

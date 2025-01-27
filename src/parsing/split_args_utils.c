@@ -34,3 +34,14 @@ int	all_same_quotes(char *s)
 		return (1);
 	return (-1);
 }
+
+int	file_found(char *s, int i)
+{
+	i++;
+	if (s[i - 1] == '<' && s[i] == '<')
+		i++;
+	else if (s[i - 1] == '>' && s[i] == '>')
+		i++;
+	i = jump_spaces(s, i);
+	return (i);
+}
