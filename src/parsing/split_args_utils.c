@@ -19,7 +19,26 @@ int	jump_spaces(char *s, int i)
 	return (i);
 }
 
-int	all_same_quotes(char *s)
+int	empty_quotes(char *arg)
+{
+	int 	i;
+	char	q;
+
+	i = 0;
+	while (arg[i] != '\0' && (arg[i] == '\'' || arg[i] == '"'))
+	{
+		q = arg[i];
+		if (arg[i + 1] == q)
+			i += 2;
+		else
+			break ;
+	}
+	if (arg[i] == '\0')
+		return (1);
+	return (0);
+}
+
+/* int	all_same_quotes(char *s)
 {
 	int		i;
 	char	q;
@@ -34,7 +53,7 @@ int	all_same_quotes(char *s)
 	if (s[i] == '\0')
 		return (1);
 	return (-1);
-}
+} */
 
 int	file_found(char *s, int i)
 {

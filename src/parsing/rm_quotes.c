@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:07:35 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/29 14:13:52 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:01:41 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*quote_fragment(char *arg, char *dup, int i, int j)
 	char	*sub;
 	char	*dup_2;
 
+	dup_2 = NULL;
 	if (j > i && dup == NULL)
 		dup_2 = ft_substr(arg, i, j - i);
 	else if (j > i && dup != NULL)
@@ -60,15 +61,15 @@ char	*rm_quotes(char *arg, int i, int j)
 	int		k;
 	char	*dup;
 
-	if (ft_strcmp(arg, "''") == 0 && i == 0)
-		return (ft_strdup(arg));
-	else if (ft_strcmp(arg, "''") == 0 && i > 0)
-		return (arg);
 	if (arg == NULL)
 		return (ft_strdup(""));
+	if ((ft_strcmp(arg, "''") == 0 || ft_strcmp(arg, """") == 0))
+		return (ft_strdup("''"));
+	j = i;
+	dup = NULL;
 	i = next_fragment(arg, i, 1);
-	if (arg[i] == '\0')
-		return (arg);
+	if (arg[i] == '\0' && j == 0)
+		return (ft_strdup(arg));
 	if (i > 0)
 		dup = ft_substr(arg, 0, i);
 	j = next_fragment(arg, ++i, 2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/27 13:13:06 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:44:35 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*arg_dup(char *s, int j)
 	char	*arg;
 
 	arg = ft_substr(s, arg_size(s, j, 's'), arg_size(s, j, 'r'));
-	if (all_same_quotes(arg) == 1)
+	if (empty_quotes(arg) == 1)
 	{
 		free (arg);
 		arg = ft_strdup("''");
@@ -104,7 +104,7 @@ int	split_args(char *s, t_mini *mini)
 	j = 0;
 	while (++i < mini->arg_c)
 	{
-		if (all_same_quotes(s) == 1)
+		if (empty_quotes(s) == 1)
 			mini->arg_matrix[i] = ft_strdup("''");
 		else
 			mini->arg_matrix[i] = arg_dup(s, j);
