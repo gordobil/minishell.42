@@ -1,10 +1,5 @@
-.
-..
-.git
-.vscode
 Makefile
 a
-hola
 includes
 libft
 libft.a

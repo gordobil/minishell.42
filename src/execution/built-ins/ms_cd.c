@@ -35,7 +35,7 @@ int	ms_cd(t_pipes *pipe, t_envp *envp, int i)
 	path = get_path(pipe, i);
 	if (path == NULL)
 		return (-1);
-	else if (chdir(path) != 0)
+	if (chdir(path) != 0)
 	{
 		error_messages(-6, path);
 		return (free(path), -2);
