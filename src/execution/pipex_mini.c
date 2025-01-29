@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipexmini.c                                        :+:      :+:    :+:   */
+/*   pipex_mini.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:53:44 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/20 09:49:58 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:20:22 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	create_pipes_for_pipeline(int command_count, int **pipes)
 {

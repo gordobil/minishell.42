@@ -88,10 +88,25 @@ int	del_cmp(char *delimiter, char *line)
 	return (-1);
 }
 
+void	write_line(t_mini *mini, int fd, int i)
+{
+	char	*line;
+
+	while (1)
+	{
+		line = readline(YELLOW"> "WHITE);
+		if (del_cmp(mini->delimiters[i], line) == 0)
+			break ;
+		line = replace_vars(mini, line);
+		write (fd, line, ft_strlen(line));
+		write (fd, "\n", 1);
+		free (line);
+	}
+}
+
 void	delimiters(t_mini *mini)
 {
 	char	*namefile;
-	char	*line;
 	t_pipes	*command;
 	int		fd;
 	int		i;
@@ -103,18 +118,10 @@ void	delimiters(t_mini *mini)
 		if (command == NULL)
 			break ;
 		namefile = namefiles(0);
-		fd = open(namefile, O_CREAT | O_EXCL | S_IRWXU);
-		while (1)
-		{
-			line = readline(YELLOW"> "WHITE);
-			if (del_cmp(mini->delimiters[i], line) == 0)
-				break ;
-			line = replace_vars(mini, line);
-			write (fd, line, ft_strlen(line));
-			write (fd, "\n", 1);
-			free (line);
-		}
+		fd = open(namefile, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
+		write_line(mini, fd, i);
 		command = save_files(command, namefile, fd, i);
+		close(fd);
 		free(namefile);
 	}
 }

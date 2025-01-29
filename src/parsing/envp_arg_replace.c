@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp_replace.c                                     :+:      :+:    :+:   */
+/*   envp_arg_replace.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:18:44 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/06 18:26:01 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:57:03 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	var_404(char *str, int i, char *comp)
+char	*var_404(char *str, int i, char *comp)
 {
 	char	*start;
 	char	*end;
 
-	if ((str[i + 1] < '0' || str[i + 1] > '9') && ft_strcmp(comp, str) != 0)
-		return (free(comp), i);
 	start = ft_substr(str, 0, i);
 	i++;
 	if (str[i] < '0' || str[i] > '9')
-	{
-		while (str[i] != '\0' && str[i] != '<' && str[i] != '>' && str[i] != ' '
-			&& str[i] != '	' && str[i] != '\n' && str[i] != '$')
+		while (str[i] != '\0' && str[i] != '<' && str[i] != '>'
+			&& str[i] != ' ' && str[i] != '	' && str[i] != '\n'
+			&& str[i] != '$' && str[i] != '"' && str[i] != '\'')
 			i++;
-	}
 	else
 		i++;
 	end = ft_substr(str, i, ft_strlen(str));
 	free(str);
-	str = ft_strjoin(start, end);
-	free(start);
-	free(end);
+	if (start || end)
+		str = ft_strjoin(start, end);
+	if (start)
+		free(start);
+	if (end)
+		free(end);
 	free (comp);
-	return (0);
+	return (str);
 }
 
 char	*found_var(t_envp *envp, char *str, int i, int j)
@@ -58,22 +58,28 @@ char	*found_var(t_envp *envp, char *str, int i, int j)
 	return (new_str);
 }
 
-char	*compare_var(char *str, t_envp *envp, int i)
+char	*compare_var(char *str, t_envp *envp, int i, char *comp)
 {
-	int	j;
-	int	k;
+	int		j;
+	int		k;
 
 	j = i + 1;
 	k = 0;
 	while (envp->variable[k] == str[j] && envp->variable[k] != '\0'
-		&& str[j] != '\0' && str[j] != '<' && str[j] != '>'
-		&& str[j] != ' ' && str[j] != '	' && str[j] != '\n' && str[j] != '$')
+		&& str[j] != '\0' && str[j] != '<' && str[j] != '>' && str[j] != '"'
+		&& str[j] != '\'' && str[j] != ' ' && str[j] != '	' && str[j] != '\n'
+		&& str[j] != '$')
 	{
 		k++;
 		j++;
 	}
-	if (envp->variable[k] == '\0')
+	if (envp->variable[k] == '\0' && (str[j] == '\0' || str[j] == '<'
+			|| str[j] == '"' || str[j] == '\'' || str[j] == '>'
+			|| str[j] == ' ' || str[j] == '	' || str[j] == '\n'
+			|| str[j] == '$'))
 		str = found_var(envp, str, i, j);
+	if (envp->next == NULL && ft_strcmp(str, comp) == 0)
+		str = var_404(str, i, comp);
 	return (str);
 }
 
@@ -84,22 +90,21 @@ char	*replace_vars(t_mini *mini, char *str)
 	int		i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i] != '\0' && str)
 	{
 		if (str[i] == '$')
 		{
 			envp = mini->envp;
-			while (envp != NULL)
+			comp = ft_strdup(str);
+			while (envp != NULL && ft_strcmp(comp, str) == 0)
 			{
-				comp = ft_strdup(str);
-				str = compare_var(str, envp, i);
-				if (ft_strcmp(comp, str) != 0)
-					break ;
+				str = compare_var(str, envp, i, comp);
 				envp = envp->next;
 			}
-			i = var_404(str, i, comp);
+			i = 0;
 		}
-		i++;
+		else
+			i++;
 	}
 	return (str);
 }
@@ -107,12 +112,21 @@ char	*replace_vars(t_mini *mini, char *str)
 void	arg_vars(t_mini *mini)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (mini->arg_matrix[i] != NULL)
 	{
-		if (mini->arg_matrix[i][0] == '$' || mini->arg_matrix[i][0] == '"')
-			mini->arg_matrix[i] = replace_vars(mini, mini->arg_matrix[i]);
+		j = 0;
+		while (mini->arg_matrix[i][j] != '\0')
+		{
+			if (mini->arg_matrix[i][j] == '$')
+			{
+				mini->arg_matrix[i] = replace_vars(mini, mini->arg_matrix[i]);
+				break ;
+			}
+			j++;
+		}
 		i++;
 	}
 }

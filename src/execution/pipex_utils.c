@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipexutils.c                                       :+:      :+:    :+:   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:00:37 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/17 12:00:53 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:05:25 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	**get_pathsenv(t_envp *envp)
 {

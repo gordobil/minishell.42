@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:27:37 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/21 13:14:31 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:52:43 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s3)
 		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
+	while (s1 != NULL && s1[i] != '\0')
 	{
 		s3[i] = s1[i];
 		i++;
 	}
 	j = 0;
-	while (s2[j] != '\0')
+	while (s2 != NULL && s2[j] != '\0')
 	{
 		s3[i] = s2[j];
 		i++;

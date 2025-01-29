@@ -78,21 +78,23 @@ typedef struct s_mini
 	t_envp			*envp;
 }				t_mini;
 
+/****************************** PARSING ******************************/
 //SPLIT_ARGS
 int		split_args(char *str, t_mini *mini);
-int		arg_jump(char *s, int i);
+int		arg_jump(char *s, int i, char q);
 
 //SPLIT_ARGS_UTILS
-int		check_unclosed(char *s);
 int		jump_spaces(char *s, int i);
-int		empty_quotes(char *s, int i);
-int		jump_empty(char *s, int i);
+int		all_same_quotes(char *s);
+int		file_found(char *s, int i);
 
 //PARSING_UTILS
 void	save_vars(t_pipes *pipe, int count);
-char	*rm_quotes(char *arg);
 int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
+
+//RM_QUOTES
+char	*rm_quotes(char *arg, int i, int j);
 
 //RDL
 char	*rdl_management(void);
@@ -110,11 +112,12 @@ void	arg_vars(t_mini *mini);
 char	*replace_vars(t_mini *mini, char *str);
 
 //STRUCTS
-void	pipe_info(char **arg_matrix, t_mini *mini, int i, int j);
+int		pipe_info(char **arg_matrix, t_mini *mini, int i, int j);
 int		is_it_a_var(char *str);
 
 //STRUCTS_INIT
 int		init_structs(t_mini *mini, int i, int position);
+int		pipes_end(char **arg_matrix, int i, t_mini *mini);
 
 //DELIMITERS
 void	delimiters(t_mini *mini);
@@ -127,21 +130,26 @@ int		open_fds(t_mini *mini);
 
 //FILES_UTILS
 char	*get_namefile(char *file, char type);
-void	close_fds(int fd, char *file);
+void	close_fds(t_files *file);
 int		count_files(t_mini *mini, int i, int k);
 
+/***************************** EXECUTION *****************************/
 //EXECUTE
 void	pipex(t_pipes *pipes, t_envp *envp);
 int		building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp);
 void	execveloop(char **str, char **path);
 
-//PIPEX
-char    **get_pathsenv(t_envp *envp);
-void    execute_single_command(t_pipes *current, char **paths, t_envp *env_list);
-void    create_pipes_for_pipeline(int command_count, int **pipes);
-void    setup_redirections(int i, int **pipes, t_pipes *current, int command_count);
-void    close_pipes_and_wait(int command_count, int **pipes, pid_t *pids);
-void    execute_pipeline(t_pipes *pipeline, t_envp *env_list);
+//PIPEX_MINI
+void	create_pipes_for_pipeline(int command_count, int **pipes);
+void	setup_redirections(int i, int **pipes, t_pipes *current,
+			int command_count);
+void	close_pipes_and_wait(int command_count, int **pipes, pid_t *pids);
+void	execute_pipeline(t_pipes *pipeline, t_envp *env_list);
+
+//PIPEX_UTILS
+char	**get_pathsenv(t_envp *envp);
+void	execute_single_command(t_pipes *current, char **paths,
+			t_envp *env_list);
 
 //BUILT-INS
 int		ms_cd(t_pipes *pipe, t_envp *envp, int i);
@@ -152,6 +160,7 @@ void	ms_export(t_pipes *pipes, t_envp *envp);
 void	ms_unset(t_pipes *pipe, t_envp *envp, int i);
 t_envp	*unset_var(char *variable, t_envp *envp);
 
+/******************************* MAIN ********************************/
 //FREEING
 void	freeing(t_mini *mini);
 void	free_matrix(char **matrix);

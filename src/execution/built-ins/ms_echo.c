@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_env.c                                           :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 23:54:47 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/11 23:54:47 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/12/02 12:09:11 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/12/02 12:09:11 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-int	ms_env(t_envp *envp, t_pipes *pipe, int i)
+void	ms_echo(t_pipes *pipe, int i)
 {
-	t_envp	*var;
+	int	flag;
 
 	i++;
-	if (!envp || envp == NULL)
-		return (-1);
-	var = envp;
+	flag = 0;
 	if (pipe->command[i] != NULL)
 	{
-		if (ft_strcmp(pipe->command[i], "-a") == 0)
-			printtt_envp(var);
-		return (error_messages(-5, "env"));
+		if (ft_strcmp(pipe->command[i], "-n") == 0)
+		{
+			i++;
+			flag = 1;
+		}
+		while (pipe->command[i] != NULL)
+		{
+			ft_printf("%s", pipe->command[i]);
+			if (pipe->command[i + 1] != NULL && pipe->command[i][0] != '\0')
+				ft_printf(" ");
+			i++;
+		}
 	}
-	while (var != NULL)
-	{
-		if (var->exported == 1 && var->variable != NULL
-			&& var->content != NULL)
-			ft_printf("%s=%s\n", var->variable, var->content);
-		var = var->next;
-	}
-	return (0);
+	if (flag == 0)
+		ft_printf("\n");
 }

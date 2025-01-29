@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
 void	infiles_saving(t_mini *mini, int i)
 {
 	if (mini->arg_matrix[i][0] == '<' && mini->arg_matrix[i][1] != '<')
@@ -111,10 +112,10 @@ int	open_fds(t_mini *mini)
 				return (-1);
 		else if (pipe->append->file != NULL)
 		{
-			pipe->infile->fd = open(get_namefile(pipe->append->file, '>'),
-					O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
-			if (pipe->infile->fd < 0)
-				pipe->infile->fd = open(get_namefile(pipe->append->file, '>'),
+			pipe->append->fd = open(get_namefile(pipe->append->file, '>'),
+					O_APPEND | O_WRONLY | O_CREAT, S_IRWXU);
+			if (pipe->append->fd < 0)
+				pipe->append->fd = open(get_namefile(pipe->append->file, '>'),
 						O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
 		}
 		if (pipe->outfile->file != NULL)

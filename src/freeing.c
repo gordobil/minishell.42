@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:27:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/17 13:54:31 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:29:52 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@ void	free_matrix(char **matrix)
 	int	i;
 
 	i = 0;
-	while (matrix[i] != NULL)
+	if (matrix)
 	{
-		free(matrix[i]);
-		i++;
+		while (matrix[i] != NULL)
+		{
+			if (matrix[i])
+				free(matrix[i]);
+			i++;
+		}
+		free(matrix);
+		matrix = NULL;
 	}
-	free(matrix);
-	matrix = NULL;
 }
 
 void	free_envp(t_envp *envp)
@@ -49,14 +53,26 @@ void	free_envp(t_envp *envp)
 
 void	free_files(t_pipes *pipe)
 {
-	close_fds(pipe->infile->fd, pipe->infile->file);
-	free(pipe->infile);
-	close_fds(pipe->outfile->fd, pipe->outfile->file);
-	free(pipe->outfile);
-	close_fds(pipe->append->fd, pipe->append->file);
-	free(pipe->append);
-	close_fds(pipe->delimiter->fd, pipe->delimiter->file);
-	free(pipe->delimiter);
+	if (pipe->infile != NULL)
+	{
+		close_fds(pipe->infile);
+		free(pipe->infile);
+	}
+	if (pipe->outfile != NULL)
+	{
+		close_fds(pipe->outfile);
+		free(pipe->outfile);
+	}
+	if (pipe->append != NULL)
+	{
+		close_fds(pipe->append);
+		free(pipe->append);
+	}
+	if (pipe->delimiter != NULL)
+	{
+		close_fds(pipe->delimiter);
+		free(pipe->delimiter);
+	}
 }
 
 void	free_pipes(t_pipes *pipe)
@@ -68,9 +84,11 @@ void	free_pipes(t_pipes *pipe)
 		if (pipe->vars != NULL)
 			free_matrix(pipe->vars);
 		pipe->var_c = 0;
+		pipe->args = 0;
 		free_files(pipe);
 		if (pipe->position > 0)
 			free(pipe->prev);
+		pipe->position = 0;
 		if (pipe->next == NULL)
 		{
 			free(pipe);
