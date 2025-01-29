@@ -19,31 +19,29 @@ RL_FLAGS			=	-I/usr/include/readline -lreadline
 LIBFT				=	libft.a
 
 SRC_PATH			=	./src/
-BI_PATH				=	./src/built-ins/
 PRS_PATH			=	./src/parsing/
+EXC_PATH			=	./src/execution/
+BI_PATH				=	./src/execution/built-ins/
 LIBFT_PATH			=	./libft/
 
-FILES				=	./a \
-						./b \
-						./c \
-						./d \
-						./e \
-
 SOURCES				=	$(SRC_PATH)errors.c \
-						$(SRC_PATH)execute.c \
 						$(SRC_PATH)freeing.c \
 						$(SRC_PATH)minishell.c \
+						$(SRC_PATH)readline.c \
 						$(PRS_PATH)delimiters.c \
 						$(PRS_PATH)envp.c \
 						$(PRS_PATH)envp_arg_replace.c \
 						$(PRS_PATH)files.c \
 						$(PRS_PATH)files_utils.c \
 						$(PRS_PATH)parsing_utils.c \
-						$(PRS_PATH)rdl.c \
+						$(PRS_PATH)rm_quotes.c \
 						$(PRS_PATH)split_args.c \
 						$(PRS_PATH)split_args_utils.c \
 						$(PRS_PATH)structs.c \
 						$(PRS_PATH)structs_init.c \
+						$(EXC_PATH)execute.c \
+						$(EXC_PATH)pipex_mini.c \
+						$(EXC_PATH)pipex_utils.c \
 						$(BI_PATH)ms_cd.c \
 						$(BI_PATH)ms_echo.c \
 						$(BI_PATH)ms_env.c \
@@ -51,8 +49,6 @@ SOURCES				=	$(SRC_PATH)errors.c \
 						$(BI_PATH)ms_pwd.c \
 						$(BI_PATH)ms_unset.c \
 						$(SRC_PATH)printttttttt.c \
-						$(SRC_PATH)pipexmini.c \
-						$(SRC_PATH)pipexutils.c \
 						
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
@@ -88,8 +84,8 @@ all:				$(NAME) $(LIBFT)
 
 $(NAME):			$(OBJECTS) $(LIBFT) $(INCLUDES)
 					$(CC) $(CC_FLAGS) $(OBJECTS) $(LIBFT) $(RL_FLAGS) -o $(NAME)
-					mkdir -p $(SRC_PATH)objects/
-					mv $(OBJECTS) $(SRC_PATH)objects/
+					mkdir -p $(SRC_PATH).objects/
+					mv $(OBJECTS) $(SRC_PATH).objects/
 					echo "\n························· Compilation complete ··························"
 					echo "$$MINISHELL"
 
@@ -97,19 +93,18 @@ $(LIBFT):
 					@make --no-print-directory -C $(LIBFT_PATH)
 
 clean:
-					rm -rf $(SRC_PATH)objects/
+					rm -rf $(SRC_PATH).objects/
 					rm -rf $(SRC_PATH)*.o
-					rm -rf $(BI_PATH)*.o
 					rm -rf $(PRS_PATH)*.o
+					rm -rf $(EXC_PATH)*.o
+					rm -rf $(BI_PATH)*.o
 					@make clean --no-print-directory -C $(LIBFT_PATH)
 					echo "$(WHITE) · $(BLUE)Minishell objects removed.$(WHITE)\n"
 					
 fclean:				clean
 					rm -rf $(NAME)
 					rm -rf $(LIBFT)
-					rm -rf ./.temp_files/
 					rm -rf .temp_file_*
-					rm -rf $(FILES)
 					@make fclean --no-print-directory -C $(LIBFT_PATH)
 					echo "$(WHITE) · $(BLUE)Minishell executable removed.$(WHITE)\n"
 

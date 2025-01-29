@@ -12,20 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-int	check_unclosed(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i = arg_jump(s, i);
-		if (i < 0)
-			return (i);
-	}
-	return (0);
-}
-
 int	jump_spaces(char *s, int i)
 {
 	while (s[i] == ' ' || s[i] == '	')
@@ -33,29 +19,30 @@ int	jump_spaces(char *s, int i)
 	return (i);
 }
 
-int	empty_quotes(char *s, int i)
+int	all_same_quotes(char *s)
 {
-	int		start;
+	int		i;
 	char	q;
 
-	if (s[i] == '"' || s[i] == '\'')
-	{
-		start = i;
+	i = jump_spaces(s, 0);
+	if (s[i] == '\'' || s[i] == '"')
 		q = s[i];
-		while (s[i] == q && s[i] != '\0')
-			i++;
-		if (s[i] != '\0' && ((i - start) % 2 != 0))
-			i--;
-		else if (s[i] != '\0' && ((i - start) % 2 == 0))
-			if (i != jump_spaces(s, i))
-				return (empty_quotes(s, jump_spaces(s, i)));
-	}
-	return (i);
+	else
+		return (0);
+	while (s[i] == q && s[i] != '\0')
+		i++;
+	if (s[i] == '\0')
+		return (1);
+	return (-1);
 }
 
-int	jump_empty(char *s, int i)
+int	file_found(char *s, int i)
 {
+	i++;
+	if (s[i - 1] == '<' && s[i] == '<')
+		i++;
+	else if (s[i - 1] == '>' && s[i] == '>')
+		i++;
 	i = jump_spaces(s, i);
-	i = empty_quotes(s, i);
 	return (i);
 }

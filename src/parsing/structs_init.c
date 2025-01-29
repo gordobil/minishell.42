@@ -85,3 +85,20 @@ int	init_structs(t_mini *mini, int i, int position)
 					* sizeof(char *));
 	}
 }
+
+int	pipes_end(char **arg_matrix, int i, t_mini *mini)
+{
+	if (arg_matrix[i] == NULL)
+	{
+		mini->pipes->next = NULL;
+		return (-1);
+	}
+	if (ms_strcmp(arg_matrix[i], "|") == 0)
+		i++;
+	if (arg_matrix[i] == NULL)
+	{
+		mini->pipes->next = NULL;
+		return (error_messages(-9, NULL), -2);
+	}
+	return (i);
+}

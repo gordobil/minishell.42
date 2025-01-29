@@ -66,7 +66,7 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 			&& ms_strcmp(mini->arg_matrix[i], "|" ) && j < arguments
 			&& mini->pipes->command)
 		{
-			mini->pipes->command[j] = ft_strdup(mini->arg_matrix[i]);
+			mini->pipes->command[j] = rm_quotes(mini->arg_matrix[i], 0, 0);
 			j++;
 		}
 		else if ((mini->arg_matrix[i][0] == '<'
@@ -82,25 +82,34 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 	return (k);
 }
 
-void	plain_command(char **arg_matrix, t_mini *mini)
+int	plain_command(char **arg_matrix, t_mini *mini)
 {
 	int	i;
+	int	j;
 
 	mini->comm_c = 1;
 	i = 0;
-	while (arg_matrix[i] != NULL)
+	j = 0;
+	while (arg_matrix[j] != NULL)
 	{
-		mini->pipes->command[i] = rm_quotes(arg_matrix[i]);
-		i++;
+		if (ms_strcmp(arg_matrix[j], "|") != 0)
+		{
+			mini->pipes->command[i] = rm_quotes(arg_matrix[i], 0, 0);
+			i++;
+		}
+		j++;
 	}
 	save_vars(mini->pipes, mini->pipes->var_c);
 	mini->pipes->command[i] = NULL;
 	mini->pipes->prev = NULL;
 	mini->pipes->next = NULL;
 	mini->files = NULL;
+	if (ms_strcmp(arg_matrix[j - 1], "|") == 0)
+		return (error_messages(-9, NULL), -2);
+	return (0);
 }
 
-void	pipe_info(char **arg_matrix, t_mini *mini, int i, int j)
+int	pipe_info(char **arg_matrix, t_mini *mini, int i, int j)
 {
 	int		position;
 
@@ -110,20 +119,19 @@ void	pipe_info(char **arg_matrix, t_mini *mini, int i, int j)
 	while (arg_matrix[i] != NULL && ++position < mini->arg_c)
 	{
 		init_structs(mini, i, position);
-		if (mini->pipes->args == mini->arg_c)
+		if (mini->pipes->args == mini->arg_c
+			|| (mini->pipes->args == mini->arg_c - 1
+				&& ms_strcmp(mini->arg_matrix[mini->pipes->args], "|") == 0))
 			return (plain_command(arg_matrix, mini));
 		j = dup_args(j, mini, i, mini->pipes->args);
 		update_nodes(mini, position);
 		i = count_args(arg_matrix, mini->pipes, i, 'i');
 		save_vars(mini->pipes, mini->pipes->var_c);
-		if (arg_matrix[i] == NULL)
-		{
-			mini->pipes->next = NULL;
+		i = pipes_end(arg_matrix, i, mini);
+		if (i < 0)
 			break ;
-		}
-		else if (ms_strcmp(arg_matrix[i], "|") == 0)
-			i++;
 		mini->pipes = mini->pipes->next;
 	}
 	update_nodes(mini, -1);
+	return (i);
 }

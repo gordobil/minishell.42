@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:28:01 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/17 13:53:29 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:57:31 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ char	*get_namefile(char *file, char type)
 	return (file);
 }
 
-void	close_fds(int fd, char *file)
+void	close_fds(t_files *file)
 {
-	if (file != NULL)
-		free(file);
-	if (fd != 0 && fd != -1)
-		close(fd);
+	if (file->file != NULL)
+		free(file->file);
+	file->fd = 0;
 }
 
 int	count_files(t_mini *mini, int i, int k)

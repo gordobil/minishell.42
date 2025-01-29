@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/22 17:55:22 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:52:29 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ void	end_mini(t_mini *mini, char *rdline)
 int	parsing(t_mini *mini)
 {
 	arg_vars(mini);
-	pipe_info(mini->arg_matrix, mini, 0, 0);
+	if (pipe_info(mini->arg_matrix, mini, 0, 0) == -2)
+		return (-1);
 	if (mini->del_c > 0)
 		delimiters(mini);
 	if (open_fds(mini) != 0)
-		return (-1);
+		return (-2);
 	return (0);
 }
 
@@ -58,16 +59,13 @@ int	main(int argc, char **argv, char **envp)
 	end_mini(mini, rdline);
 	return (0);
 }
- 
- 
+
 /******** FALTA ********/
 // redirecciones
  
 /******* ERRORES *******/
 // expansión variables
 // comillas vacías
-
-
 
 //valgrind --leak-check=yes ./minishell
 //valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
