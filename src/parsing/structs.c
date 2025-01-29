@@ -59,7 +59,7 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 	int	j;
 
 	j = 0;
-	while (mini->arg_matrix[i] != NULL
+	while (mini->arg_matrix[++i] != NULL
 		&& ms_strcmp(mini->arg_matrix[i], "|") != 0)
 	{
 		if (mini->arg_matrix[i][0] != '<' && mini->arg_matrix[i][0] != '>'
@@ -67,13 +67,15 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 			&& mini->pipes->command)
 		{
 			mini->pipes->command[j] = rm_quotes(mini->arg_matrix[i], 0, 0);
-			j++;
+			if (ft_strcmp(mini->pipes->command[j], "") == 0)
+				free(mini->pipes->command[j]);
+			else
+				j++;
 		}
 		else if ((mini->arg_matrix[i][0] == '<'
 			|| mini->arg_matrix[i][0] == '>'))
 			if (file_count(mini->arg_matrix, i, 'r') < 0)
 				k = file_saving(mini, i, k);
-		i++;
 	}
 	if (mini->pipes->command)
 		mini->pipes->command[j] = NULL;
@@ -94,8 +96,11 @@ int	plain_command(char **arg_matrix, t_mini *mini)
 	{
 		if (ms_strcmp(arg_matrix[j], "|") != 0)
 		{
-			mini->pipes->command[i] = rm_quotes(arg_matrix[i], 0, 0);
-			i++;
+			mini->pipes->command[i] = rm_quotes(arg_matrix[j], 0, 0);
+			if (ft_strcmp(mini->pipes->command[i], "") == 0)
+				free(mini->pipes->command[i]);
+			else
+				i++;
 		}
 		j++;
 	}
@@ -123,7 +128,7 @@ int	pipe_info(char **arg_matrix, t_mini *mini, int i, int j)
 			|| (mini->pipes->args == mini->arg_c - 1
 				&& ms_strcmp(mini->arg_matrix[mini->pipes->args], "|") == 0))
 			return (plain_command(arg_matrix, mini));
-		j = dup_args(j, mini, i, mini->pipes->args);
+		j = dup_args(j, mini, i - 1, mini->pipes->args);
 		update_nodes(mini, position);
 		i = count_args(arg_matrix, mini->pipes, i, 'i');
 		save_vars(mini->pipes, mini->pipes->var_c);
