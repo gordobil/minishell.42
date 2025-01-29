@@ -15,10 +15,10 @@
 void	infiles_saving(t_mini *mini, int i)
 {
 	if (mini->arg_matrix[i][0] == '<' && mini->arg_matrix[i][1] != '<')
-		mini->pipes->infile->file = ft_strdup(mini->arg_matrix[i]);
+		mini->pipes->infile->file = rm_quotes(mini->arg_matrix[i], 0, 0);
 	else if (mini->arg_matrix[i][0] == '<' && mini->arg_matrix[i][1] == '<')
 	{
-		mini->pipes->delimiter->file = ft_strdup(mini->arg_matrix[i]);
+		mini->pipes->delimiter->file = rm_quotes(mini->arg_matrix[i], 0, 0);
 		if (mini->pipes->infile->file != NULL)
 		{
 			free(mini->pipes->infile->file);
@@ -33,7 +33,7 @@ int	file_saving(t_mini *mini, int i, int k)
 		infiles_saving(mini, i);
 	else if (mini->arg_matrix[i][0] == '>' && mini->arg_matrix[i][1] != '>')
 	{
-		mini->pipes->outfile->file = ft_strdup(mini->arg_matrix[i]);
+		mini->pipes->outfile->file = rm_quotes(mini->arg_matrix[i], 0, 0);
 		if (mini->pipes->append->file != NULL)
 		{
 			free(mini->pipes->append->file);
@@ -42,7 +42,7 @@ int	file_saving(t_mini *mini, int i, int k)
 	}
 	else if (mini->arg_matrix[i][0] == '>' && mini->arg_matrix[i][1] == '>')
 	{
-		mini->pipes->append->file = ft_strdup(mini->arg_matrix[i]);
+		mini->pipes->append->file = rm_quotes(mini->arg_matrix[i], 0, 0);
 		if (mini->pipes->outfile->file != NULL)
 		{
 			free(mini->pipes->outfile->file);
@@ -113,7 +113,7 @@ int	open_fds(t_mini *mini)
 		else if (pipe->append->file != NULL)
 		{
 			pipe->append->fd = open(get_namefile(pipe->append->file, '>'),
-					O_APPEND | O_WRONLY | O_CREAT, S_IRWXU);
+					O_APPEND | O_WRONLY, S_IRWXU);
 			if (pipe->append->fd < 0)
 				pipe->append->fd = open(get_namefile(pipe->append->file, '>'),
 						O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);

@@ -1,0 +1,9 @@
+total 1668
+-rw-r--r-- 1 ngordobi 2023_urduliz    4671 Jan 29 14:48 Makefile
+-rwx------ 1 ngordobi 2023_urduliz       0 Jan 29 15:22 hola
+drwxr-xr-x 2 ngordobi 2023_urduliz      40 Jan 29 14:48 includes
+drwxr-xr-x 9 ngordobi 2023_urduliz     143 Jan 29 15:19 libft
+-rw-r--r-- 1 ngordobi 2023_urduliz   73028 Jan 29 15:19 libft.a
+-rwxr-xr-x 1 ngordobi 2023_urduliz   51032 Jan 29 15:19 minishell
+drwxr-xr-x 5 ngordobi 2023_urduliz     146 Jan 29 15:19 src
+-rw-r--r-- 1 ngordobi 2023_urduliz 1572203 Dec  9 12:58 subject_minishell.pdf

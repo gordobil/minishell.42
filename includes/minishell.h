@@ -85,7 +85,7 @@ int		arg_jump(char *s, int i, char q);
 
 //SPLIT_ARGS_UTILS
 int		jump_spaces(char *s, int i);
-int		all_same_quotes(char *s);
+int		empty_quotes(char *arg);
 int		file_found(char *s, int i);
 
 //PARSING_UTILS
