@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/09 13:26:50 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/22 17:55:22 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,9 @@ int	main(int argc, char **argv, char **envp)
  
 /******** FALTA ********/
 // redirecciones
-// redirecciones en único comando
  
 /******* ERRORES *******/
 // expansión variables
-// ejecutables
 // comillas vacías
 
 

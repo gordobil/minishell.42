@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/22 16:46:57 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:14:26 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,6 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 		return ;
 	path = get_pathsenv(envp);
 	envp = get_edge_node(pipes->mini->envp, 's');
-	if (building_execute(pipes->mini, pipes, envp) == -1)
-	{
-		execute_pipeline(pipes, envp);
-	}
+	execute_pipeline(pipes, envp);
 	free_matrix(path);
 }
