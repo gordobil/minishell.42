@@ -23,6 +23,7 @@ int	all_same_quotes(char *s)
 {
 	int		i;
 	char	q;
+
 	i = jump_spaces(s, 0);
 	if (s[i] == '\'' || s[i] == '"')
 		q = s[i];
@@ -33,4 +34,15 @@ int	all_same_quotes(char *s)
 	if (s[i] == '\0')
 		return (1);
 	return (-1);
+}
+
+int	file_found(char *s, int i)
+{
+	i++;
+	if (s[i - 1] == '<' && s[i] == '<')
+		i++;
+	else if (s[i - 1] == '>' && s[i] == '>')
+		i++;
+	i = jump_spaces(s, i);
+	return (i);
 }

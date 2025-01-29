@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp_arg_replace.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:18:44 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/20 11:53:11 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:57:03 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ char	*var_404(char *str, int i, char *comp)
 	start = ft_substr(str, 0, i);
 	i++;
 	if (str[i] < '0' || str[i] > '9')
-		while (str[i] != '\0' && str[i] != '<' && str[i] != '>' && str[i] != ' '
-			&& str[i] != '	' && str[i] != '\n' && str[i] != '$' && str[i] != '"'
-			&& str[i] != '\'')
+		while (str[i] != '\0' && str[i] != '<' && str[i] != '>'
+			&& str[i] != ' ' && str[i] != '	' && str[i] != '\n'
+			&& str[i] != '$' && str[i] != '"' && str[i] != '\'')
 			i++;
 	else
 		i++;
@@ -74,8 +74,9 @@ char	*compare_var(char *str, t_envp *envp, int i, char *comp)
 		j++;
 	}
 	if (envp->variable[k] == '\0' && (str[j] == '\0' || str[j] == '<'
-		|| str[j] == '"' || str[j] == '\'' || str[j] == '>' || str[j] == ' '
-		|| str[j] == '	' || str[j] == '\n' || str[j] == '$'))
+			|| str[j] == '"' || str[j] == '\'' || str[j] == '>'
+			|| str[j] == ' ' || str[j] == '	' || str[j] == '\n'
+			|| str[j] == '$'))
 		str = found_var(envp, str, i, j);
 	if (envp->next == NULL && ft_strcmp(str, comp) == 0)
 		str = var_404(str, i, comp);
