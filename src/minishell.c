@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/29 16:06:41 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:48:40 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,6 @@ int	main(int argc, char **argv, char **envp)
 
 /******** FALTA ********/
 // redirecciones
- 
-/******* ERRORES *******/
-// expansión variables
-// comillas vacías
 
 //valgrind --leak-check=yes ./minishell
 //valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell

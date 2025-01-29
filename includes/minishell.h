@@ -78,7 +78,7 @@ typedef struct s_mini
 	t_envp			*envp;
 }				t_mini;
 
-/****************************** PARSING ******************************/
+/******************************** PARSING ********************************/
 //SPLIT_ARGS
 int		split_args(char *str, t_mini *mini);
 int		arg_jump(char *s, int i, char q);
@@ -133,7 +133,7 @@ char	*get_namefile(char *file, char type);
 void	close_fds(t_files *file);
 int		count_files(t_mini *mini, int i, int k);
 
-/***************************** EXECUTION *****************************/
+/******************************* EXECUTION *******************************/
 //EXECUTE
 void	pipex(t_pipes *pipes, t_envp *envp);
 int		building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp);
@@ -160,7 +160,7 @@ void	ms_export(t_pipes *pipes, t_envp *envp);
 void	ms_unset(t_pipes *pipe, t_envp *envp, int i);
 t_envp	*unset_var(char *variable, t_envp *envp);
 
-/******************************* MAIN ********************************/
+/********************************* MAIN **********************************/
 //FREEING
 void	freeing(t_mini *mini);
 void	free_matrix(char **matrix);
