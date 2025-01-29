@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:53:44 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/29 14:20:22 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:52:06 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,17 @@ void	create_pipes_for_pipeline(int command_count, int **pipes)
 void	setup_redirections(int i, int **pipes, t_pipes *current,
 	int command_count)
 {
-	if (i > 0)
+	if (current->infile->file)
+		dup2(current->infile->fd, STDIN_FILENO);
+	else if (current->delimiter->file)
+		dup2(current->delimiter->fd, STDIN_FILENO);
+	else if (i > 0)
 		dup2(pipes[i - 1][0], STDIN_FILENO);
-	if (current->next)
+	if (current->outfile->file)
+		dup2(current->outfile->fd, STDOUT_FILENO);
+	else if (current->append->file)
+		dup2(current->append->fd, STDOUT_FILENO);
+	else if (current->next)
 		dup2(pipes[i][1], STDOUT_FILENO);
 }
 

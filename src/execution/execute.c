@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/29 14:20:20 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:52:34 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ void	execveloop(char **str, char **path)
 		free (bin);
 		count++;
 	}
+	bin = ft_strcat("./", *str);
+	execve(bin, str, 0);
+	free (bin);
 	ft_printf("%s: command not found\n", *str);
 	exit(127);
 }
@@ -70,19 +73,6 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 		return ;
 	path = get_pathsenv(envp);
 	envp = get_edge_node(pipes->mini->envp, 's');
-	if (pipes->next == NULL)
-	{
-		if (building_execute(pipes->mini, pipes, envp) == -1)
-		{
-			id = fork();
-			if (id == 0)
-				execveloop(pipes->command, path);
-			waitpid(id, &status, 0);
-		}
-	}
-	else
-	{
-		execute_pipeline(pipes, envp);
-	}
+	execute_pipeline(pipes, envp);
 	free_matrix(path);
 }
