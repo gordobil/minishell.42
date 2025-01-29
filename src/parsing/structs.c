@@ -66,7 +66,7 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 			&& ms_strcmp(mini->arg_matrix[i], "|" ) && j < arguments
 			&& mini->pipes->command)
 		{
-			mini->pipes->command[j] = rm_quotes(mini->arg_matrix[i], 0);
+			mini->pipes->command[j] = rm_quotes(mini->arg_matrix[i], 0, 0);
 			j++;
 		}
 		else if ((mini->arg_matrix[i][0] == '<'
@@ -94,7 +94,7 @@ int	plain_command(char **arg_matrix, t_mini *mini)
 	{
 		if (ms_strcmp(arg_matrix[j], "|") != 0)
 		{
-			mini->pipes->command[i] = rm_quotes(arg_matrix[i], 0);
+			mini->pipes->command[i] = rm_quotes(arg_matrix[i], 0, 0);
 			i++;
 		}
 		j++;

@@ -90,12 +90,11 @@ int		file_found(char *s, int i);
 
 //PARSING_UTILS
 void	save_vars(t_pipes *pipe, int count);
-char	*rm_quotes(char *arg, int i);
 int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
 
 //RM_QUOTES
-char	*rm_quotes(char *arg, int i);
+char	*rm_quotes(char *arg, int i, int j);
 
 //RDL
 char	*rdl_management(void);
