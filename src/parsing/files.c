@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:55:19 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/11/25 12:55:19 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:40:07 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	open_fds(t_mini *mini)
 		if (pipe->infile->file != NULL)
 			if (in_out_files(pipe, 'i') != 0)
 				return (-1);
-		else if (pipe->append->file != NULL)
+		if (pipe->append->file != NULL)
 		{
 			pipe->append->fd = open(get_namefile(pipe->append->file, '>'),
 					O_APPEND | O_WRONLY, S_IRWXU);
@@ -121,7 +121,7 @@ int	open_fds(t_mini *mini)
 		if (pipe->outfile->file != NULL)
 			if (in_out_files(pipe, 'o') != 0)
 				return (-1);
-		else if (pipe->delimiter->file != NULL)
+		if (pipe->delimiter->file != NULL)
 			pipe->delimiter->fd = open(pipe->delimiter->file, O_RDONLY);
 		pipe = pipe->next;
 	}
