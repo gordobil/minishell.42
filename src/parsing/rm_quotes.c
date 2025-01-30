@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:07:35 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/29 16:01:41 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:06:04 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*rm_quotes(char *arg, int i, int j)
 	int		k;
 	char	*dup;
 
-	if (arg == NULL)
+	if (arg == NULL || ft_strcmp(arg, "") == 0)
 		return (ft_strdup(""));
 	if ((ft_strcmp(arg, "''") == 0 || ft_strcmp(arg, """") == 0))
 		return (ft_strdup("''"));
@@ -77,7 +77,7 @@ char	*rm_quotes(char *arg, int i, int j)
 	k = ft_strlen(dup);
 	i = next_fragment(arg, ++j, 3);
 	dup = quote_fragment(arg, dup, j, i);
-	if (dup == NULL)
+	if (!dup)
 		return (ft_strdup(""));
 	i = next_fragment(dup, k - 1, 4);
 	if (dup[i] != '\0')

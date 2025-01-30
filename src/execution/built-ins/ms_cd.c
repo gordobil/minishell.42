@@ -33,6 +33,7 @@ int	ms_cd(t_pipes *pipe, t_envp *envp, int i)
 	t_envp	*var;
 
 	path = get_path(pipe, i);
+	ft_printf("%s\n", path);
 	if (path == NULL)
 		return (-1);
 	if (chdir(path) != 0)
@@ -45,5 +46,6 @@ int	ms_cd(t_pipes *pipe, t_envp *envp, int i)
 		var = var->next;
 	free (var->content);
 	var->content = ft_strdup(getcwd(buffer, 4096));
+	ft_printf("%s\n", var->content);
 	return (free(path), 0);
 }

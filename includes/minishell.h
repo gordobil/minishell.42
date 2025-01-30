@@ -76,6 +76,7 @@ typedef struct s_mini
 	int				comm_c;
 	t_pipes			*pipes;
 	t_envp			*envp;
+	int				last_ret;
 }				t_mini;
 
 /******************************** PARSING ********************************/
