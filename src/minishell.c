@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/30 21:44:39 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/30 22:04:23 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ int	main(int argc, char **argv, char **envp)
 /******** FALTA ********/
 // actulizar structs padre
 // export variable sin content
-// var=cont
+// var=cont (???
+// LEAKS
+// norma
+// tilde (al lado de la ñ) y enter == segfault
 
 //valgrind --leak-check=yes ./minishell
 //valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell

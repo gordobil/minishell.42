@@ -137,7 +137,7 @@ int		count_files(t_mini *mini, int i, int k);
 /******************************* EXECUTION *******************************/
 //EXECUTE
 void	pipex(t_pipes *pipes, t_envp *envp);
-int		building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp);
+int		building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp, int i);
 void	execveloop(char **str, char **path);
 
 //PIPEX_MINI
@@ -151,6 +151,7 @@ void	execute_pipeline(t_pipes *pipeline, t_envp *env_list);
 char	**get_pathsenv(t_envp *envp);
 void	execute_single_command(t_pipes *current, char **paths,
 			t_envp *env_list);
+int		var_jump(char **command);
 
 //BUILT-INS
 int		ms_cd(t_pipes *pipe, t_envp *envp, int i);

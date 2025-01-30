@@ -63,7 +63,7 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 		&& ms_strcmp(mini->arg_matrix[i], "|") != 0)
 	{
 		if (mini->arg_matrix[i][0] != '<' && mini->arg_matrix[i][0] != '>'
-			&& ms_strcmp(mini->arg_matrix[i], "|" ) && j < arguments
+			&& ms_strcmp(mini->arg_matrix[i], "|") != 0 && j < arguments
 			&& mini->pipes->command)
 		{
 			mini->pipes->command[j] = rm_quotes(mini->arg_matrix[i], 0, 0);
@@ -72,10 +72,9 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 			else
 				j++;
 		}
-		else if ((mini->arg_matrix[i][0] == '<'
-			|| mini->arg_matrix[i][0] == '>'))
-			if (file_count(mini->arg_matrix, i, 'r') < 0)
-				k = file_saving(mini, i, k);
+		if ((mini->arg_matrix[i][0] == '<' || mini->arg_matrix[i][0] == '>')
+			&& file_count(mini->arg_matrix, i, 'r') < 0)
+			k = file_saving(mini, i, k);
 	}
 	if (mini->pipes->command)
 		mini->pipes->command[j] = NULL;
@@ -91,8 +90,8 @@ int	plain_command(char **arg_matrix, t_mini *mini)
 
 	mini->comm_c = 1;
 	i = 0;
-	j = 0;
-	while (arg_matrix[j] != NULL)
+	j = -1;
+	while (arg_matrix[++j] != NULL)
 	{
 		if (ms_strcmp(arg_matrix[j], "|") != 0)
 		{
@@ -102,7 +101,6 @@ int	plain_command(char **arg_matrix, t_mini *mini)
 			else
 				i++;
 		}
-		j++;
 	}
 	save_vars(mini->pipes, mini->pipes->var_c);
 	mini->pipes->command[i] = NULL;

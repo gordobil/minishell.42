@@ -21,7 +21,7 @@ int	jump_spaces(char *s, int i)
 
 int	empty_quotes(char *arg)
 {
-	int 	i;
+	int		i;
 	char	q;
 
 	i = 0;

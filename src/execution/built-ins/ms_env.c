@@ -35,7 +35,8 @@ int	ms_env(t_envp *envp, t_pipes *pipe, int i, int print_export)
 			&& var->variable != NULL)
 		{
 			if (var->content != NULL)
-				ft_printf("declare -x %s=\"%s\"\n", var->variable, var->content);
+				ft_printf("declare -x %s=\"%s\"\n", var->variable,
+					var->content);
 			else
 				ft_printf("declare -x %s\n", var->variable);
 		}
