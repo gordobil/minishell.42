@@ -156,7 +156,7 @@ void	execute_single_command(t_pipes *current, char **paths,
 int		ms_cd(t_pipes *pipe, t_envp *envp, int i);
 void	ms_echo(t_pipes *pipe, int i);
 void	ms_pwd(t_envp *envp, t_pipes *pipe);
-int		ms_env(t_envp *envp, t_pipes *pipe, int i);
+int		ms_env(t_envp *envp, t_pipes *pipe, int i, int print_export);
 void	ms_export(t_pipes *pipes, t_envp *envp);
 void	ms_unset(t_pipes *pipe, t_envp *envp, int i);
 t_envp	*unset_var(char *variable, t_envp *envp);

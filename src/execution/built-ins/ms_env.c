@@ -12,7 +12,7 @@
 
 #include "../../../includes/minishell.h"
 
-int	ms_env(t_envp *envp, t_pipes *pipe, int i)
+int	ms_env(t_envp *envp, t_pipes *pipe, int i, int print_export)
 {
 	t_envp	*var;
 
@@ -28,9 +28,17 @@ int	ms_env(t_envp *envp, t_pipes *pipe, int i)
 	}
 	while (var != NULL)
 	{
-		if (var->exported == 1 && var->variable != NULL
-			&& var->content != NULL)
+		if (print_export == 0 && var->exported == 1
+			&& var->variable != NULL && var->content != NULL)
 			ft_printf("%s=%s\n", var->variable, var->content);
+		else if (print_export == 1 && var->exported == 1
+			&& var->variable != NULL)
+		{
+			if (var->content != NULL)
+				ft_printf("declare -x %s=\"%s\"\n", var->variable, var->content);
+			else
+				ft_printf("declare -x %s\n", var->variable);
+		}
 		var = var->next;
 	}
 	return (0);

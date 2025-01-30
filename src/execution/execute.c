@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/30 11:17:23 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/30 21:40:30 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,12 @@ int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp)
 		else if (ft_strcmp(pipe->command[i], "pwd") == 0)
 			ms_pwd(envp, pipe);
 		else if (ft_strcmp(pipe->command[i], "env") == 0)
-			ms_env(envp, pipe, i);
-		else if (ft_strcmp(pipe->command[i], "export") == 0)
+			ms_env(envp, pipe, i, 0);
+		else if (ft_strcmp(pipe->command[i], "export") == 0
+				&& pipe->command[i + 1] == NULL)
+			ms_env(envp, pipe, i, 1);
+		else if (ft_strcmp(pipe->command[i], "export") == 0
+				&& pipe->command[i + 1] != NULL)
 			ms_export(pipe, envp);
 		else if (ft_strcmp(pipe->command[i], "unset") == 0)
 			ms_unset(pipe, envp, i);
