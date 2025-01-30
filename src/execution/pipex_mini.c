@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_mini.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:53:44 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/29 14:52:06 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:28:33 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	setup_redirections(int i, int **pipes, t_pipes *current,
 void	close_pipes_and_wait(int command_count, int **pipes, pid_t *pids)
 {
 	int	i;
+	int status;
 
 	i = 0;
+	status = 0;
 	while (i < command_count - 1)
 	{
 		close(pipes[i][0]);
@@ -62,9 +64,11 @@ void	close_pipes_and_wait(int command_count, int **pipes, pid_t *pids)
 	i = 0;
 	while (i < command_count)
 	{
-		waitpid(pids[i], NULL, 0);
+		waitpid(pids[i], &status, 0);
 		i++;
 	}
+	status = status >> 8;
+	//ft_printf("Status ==%d\n", status);
 	free(pids);
 }
 
