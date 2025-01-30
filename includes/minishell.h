@@ -144,7 +144,7 @@ void	execveloop(char **str, char **path);
 void	create_pipes_for_pipeline(int command_count, int **pipes);
 void	setup_redirections(int i, int **pipes, t_pipes *current,
 			int command_count);
-void	close_pipes_and_wait(int command_count, int **pipes, pid_t *pids);
+void	close_pipes_and_wait(int command_count, int **pipes, pid_t *pids, t_mini *mini);
 void	execute_pipeline(t_pipes *pipeline, t_envp *env_list);
 
 //PIPEX_UTILS

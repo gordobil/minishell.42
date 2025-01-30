@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:53:44 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/30 11:28:33 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:49:49 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	setup_redirections(int i, int **pipes, t_pipes *current,
 		dup2(pipes[i][1], STDOUT_FILENO);
 }
 
-void	close_pipes_and_wait(int command_count, int **pipes, pid_t *pids)
+void	close_pipes_and_wait(int command_count, int **pipes, pid_t *pids, t_mini *mini)
 {
 	int	i;
 	int status;
@@ -67,8 +67,7 @@ void	close_pipes_and_wait(int command_count, int **pipes, pid_t *pids)
 		waitpid(pids[i], &status, 0);
 		i++;
 	}
-	status = status >> 8;
-	//ft_printf("Status ==%d\n", status);
+	mini->last_ret = status >> 8;
 	free(pids);
 }
 
@@ -109,10 +108,10 @@ void	execute_pipeline(t_pipes *pipeline, t_envp *env_list)
 		if (pids[i] == 0)
 		{
 			setup_redirections(i, pipes, current, command_count);
-			close_pipes_and_wait(command_count, pipes, pids);
+			close_pipes_and_wait(command_count, pipes, pids, pipeline->mini);
 			execute_single_command(current, get_pathsenv(env_list), env_list);
 		}
 		current = current->next;
 	}
-	close_pipes_and_wait(command_count, pipes, pids);
+	close_pipes_and_wait(command_count, pipes, pids, pipeline->mini);
 }

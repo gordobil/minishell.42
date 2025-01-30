@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/30 11:17:23 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:47:55 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp)
 			ms_export(pipe, envp);
 		else if (ft_strcmp(pipe->command[i], "unset") == 0)
 			ms_unset(pipe, envp, i);
+		else if (ft_strcmp(pipe->command[i], "$?") == 0)
+			ft_printf("%d: command not found\n", mini->last_ret);
 		else if (pipe->args == pipe->var_c)
 			add_vars(pipe, mini);
 		else
