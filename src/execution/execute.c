@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/29 17:02:31 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:17:23 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,38 @@ void	execveloop(char **str, char **path)
 	exit(127);
 }
 
+int	comand_size(t_pipes	*pipes)
+{
+	int	command_count;
+
+	command_count = 0;
+	while (pipes)
+	{
+		pipes = pipes->next;
+		command_count++;
+	}
+	return (command_count);
+}
+
+int	is_text(t_pipes *pipe, t_envp *envp)
+{
+	if (ft_strcmp(pipe->command[0], "cd") == 0)
+		return (0);
+	else if (ft_strcmp(pipe->command[0], "echo") == 0)
+		return (0);
+	else if (ft_strcmp(pipe->command[0], "pwd") == 0)
+		return (1);
+	else if (ft_strcmp(pipe->command[0], "env") == 0)
+		return (1);
+	else if (ft_strcmp(pipe->command[0], "export") == 0)
+		return (0);
+	else if (ft_strcmp(pipe->command[0], "unset") == 0)
+		return (0);
+	return (1);
+	
+	
+}
+
 void	pipex(t_pipes *pipes, t_envp *envp)
 {
 	int		status;
@@ -73,6 +105,9 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 		return ;
 	path = get_pathsenv(envp);
 	envp = get_edge_node(pipes->mini->envp, 's');
-	execute_pipeline(pipes, envp);
+	if (comand_size(pipes) == 1 && is_text(pipes, envp) == 0)
+		building_execute(pipes->mini, pipes, envp);
+	else
+		execute_pipeline(pipes, envp);
 	free_matrix(path);
 }
