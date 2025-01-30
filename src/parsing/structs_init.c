@@ -56,7 +56,6 @@ void	start_structs(t_mini *mini)
 	}
 	else
 		mini->delimiters = NULL;
-	mini->last_ret = 0;
 }
 
 int	init_structs(t_mini *mini, int i, int position)

@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:38 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/17 22:43:11 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/30 20:23:30 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	load_envp(t_mini *mini, char **envp)
 	t_envp	*envp_p;
 
 	i = 0;
+	mini->last_ret = 0;
 	mini->envp = malloc(sizeof(t_envp));
 	if (!mini->envp)
 		return ;
