@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/29 18:24:58 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/30 20:29:40 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,9 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		add_history(rdline);
 		if (split_args(rdline, mini) == 0 && mini->arg_c > 0)
-		{
 			if (parsing(mini) == 0)
 				pipex(mini->pipes, mini->envp);
-			freeing(mini);
-		}
+		freeing(mini);
 		free(rdline);
 	}
 	end_mini(mini, rdline);
