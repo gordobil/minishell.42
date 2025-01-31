@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/31 11:08:53 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:39:02 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp)
 			ms_unset(pipe, envp, i);
 		else if (ft_strcmp(pipe->command[i], "$?") == 0 || pipe->args
 			== pipe->var_c)
-			return (building_utils(mini, pipe, i));
+			building_utils(mini, pipe, i);
+		return (-1);
 	}
 	return (0);
 }
@@ -51,14 +52,10 @@ void	execveloop(char **str, char **path, char **term)
 	while (path[count] != 0)
 	{
 		bin = ft_strcat(path[count], *str);
-		if (ft_strcmp(*str, "clear") == 0)
-			execve(bin, str, term);
-		execve(bin, str, 0);
+		execve(bin, str, term);
 		free (bin);
 		count++;
 	}
-	if (ft_strcmp(*str, "clear"))
-		execve(bin, str, term);
 	execve(*str, str, 0);
 	ft_printf("%s: command not found\n", *str);
 	exit(127);

@@ -73,6 +73,7 @@ typedef struct s_mini
 	char			**files;
 	int				del_c;
 	char			**delimiters;
+	char			**env_str;
 	int				comm_c;
 	t_pipes			*pipes;
 	t_envp			*envp;
