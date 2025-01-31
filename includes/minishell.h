@@ -116,6 +116,10 @@ char	*replace_vars(t_mini *mini, char *str);
 int		pipe_info(char **arg_matrix, t_mini *mini, int i, int j);
 int		is_it_a_var(char *str);
 
+//STRUCTS_UTILS
+void	dup_args_utils(t_mini **mini, int *j);
+void	mini_is_null(t_mini **mini, int *i);
+
 //STRUCTS_INIT
 int		init_structs(t_mini *mini, int i, int position);
 int		pipes_end(char **arg_matrix, int i, t_mini *mini);
@@ -138,13 +142,14 @@ int		count_files(t_mini *mini, int i, int k);
 //EXECUTE
 void	pipex(t_pipes *pipes, t_envp *envp);
 int		building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp);
-void	execveloop(char **str, char **path);
+void	execveloop(char **str, char **path, char **term);
 
 //PIPEX_MINI
 void	create_pipes_for_pipeline(int command_count, int **pipes);
 void	setup_redirections(int i, int **pipes, t_pipes *current,
 			int command_count);
-void	close_pipes_and_wait(int command_count, int **pipes, pid_t *pids, t_mini *mini);
+void	close_pipes_and_wait(int command_count, int **pipes,
+			pid_t *pids, t_mini *mini);
 void	execute_pipeline(t_pipes *pipeline, t_envp *env_list);
 
 //PIPEX_UTILS
@@ -160,6 +165,7 @@ int		ms_env(t_envp *envp, t_pipes *pipe, int i);
 void	ms_export(t_pipes *pipes, t_envp *envp);
 void	ms_unset(t_pipes *pipe, t_envp *envp, int i);
 t_envp	*unset_var(char *variable, t_envp *envp);
+int		building_utils(t_mini *mini, t_pipes *pipe, int i);
 
 /********************************* MAIN **********************************/
 //FREEING

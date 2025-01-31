@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:53:44 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/30 11:49:49 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/01/31 11:11:11 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ void	setup_redirections(int i, int **pipes, t_pipes *current,
 		dup2(pipes[i][1], STDOUT_FILENO);
 }
 
-void	close_pipes_and_wait(int command_count, int **pipes, pid_t *pids, t_mini *mini)
+void	close_pipes_and_wait(int command_count, int **pipes,
+	pid_t *pids, t_mini *mini)
 {
 	int	i;
-	int status;
+	int	status;
 
 	i = 0;
 	status = 0;

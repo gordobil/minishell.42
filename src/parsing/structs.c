@@ -67,10 +67,7 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 			&& mini->pipes->command)
 		{
 			mini->pipes->command[j] = rm_quotes(mini->arg_matrix[i], 0, 0);
-			if (ft_strcmp(mini->pipes->command[j], "") == 0)
-				free(mini->pipes->command[j]);
-			else
-				j++;
+			dup_args_utils(&mini, &j);
 		}
 		else if ((mini->arg_matrix[i][0] == '<'
 			|| mini->arg_matrix[i][0] == '>'))
@@ -105,10 +102,7 @@ int	plain_command(char **arg_matrix, t_mini *mini)
 		j++;
 	}
 	save_vars(mini->pipes, mini->pipes->var_c);
-	mini->pipes->command[i] = NULL;
-	mini->pipes->prev = NULL;
-	mini->pipes->next = NULL;
-	mini->files = NULL;
+	mini_is_null(&mini, &i);
 	if (ms_strcmp(arg_matrix[j - 1], "|") == 0)
 		return (error_messages(-9, NULL), -2);
 	return (0);

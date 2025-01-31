@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:00:37 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/29 14:52:40 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/31 11:10:28 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,28 @@ char	**get_pathsenv(t_envp *envp)
 
 void	execute_single_command(t_pipes *current, char **paths, t_envp *env_list)
 {
+	char	*temp;
+	char	**term;
+	t_envp	*env_temp;
+
+	env_temp = env_list;
+	while (env_temp->next)
+	{
+		if (ft_strcmp(env_temp->variable, "TERM") == 0
+			|| ft_strcmp(env_temp->variable, "USER") == 0)
+		{
+			temp = ft_strcat(temp, "\n");
+			temp = ft_strcat(temp, env_temp->variable);
+			temp = ft_strcat(temp, "=");
+			temp = ft_strcat(temp, env_temp->content);
+			temp = ft_strcat(temp, "\n");
+		}
+		env_temp = env_temp->next;
+	}
+	term = ft_split(temp, '\n');
 	if (building_execute(current->mini, current, env_list) == -1)
 	{
-		execveloop(current->command, paths);
+		execveloop(current->command, paths, term);
 	}
 	exit(EXIT_SUCCESS);
 }
