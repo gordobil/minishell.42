@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:00:37 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/31 18:30:35 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:05:50 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	execute_single_command(t_pipes *current, char **paths, t_envp *env_list)
 	{
 		execveloop(current->command, paths, current->mini->env_str);
 	}
+	free_matrix(paths);
 	exit(EXIT_SUCCESS);
 }
 

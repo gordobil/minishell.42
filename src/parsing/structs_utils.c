@@ -12,14 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-void	dup_args_utils(t_mini **mini, int *j)
-{
-	if (ft_strcmp((*mini)->pipes->command[*j], "") == 0)
-		free((*mini)->pipes->command[*j]);
-	else
-		j++;
-}
-
 void	mini_is_null(t_mini **mini, int *i)
 {
 	(*mini)->pipes->command[*i] = NULL;

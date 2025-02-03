@@ -118,7 +118,6 @@ int		pipe_info(char **arg_matrix, t_mini *mini, int i, int j);
 int		is_it_a_var(char *str);
 
 //STRUCTS_UTILS
-void	dup_args_utils(t_mini **mini, int *j);
 void	mini_is_null(t_mini **mini, int *i);
 
 //STRUCTS_INIT
@@ -151,7 +150,7 @@ void	setup_redirections(int i, int **pipes, t_pipes *current,
 			int command_count);
 void	close_pipes_and_wait(int command_count, int **pipes,
 			pid_t *pids, t_mini *mini);
-void	execute_pipeline(t_pipes *pipeline, t_envp *env_list);
+void	execute_pipeline(t_pipes *pipeline, t_envp *env_list, char **path);
 
 //PIPEX_UTILS
 char	**get_pathsenv(t_envp *envp);
