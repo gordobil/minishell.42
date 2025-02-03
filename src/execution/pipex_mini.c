@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_mini.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:53:44 by mafarto-          #+#    #+#             */
 /*   Updated: 2025/01/31 11:11:11 by mafarto-         ###   ########.fr       */

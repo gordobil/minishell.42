@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
 /*   Updated: 2025/02/03 10:52:11 by mafarto-         ###   ########.fr       */
@@ -12,15 +12,10 @@
 
 #include "../../includes/minishell.h"
 
-int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp)
+int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp, int i)
 {
-	int	i;
-
-	i = 0;
 	if (pipe != NULL && pipe->command != NULL && pipe->command[i] != NULL)
 	{
-		while (pipe->command[i] != NULL && is_it_a_var(pipe->command[i]) > 0)
-			i++;
 		if (ft_strcmp(pipe->command[i], "cd") == 0)
 			ms_cd(pipe, envp, i);
 		else if (ft_strcmp(pipe->command[i], "echo") == 0)
@@ -28,8 +23,12 @@ int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp)
 		else if (ft_strcmp(pipe->command[i], "pwd") == 0)
 			ms_pwd(envp, pipe);
 		else if (ft_strcmp(pipe->command[i], "env") == 0)
-			ms_env(envp, pipe, i);
-		else if (ft_strcmp(pipe->command[i], "export") == 0)
+			ms_env(envp, pipe, i, 0);
+		else if (ft_strcmp(pipe->command[i], "export") == 0
+			&& pipe->command[i + 1] == NULL)
+			ms_env(envp, pipe, i, 1);
+		else if (ft_strcmp(pipe->command[i], "export") == 0
+			&& pipe->command[i + 1] != NULL)
 			ms_export(pipe, envp);
 		else if (ft_strcmp(pipe->command[i], "unset") == 0)
 			ms_unset(pipe, envp, i);	
@@ -101,7 +100,7 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 	path = get_pathsenv(envp);
 	envp = get_edge_node(pipes->mini->envp, 's');
 	if (comand_size(pipes) == 1 && is_text(pipes, envp) == 0)
-		building_execute(pipes->mini, pipes, envp);
+		building_execute(pipes->mini, pipes, envp, var_jump(pipes->command));
 	else
 		execute_pipeline(pipes, envp);
 	free_matrix(path);

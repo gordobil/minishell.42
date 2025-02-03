@@ -32,9 +32,20 @@ char	**get_pathsenv(t_envp *envp)
 
 void	execute_single_command(t_pipes *current, char **paths, t_envp *env_list)
 {
-	if (building_execute(current->mini, current, env_list) == -1)
+	if (building_execute(current->mini, current, env_list,
+			var_jump(current->command)) == -1)
 	{
 		execveloop(current->command, paths, current->mini->env_str);
 	}
 	exit(EXIT_SUCCESS);
+}
+
+int	var_jump(char **command)
+{
+	int	i;
+
+	i = 0;
+	while (command[i] != NULL && is_it_a_var(command[i]) > 0)
+		i++;
+	return (i);
 }

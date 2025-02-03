@@ -48,6 +48,7 @@ void	load_envp(t_mini *mini, char **envp)
 	t_envp	*envp_p;
 
 	i = 0;
+	mini->last_ret = 0;
 	mini->envp = malloc(sizeof(t_envp));
 	if (!mini->envp)
 		return ;

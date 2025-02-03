@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:27:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/22 12:29:52 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/30 20:28:06 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	free_pipes(t_pipes *pipe)
 	{
 		if (pipe->command)
 			free_matrix(pipe->command);
-		if (pipe->vars != NULL)
+		if (pipe->vars)
 			free_matrix(pipe->vars);
 		pipe->var_c = 0;
 		pipe->args = 0;

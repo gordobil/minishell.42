@@ -50,11 +50,9 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		add_history(rdline);
 		if (split_args(rdline, mini) == 0 && mini->arg_c > 0)
-		{
 			if (parsing(mini) == 0)
 				pipex(mini->pipes, mini->envp);
-			freeing(mini);
-		}
+		freeing(mini);
 		free(rdline);
 	}
 	end_mini(mini, rdline);
@@ -62,7 +60,11 @@ int	main(int argc, char **argv, char **envp)
 }
 
 /******** FALTA ********/
-// redirecciones
+// export variable sin content
+// var=cont (???
+// LEAKS
+// norma
+// tilde (al lado de la ñ) y enter == segfault
 
 //valgrind --leak-check=yes ./minishell
 //valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
