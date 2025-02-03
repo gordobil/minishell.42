@@ -28,6 +28,7 @@ SOURCES				=	$(SRC_PATH)errors.c \
 						$(SRC_PATH)freeing.c \
 						$(SRC_PATH)minishell.c \
 						$(SRC_PATH)readline.c \
+						$(SRC_PATH).print_mini.c \
 						$(PRS_PATH)delimiters.c \
 						$(PRS_PATH)envp.c \
 						$(PRS_PATH)envp_arg_replace.c \
@@ -49,7 +50,6 @@ SOURCES				=	$(SRC_PATH)errors.c \
 						$(BI_PATH)ms_export.c \
 						$(BI_PATH)ms_pwd.c \
 						$(BI_PATH)ms_unset.c \
-						$(SRC_PATH)printttttttt.c \
 						
 
 OBJECTS				= 	$(SOURCES:%.c=%.o)
