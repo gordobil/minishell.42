@@ -150,7 +150,7 @@ void	setup_redirections(int i, int **pipes, t_pipes *current,
 			int command_count);
 void	close_pipes_and_wait(int command_count, int **pipes,
 			pid_t *pids, t_mini *mini);
-void	execute_pipeline(t_pipes *pipeline, t_envp *env_list);
+void	execute_pipeline(t_pipes *pipeline, t_envp *env_list, char **path);
 
 //PIPEX_UTILS
 char	**get_pathsenv(t_envp *envp);

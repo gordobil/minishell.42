@@ -37,6 +37,7 @@ void	execute_single_command(t_pipes *current, char **paths, t_envp *env_list)
 	{
 		execveloop(current->command, paths, current->mini->env_str);
 	}
+	free_matrix(paths);
 	exit(EXIT_SUCCESS);
 }
 

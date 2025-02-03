@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_mini.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:53:44 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/31 11:11:11 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:03:33 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	cheatriang_tool(int	***pipes, pid_t **pids,	t_pipes **current)
 	return (command_count);
 }
 
-void	execute_pipeline(t_pipes *pipeline, t_envp *env_list)
+void	execute_pipeline(t_pipes *pipeline, t_envp *env_list, char **path)
 {
 	int		command_count;
 	int		**pipes;
@@ -110,9 +110,10 @@ void	execute_pipeline(t_pipes *pipeline, t_envp *env_list)
 		{
 			setup_redirections(i, pipes, current, command_count);
 			close_pipes_and_wait(command_count, pipes, pids, pipeline->mini);
-			execute_single_command(current, get_pathsenv(env_list), env_list);
+			execute_single_command(current, path, env_list);
 		}
 		current = current->next;
 	}
+	free_matrix(path);
 	close_pipes_and_wait(command_count, pipes, pids, pipeline->mini);
 }

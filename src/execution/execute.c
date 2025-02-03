@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/03 14:05:27 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:03:17 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,5 @@ void	pipex(t_pipes *pipes, t_envp *envp)
 	if (!pipes->next && is_text(pipes, envp, var_jump(pipes->command)) == 0)
 		building_execute(pipes->mini, pipes, envp, var_jump(pipes->command));
 	else
-		execute_pipeline(pipes, envp);
-	free_matrix(path);
+		execute_pipeline(pipes, envp, path);
 }
