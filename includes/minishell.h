@@ -166,7 +166,6 @@ int		ms_env(t_envp *envp, t_pipes *pipe, int i);
 void	ms_export(t_pipes *pipes, t_envp *envp);
 void	ms_unset(t_pipes *pipe, t_envp *envp, int i);
 t_envp	*unset_var(char *variable, t_envp *envp);
-int		building_utils(t_mini *mini, t_pipes *pipe, int i);
 
 /********************************* MAIN **********************************/
 //FREEING

@@ -49,7 +49,6 @@ SOURCES				=	$(SRC_PATH)errors.c \
 						$(BI_PATH)ms_export.c \
 						$(BI_PATH)ms_pwd.c \
 						$(BI_PATH)ms_unset.c \
-						$(BI_PATH)building_utils.c \
 						$(SRC_PATH)printttttttt.c \
 						
 

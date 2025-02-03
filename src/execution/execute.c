@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/31 18:39:02 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:52:11 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp)
 		else if (ft_strcmp(pipe->command[i], "export") == 0)
 			ms_export(pipe, envp);
 		else if (ft_strcmp(pipe->command[i], "unset") == 0)
-			ms_unset(pipe, envp, i);
-		else if (ft_strcmp(pipe->command[i], "$?") == 0 || pipe->args
-			== pipe->var_c)
-			building_utils(mini, pipe, i);
+			ms_unset(pipe, envp, i);	
+		else if (pipe->args == pipe->var_c)
+			return (add_vars(pipe, mini), 0);
 		return (-1);
 	}
 	return (0);
