@@ -86,4 +86,5 @@ void	ms_export(t_pipes *pipes, t_envp *envp)
 		free(var);
 	}
 	pipes->mini->envp = envp;
+	printtt_envp(envp);
 }
