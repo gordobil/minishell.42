@@ -38,6 +38,7 @@ SOURCES				=	$(SRC_PATH)errors.c \
 						$(PRS_PATH)split_args.c \
 						$(PRS_PATH)split_args_utils.c \
 						$(PRS_PATH)structs.c \
+						$(PRS_PATH)structs_utils.c \
 						$(PRS_PATH)structs_init.c \
 						$(EXC_PATH)execute.c \
 						$(EXC_PATH)pipex_mini.c \

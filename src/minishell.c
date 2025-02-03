@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/30 22:04:23 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:44:46 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	end_mini(t_mini *mini, char *rdline)
 int	parsing(t_mini *mini)
 {
 	arg_vars(mini);
+	ft_printf("%m\n", mini->arg_matrix);
 	if (pipe_info(mini->arg_matrix, mini, 0, 0) == -2)
 		return (-1);
 	if (mini->del_c > 0)
@@ -59,7 +60,6 @@ int	main(int argc, char **argv, char **envp)
 }
 
 /******** FALTA ********/
-// actulizar structs padre
 // export variable sin content
 // var=cont (???
 // LEAKS

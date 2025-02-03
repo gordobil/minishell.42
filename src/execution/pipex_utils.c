@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:00:37 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/30 22:10:33 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:30:35 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	execute_single_command(t_pipes *current, char **paths, t_envp *env_list)
 	if (building_execute(current->mini, current, env_list,
 			var_jump(current->command)) == -1)
 	{
-		execveloop(current->command, paths);
+		execveloop(current->command, paths, current->mini->env_str);
 	}
 	exit(EXIT_SUCCESS);
 }
