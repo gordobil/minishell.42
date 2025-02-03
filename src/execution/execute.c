@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/01/30 21:52:15 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:52:11 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,15 @@ int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp, int i)
 			&& pipe->command[i + 1] != NULL)
 			ms_export(pipe, envp);
 		else if (ft_strcmp(pipe->command[i], "unset") == 0)
-			ms_unset(pipe, envp, i);
+			ms_unset(pipe, envp, i);	
 		else if (pipe->args == pipe->var_c)
-			add_vars(pipe, mini);
-		else
-			return (-1);
+			return (add_vars(pipe, mini), 0);
+		return (-1);
 	}
 	return (0);
 }
 
-void	execveloop(char **str, char **path)
+void	execveloop(char **str, char **path, char **term)
 {
 	char	*bin;
 	int		count;
@@ -51,13 +50,11 @@ void	execveloop(char **str, char **path)
 	while (path[count] != 0)
 	{
 		bin = ft_strcat(path[count], *str);
-		execve(bin, str, 0);
+		execve(bin, str, term);
 		free (bin);
 		count++;
 	}
-	bin = ft_strcat("./", *str);
-	execve(bin, str, 0);
-	free (bin);
+	execve(*str, str, 0);
 	ft_printf("%s: command not found\n", *str);
 	exit(127);
 }

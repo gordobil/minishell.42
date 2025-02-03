@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:38 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/30 20:23:30 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:36:24 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	load_envp(t_mini *mini, char **envp)
 	if (!mini->envp)
 		return ;
 	envp_p = mini->envp;
+	mini->env_str = envp;
 	while (envp[i] != NULL)
 	{
 		envp_p->position = i;
