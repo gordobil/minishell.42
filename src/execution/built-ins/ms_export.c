@@ -59,15 +59,26 @@ char	*get_var(char *arg)
 	return (var);
 }
 
-void	ms_export(t_pipes *pipes, t_envp *envp)
+t_envp	*no_content_var(t_envp *envp, char *var)
+{
+	envp = get_edge_node(envp, 'e');
+	envp->next = malloc(sizeof(t_envp));
+	envp->next->prev = envp;
+	envp->next->next = NULL;
+	envp->next->variable = ft_strdup(var);
+	envp->next->content = NULL;
+	envp->next->position = envp->position + 1;
+	envp->next->exported = 1;
+	envp = get_edge_node(envp, 's');
+	return (envp);
+}
+
+void	ms_export(t_pipes *pipes, t_envp *envp, int i)
 {
 	t_envp	*first;
 	t_envp	*last;
 	char	*var;
-	int		i;
 
-	add_vars(pipes, pipes->mini);
-	i = 0;
 	while (pipes->command[++i] != NULL)
 	{
 		var = get_var(pipes->command[i]);
@@ -83,6 +94,8 @@ void	ms_export(t_pipes *pipes, t_envp *envp)
 			}
 			first->exported = 1;
 		}
+		else
+			envp = no_content_var(envp, var);
 		free(var);
 	}
 	pipes->mini->envp = envp;

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
 /*   Updated: 2025/02/03 13:03:17 by mafarto-         ###   ########.fr       */
@@ -29,11 +29,9 @@ int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp, int i)
 			ms_env(envp, pipe, i, 1);
 		else if (ft_strcmp(pipe->command[i], "export") == 0
 			&& pipe->command[i + 1] != NULL)
-			ms_export(pipe, envp);
+			ms_export(pipe, envp, 0);
 		else if (ft_strcmp(pipe->command[i], "unset") == 0)
-			ms_unset(pipe, envp, i);	
-		else if (pipe->args == pipe->var_c)
-			return (add_vars(pipe, mini), 0);
+			ms_unset(pipe, envp, i);
 		return (-1);
 	}
 	return (0);
@@ -64,7 +62,7 @@ int	comand_size(t_pipes	*pipes)
 	int	command_count;
 
 	command_count = 0;
-	while(pipes->prev != NULL)
+	while (pipes->prev != NULL)
 		pipes = pipes->prev;
 	while (pipes)
 	{

@@ -69,8 +69,8 @@ int	dup_args(int k, t_mini *mini, int i, int arguments)
 			mini->pipes->command[j] = rm_quotes(mini->arg_matrix[i], 0, 0);
 			if (ft_strcmp(mini->pipes->command[j], "") == 0)
 				free(mini->pipes->command[j]);
-	else
-		j++;
+			else
+				j++;
 		}
 		if ((mini->arg_matrix[i][0] == '<' || mini->arg_matrix[i][0] == '>')
 			&& file_count(mini->arg_matrix, i, 'r') < 0)
