@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/03 10:44:46 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:34:06 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	end_mini(t_mini *mini, char *rdline)
 int	parsing(t_mini *mini)
 {
 	arg_vars(mini);
-	ft_printf("%m\n", mini->arg_matrix);
 	if (pipe_info(mini->arg_matrix, mini, 0, 0) == -2)
 		return (-1);
 	if (mini->del_c > 0)
@@ -64,7 +63,6 @@ int	main(int argc, char **argv, char **envp)
 // var=cont (???
 // LEAKS
 // norma
-// tilde (al lado de la ñ) y enter == segfault
 
 //valgrind --leak-check=yes ./minishell
 //valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell

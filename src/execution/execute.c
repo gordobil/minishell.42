@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/03 10:52:11 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:34:33 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp, int i)
 {
+	ft_printf("i:%d\n", i);
 	if (pipe != NULL && pipe->command != NULL && pipe->command[i] != NULL)
 	{
 		if (ft_strcmp(pipe->command[i], "cd") == 0)
