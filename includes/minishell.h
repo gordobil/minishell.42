@@ -118,7 +118,6 @@ int		pipe_info(char **arg_matrix, t_mini *mini, int i, int j);
 int		is_it_a_var(char *str);
 
 //STRUCTS_UTILS
-void	dup_args_utils(t_mini **mini, int *j);
 void	mini_is_null(t_mini **mini, int *i);
 
 //STRUCTS_INIT
@@ -164,7 +163,7 @@ int		ms_cd(t_pipes *pipe, t_envp *envp, int i);
 void	ms_echo(t_pipes *pipe, int i);
 void	ms_pwd(t_envp *envp, t_pipes *pipe);
 int		ms_env(t_envp *envp, t_pipes *pipe, int i, int print_export);
-void	ms_export(t_pipes *pipes, t_envp *envp);
+void	ms_export(t_pipes *pipes, t_envp *envp, int i);
 void	ms_unset(t_pipes *pipe, t_envp *envp, int i);
 t_envp	*unset_var(char *variable, t_envp *envp);
 

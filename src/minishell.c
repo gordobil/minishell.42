@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/03 12:34:06 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:43:50 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	parsing(t_mini *mini)
 		delimiters(mini);
 	if (open_fds(mini) != 0)
 		return (-2);
+	if (mini->pipes->next == NULL && mini->pipes->prev == NULL)
+		add_vars(mini->pipes, mini);
 	return (0);
 }
 
@@ -60,7 +62,6 @@ int	main(int argc, char **argv, char **envp)
 
 /******** FALTA ********/
 // export variable sin content
-// var=cont (???
 // LEAKS
 // norma
 
