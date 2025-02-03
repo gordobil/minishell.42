@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   structs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.com   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 13:07:06 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/01/09 13:56:59 by ngordobi         ###   ########.fr       */
+/*   Created: 2024/10/28 11:58:39 by ngordobi          #+#    #+#             */
+/*   Updated: 2024/10/28 11:58:39 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../../includes/minishell.h"
 
-int	ft_strlen(const char *s)
+void	mini_is_null(t_mini **mini, int *i)
 {
-	int	i;
-
-	if (s == NULL || !s)
-		return (0);
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	(*mini)->pipes->command[*i] = NULL;
+	(*mini)->pipes->prev = NULL;
+	(*mini)->pipes->next = NULL;
+	(*mini)->files = NULL;
 }

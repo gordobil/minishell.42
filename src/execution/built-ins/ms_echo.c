@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-void	ms_echo(t_pipes *pipe)
+void	ms_echo(t_pipes *pipe, int i)
 {
-	int	i;
 	int	flag;
 
-	i = 1;
+	i++;
 	flag = 0;
 	if (pipe->command[i] != NULL)
 	{
@@ -29,7 +28,7 @@ void	ms_echo(t_pipes *pipe)
 		while (pipe->command[i] != NULL)
 		{
 			ft_printf("%s", pipe->command[i]);
-			if (pipe->command[i + 1] != NULL)
+			if (pipe->command[i + 1] != NULL && pipe->command[i][0] != '\0')
 				ft_printf(" ");
 			i++;
 		}
