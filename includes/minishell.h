@@ -152,12 +152,11 @@ void	setup_redirections(int i, int **pipes, t_pipes *current,
 			int command_count);
 void	close_pipes_and_wait(int command_count, int **pipes,
 			pid_t *pids, t_mini *mini);
-void	execute_pipeline(t_pipes *pipeline, t_envp *env_list, char **path);
+void	execute_pipeline(t_pipes *pipeline, t_envp *env_list);
 
 //PIPEX_UTILS
 char	**get_pathsenv(t_envp *envp);
-void	execute_single_command(t_pipes *current, char **paths,
-			t_envp *env_list);
+void	execute_single_command(t_pipes *current, t_envp *env_list);
 int		var_jump(char **command);
 
 //BUILT-INS
