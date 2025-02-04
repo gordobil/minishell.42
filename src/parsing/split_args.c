@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/29 15:44:35 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:18:51 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 int	arg_jump(char *s, int i, char q)
 {
 	if (s[i] == '|')
-		while (s[i] == '|' || s[i] == ' ' || s[i] == '	')
-			i++;
+		i = jump_pipe(s, i);
 	else
 	{
 		if (s[i] == '<' || s[i] == '>')
 			i = file_found(s, i);
+		if (i < 0)
+			return (i);
 		while (s[i] != '\0' && ((q == '"' || q == '\'') || (s[i] != ' '
 					&& s[i] != '|' && s[i] != '<' && s[i] != '>'
-					&& s[i] != '\t')))
+					&& s[i] != '\t' && s[i] != ';' && s[i] != '\\')))
 		{
 			if (q == '0' && (s[i] == '"' || s[i] == '\''))
 				q = s[i];
@@ -43,7 +44,7 @@ int	arg_size(char *s, int i, char mark)
 {
 	int		start;
 
-	i = jump_spaces(s, i);
+	i = jump_separators(s, i);
 	if (mark == 's')
 		return (i);
 	start = i;
@@ -63,7 +64,7 @@ int	arg_count(char *s)
 	if (s[0] == '\n' || s[0] == '\0')
 		return (0);
 	count = 0;
-	i = jump_spaces(s, 0);
+	i = jump_separators(s, 0);
 	while (s[i] != '\0')
 	{
 		start = i;
@@ -71,7 +72,7 @@ int	arg_count(char *s)
 		i = arg_jump(s, i, '0');
 		if (i < 0)
 			return (i);
-		i = jump_spaces(s, i);
+		i = jump_separators(s, i);
 	}
 	return (count);
 }

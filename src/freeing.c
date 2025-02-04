@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freeing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 12:27:59 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/30 20:28:06 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:23:13 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,10 @@ void	free_pipes(t_pipes *pipe)
 void	freeing(t_mini *mini)
 {
 	namefiles(1);
-	free_pipes(mini->pipes);
-	free_matrix(mini->arg_matrix);
+	if (mini->pipes)
+		free_pipes(mini->pipes);
+	if (mini->arg_matrix)
+		free_matrix(mini->arg_matrix);
 	mini->arg_c = 0;
 	mini->comm_c = 0;
 	if (mini->files != NULL)
