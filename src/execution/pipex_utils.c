@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:00:37 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/03 13:21:39 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:32:56 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,38 @@ char	**get_pathsenv(t_envp *envp)
 	char	**paths;
 	int		count;
 
-	paths = NULL;
 	while (envp && strcmp(envp->variable, "PATH") != 0)
 		envp = envp->next;
 	if (envp && envp->content)
 	{
 		paths = ft_split(envp->content, ':');
+		if (!paths)
+			return (NULL);
 		count = -1;
 		while (paths[++count] != NULL)
+		{
 			paths[count] = ft_strjoin(paths[count], "/");
+			if (!paths[count])
+				return (free_matrix(paths), NULL);
+		}
 	}
+	else
+		return (NULL);
 	return (paths);
 }
 
-void	execute_single_command(t_pipes *current, char **paths, t_envp *env_list)
+void	execute_single_command(t_pipes *current, t_envp *env_list)
 {
-	if (building_execute(current->mini, current, env_list,
+	char	**paths;
+
+	paths = get_pathsenv(env_list);
+	if (paths && building_execute(current->mini, current, env_list,
 			var_jump(current->command)) == -1)
 	{
 		execveloop(current->command, paths, current->mini->env_str);
 	}
-	free_matrix(paths);
+	if (paths)
+		free_matrix(paths);
 	exit(EXIT_SUCCESS);
 }
 
