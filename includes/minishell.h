@@ -86,6 +86,8 @@ int		split_args(char *str, t_mini *mini);
 int		arg_jump(char *s, int i, char q);
 
 //SPLIT_ARGS_UTILS
+int		jump_pipe(char *s, int i);
+int		found_unexpected_token(char c);
 int		jump_spaces(char *s, int i);
 int		empty_quotes(char *arg);
 int		file_found(char *s, int i);
