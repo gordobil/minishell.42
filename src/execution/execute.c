@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/03 13:03:17 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:38:49 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	execveloop(char **str, char **path, char **term)
 		free (bin);
 		count++;
 	}
+	free_matrix(path);
 	execve(*str, str, 0);
 	ft_printf("%s: command not found\n", *str);
 	exit(127);
@@ -93,15 +94,13 @@ int	is_text(t_pipes *pipe, t_envp *envp, int i)
 void	pipex(t_pipes *pipes, t_envp *envp)
 {
 	int		status;
-	int		id;
 	char	**path;
 
 	if (!pipes || !pipes->command || !pipes->command[0] || envp == NULL)
 		return ;
-	path = get_pathsenv(envp);
 	envp = get_edge_node(pipes->mini->envp, 's');
 	if (!pipes->next && is_text(pipes, envp, var_jump(pipes->command)) == 0)
 		building_execute(pipes->mini, pipes, envp, var_jump(pipes->command));
 	else
-		execute_pipeline(pipes, envp, path);
+		execute_pipeline(pipes, envp);
 }
