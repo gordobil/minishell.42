@@ -101,8 +101,10 @@ void	free_pipes(t_pipes *pipe)
 void	freeing(t_mini *mini)
 {
 	namefiles(1);
-	free_pipes(mini->pipes);
-	free_matrix(mini->arg_matrix);
+	if (mini->pipes)
+		free_pipes(mini->pipes);
+	if (mini->arg_matrix)
+		free_matrix(mini->arg_matrix);
 	mini->arg_c = 0;
 	mini->comm_c = 0;
 	if (mini->files != NULL)
