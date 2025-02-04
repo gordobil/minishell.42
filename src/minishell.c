@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/04 12:50:40 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:43:33 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	main(int argc, char **argv, char **envp)
 		if (split_args(rdline, mini) == 0 && mini->arg_c > 0)
 			if (parsing(mini) == 0)
 				pipex(mini->pipes, mini->envp);
-		freeing(mini);
+		if (mini->arg_c > 0)
+			freeing(mini);
 		free(rdline);
 	}
 	end_mini(mini, rdline);

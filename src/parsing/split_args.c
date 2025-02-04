@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:01:05 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/04 13:18:51 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:13:44 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	arg_jump(char *s, int i, char q)
 				q = '0';
 			i++;
 		}
-		if (q == '\'')
-			return (-1);
-		else if (q == '"')
-			return (-2);
+		if (q == '\'' || q == '"')
+			return (found_unexpected_token(q));
+		else if (s[i] == ';' || s[i] == '\\')
+			return (found_unexpected_token(s[i]));
 	}
 	return (i);
 }
@@ -44,7 +44,9 @@ int	arg_size(char *s, int i, char mark)
 {
 	int		start;
 
-	i = jump_separators(s, i);
+	i = jump_spaces(s, i);
+	if (s[i] == ';' || s[i] == '\\')
+		return (found_unexpected_token(s[i]));
 	if (mark == 's')
 		return (i);
 	start = i;
@@ -64,7 +66,9 @@ int	arg_count(char *s)
 	if (s[0] == '\n' || s[0] == '\0')
 		return (0);
 	count = 0;
-	i = jump_separators(s, 0);
+	i = jump_spaces(s, 0);
+	if (s[i] == '|' || s[i] == ';' || s[i] == '\\')
+		return (found_unexpected_token(s[i]));
 	while (s[i] != '\0')
 	{
 		start = i;
@@ -72,7 +76,9 @@ int	arg_count(char *s)
 		i = arg_jump(s, i, '0');
 		if (i < 0)
 			return (i);
-		i = jump_separators(s, i);
+		i = jump_spaces(s, i);
+		if (s[i] == ';' || s[i] == '\\')
+			return (found_unexpected_token(s[i]));
 	}
 	return (count);
 }
@@ -114,5 +120,5 @@ int	split_args(char *s, t_mini *mini)
 		j = arg_size(s, j, 'e');
 	}
 	mini->arg_matrix[i] = NULL;
-	return (error_messages(-7, mini->arg_matrix[0]));
+	return (0);
 }
