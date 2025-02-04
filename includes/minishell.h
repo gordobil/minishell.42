@@ -176,7 +176,8 @@ void	free_envp(t_envp *envp);
 int		error_messages(int error, char *str);
 
 //UTILS
-void	printttttttt(t_mini	*mini);
-void	printtt_envp(t_envp *envp);
+void	ms_print_mini(t_mini *mini, int enviroment);
+void	ms_print_pipes(t_pipes *command);
+void	ms_print_envp(t_envp *envp);
 
 #endif

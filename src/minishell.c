@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/03 13:40:54 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:14:22 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,6 @@ int	main(int argc, char **argv, char **envp)
 	end_mini(mini, rdline);
 	return (0);
 }
-
-/******** FALTA ********/
-// export variable sin content
-// LEAKS
-// norma
 
 //valgrind --leak-check=yes ./minishell
 //valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
