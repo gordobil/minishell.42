@@ -17,9 +17,12 @@ int	is_it_a_var(char *str)
 	int	i;
 	int	v;
 
-	if (str[0] == '<' || str[0] == '>' || str[0] == '"' || str[0] == '\''
-		|| str[0] == '=' || (str[0] >= '0' && str[0] <= '9'))
-		return (0);
+	i = 0;
+	while (str[i] == '=' && str[i] != '\0')
+		i++;
+	if ((((str[0] < 'a' || str[0] > 'z') && (str[0] < 'A'
+		|| str[0] > 'Z')) && str[0] != '_') || str[i] == '\0')
+		return (-1);
 	i = 0;
 	v = 0;
 	while (str[i] != '\0')

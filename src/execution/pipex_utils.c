@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:00:37 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/04 13:32:56 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:08:06 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,28 @@ int	var_jump(char **command)
 	while (command[i] != NULL && is_it_a_var(command[i]) > 0)
 		i++;
 	return (i);
+}
+
+int	check_vars(char **command, int i, t_mini *mini)
+{
+	t_pipes	*pipes;
+	int		j;
+
+	pipes = mini->pipes;
+	while (command[++i] != NULL)
+	{
+		if (is_it_a_var(command[i]) < 0)
+		{
+			while (pipes != NULL)
+			{
+				j = -1;
+				if (pipes->vars != NULL)
+					while (pipes->vars[++j] != NULL)
+						unset_var(get_var(pipes->vars[j]), mini->envp);
+				pipes = pipes->next;
+			}
+			return (error_messages(-15, command[i]), -1);
+		}
+	}
+	return (0);
 }

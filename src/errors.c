@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:06:42 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/04 14:15:08 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:03:37 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	error_messages(int error, char *str)
 		ft_printf("error: no enviroment variables\n");
 	else if (error == -9)
 		ft_printf("error: unclosed pipe\n");
+	else if (error == -15)
+		ft_printf("export: `%s': not a valid identifier\n", str);
 	else
 		return (error_unexpected_token(error, str));
 	return (error);
