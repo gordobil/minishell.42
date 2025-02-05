@@ -24,7 +24,7 @@ int	found_unexpected_token(char c)
 		return (-9);
 	else if (c == ';')
 		return (-10);
-	else if (c == '"')
+	else if (c == '\\')
 		return (-11);
 	else if (c == '<')
 		return (-13);
