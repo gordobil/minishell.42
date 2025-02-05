@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:18:44 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/04 12:18:59 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:33:33 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,15 @@ char	*compare_var(char *str, t_envp *envp, int i, char *comp)
 	k = 0;
 	while (envp->variable[k] == str[j] && envp->variable[k] != '\0'
 		&& ((str[j] >= 'a' && str[j] <= 'z')
-		|| (str[j] >= 'A' && str[j] <= 'Z')
-		|| (str[j] >= '0' && str[j] <= '9') || str[j] == '_'))
+			|| (str[j] >= 'A' && str[j] <= 'Z')
+			|| (str[j] >= '0' && str[j] <= '9') || str[j] == '_'))
 	{
 		k++;
 		j++;
 	}
 	if (envp->variable[k] == '\0' && ((str[j] < 'a' || str[j] > 'z')
-		&& (str[j] < 'A' || str[j] > 'Z') && (str[j] < '0' || str[j] > '9')
-		&& str[j] != '_'))
+			&& (str[j] < 'A' || str[j] > 'Z') && (str[j] < '0' || str[j] > '9')
+			&& str[j] != '_'))
 		str = found_var(envp->content, str, i, j);
 	if (envp->next == NULL && ft_strcmp(str, comp) == 0)
 		str = var_404(str, i, comp);

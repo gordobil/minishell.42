@@ -21,7 +21,7 @@ int	is_it_a_var(char *str)
 	while (str[i] == '=' && str[i] != '\0')
 		i++;
 	if ((((str[0] < 'a' || str[0] > 'z') && (str[0] < 'A'
-		|| str[0] > 'Z')) && str[0] != '_') || str[i] == '\0')
+					|| str[0] > 'Z')) && str[0] != '_') || str[i] == '\0')
 		return (-1);
 	i = 0;
 	v = 0;

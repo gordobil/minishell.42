@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:06:42 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/05 14:03:37 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:33:59 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	error_unexpected_token(int error, char *str)
 {
-	if (error == -7  || error == -12)
+	if (error == -7 || error == -12)
 		ft_printf("error: syntax error near unexpected token `|'\n");
 	else if (error == -10)
 		ft_printf("error: syntax error near unexpected token `;'\n");
