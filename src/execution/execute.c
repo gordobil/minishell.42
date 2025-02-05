@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/04 13:38:49 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:00:01 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,16 @@ void	execveloop(char **str, char **path, char **term)
 	while (path[count] != 0)
 	{
 		bin = ft_strcat(path[count], *str);
-		execve(bin, str, 0);
-		free (bin);
+		if (bin)
+		{
+			execve(bin, str, 0);
+			free (bin);
+		}
 		count++;
 	}
-	free_matrix(path);
 	execve(*str, str, 0);
 	ft_printf("%s: command not found\n", *str);
+	free_matrix(path);
 	exit(127);
 }
 
@@ -94,7 +97,6 @@ int	is_text(t_pipes *pipe, t_envp *envp, int i)
 void	pipex(t_pipes *pipes, t_envp *envp)
 {
 	int		status;
-	char	**path;
 
 	if (!pipes || !pipes->command || !pipes->command[0] || envp == NULL)
 		return ;
