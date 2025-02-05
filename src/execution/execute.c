@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/05 14:57:32 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:44:55 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	execveloop(char **str, char **path, char **term)
 		free (bin);
 		count++;
 	}
-	free_matrix(path);
+	if (path)
+		free_matrix(path);
 	execve(*str, str, 0);
 	ft_printf("%s: command not found\n", *str);
 	exit(127);
