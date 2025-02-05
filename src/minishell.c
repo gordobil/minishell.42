@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/04 13:43:33 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:14:14 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
-//valgrind --leak-check=yes ./minishell
-//valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
+/*
+valgrind --leak-check=yes ./minishell
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
+*/
