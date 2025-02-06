@@ -12,13 +12,15 @@
 
 #include "../includes/minishell.h"
 
-void	rdl_signals(int sig)
+static int	g_signals;
+
+void	rdl_new_line(int sig)
 {
 	(void)sig;
 	ft_printf("\n");
 	rl_replace_line("", 0);
+	rl_on_new_line();
 	rl_redisplay();
-	ft_printf("%s", mini_title());
 }
 
 char	*mini_title(void)
@@ -38,7 +40,7 @@ char	*rdl_management(void)
 	char	*title;
 	char	*line;
 
-	signal(SIGINT, rdl_signals);
+	signal(SIGINT, rdl_new_line);
 	signal(SIGQUIT, SIG_IGN);
 	title = mini_title();
 	line = readline(title);
