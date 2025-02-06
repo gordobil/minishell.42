@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/04 13:38:49 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:44:55 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp, int i)
 			&& pipe->command[i + 1] == NULL)
 			ms_env(envp, pipe, i, 1);
 		else if (ft_strcmp(pipe->command[i], "export") == 0
-			&& pipe->command[i + 1] != NULL)
-			ms_export(pipe, envp, 0);
+			&& pipe->command[i + 1] != NULL
+			&& check_vars(pipe->command, i, mini) == 0)
+			ms_export(pipe, envp, i);
 		else if (ft_strcmp(pipe->command[i], "unset") == 0)
 			ms_unset(pipe, envp, i);
 		return (-1);
@@ -52,7 +53,8 @@ void	execveloop(char **str, char **path, char **term)
 		free (bin);
 		count++;
 	}
-	free_matrix(path);
+	if (path)
+		free_matrix(path);
 	execve(*str, str, 0);
 	ft_printf("%s: command not found\n", *str);
 	exit(127);
