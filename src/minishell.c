@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/05 11:25:30 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:15:24 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	main(int argc, char **argv, char **envp)
 	end_mini(mini, rdline);
 	return (0);
 }
+
+// METER PIDS EN ESTRUCTURA PIPES
 
 /*
 valgrind --leak-check=yes ./minishell
