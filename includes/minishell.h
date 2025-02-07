@@ -131,7 +131,7 @@ int		init_structs(t_mini *mini, int i, int position);
 int		pipes_end(char **arg_matrix, int i, t_mini *mini);
 
 //DELIMITERS
-void	delimiters(t_mini *mini);
+int		delimiters(t_mini *mini, t_pipes *command);
 char	*namefiles(int del);
 
 //FILES

@@ -88,7 +88,7 @@ int	del_cmp(char *delimiter, char *line)
 	return (-1);
 }
 
-void	write_line(t_mini *mini, int fd, int i)
+int	write_line(t_mini *mini, int fd, int i)
 {
 	char	*line;
 
@@ -98,35 +98,43 @@ void	write_line(t_mini *mini, int fd, int i)
 		if (!line)
 		{
 			error_messages(-16, rm_arrows(mini->delimiters[i]));
-			break ;
+			return (-1);
 		}
 		if (del_cmp(mini->delimiters[i], line) == 0)
-			break ;
+			return (1);
 		line = replace_vars(mini, line, 0);
 		write (fd, line, ft_strlen(line));
 		write (fd, "\n", 1);
 		free (line);
 	}
+	return (0);
 }
 
-void	delimiters(t_mini *mini)
+int	delimiters(t_mini *mini, t_pipes *command)
 {
 	char	*namefile;
-	t_pipes	*command;
 	int		fd;
 	int		i;
+	int		rdl_ret;
 
-	command = mini->pipes;
 	i = -1;
+	rdl_ret = 0;
 	while (mini->delimiters[++i] != NULL)
 	{
 		if (command == NULL)
 			break ;
 		namefile = namefiles(0);
 		fd = open(namefile, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
-		write_line(mini, fd, i);
-		command = save_files(command, namefile, fd, i);
-		close(fd);
+		if (fd)
+		{
+			rdl_ret = write_line(mini, fd, i);
+			if (rdl_ret == 1)
+				command = save_files(command, namefile, fd, i);
+			close(fd);
+		}
 		free(namefile);
+		if (rdl_ret == -1)
+			return (-1);
 	}
+	return (0);
 }

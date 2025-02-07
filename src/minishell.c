@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/07 18:12:04 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/07 21:35:28 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int	parsing(t_mini *mini)
 	if (pipe_info(mini->arg_matrix, mini, 0, 0) == -2)
 		return (-1);
 	if (mini->del_c > 0)
-		delimiters(mini);
+		if (delimiters(mini, mini->pipes) < 0)
+			return(-2);
 	if (open_fds(mini) != 0)
-		return (-2);
+		return (-3);
 	if (mini->pipes->next == NULL && mini->pipes->prev == NULL)
 		add_vars(mini->pipes, mini);
 	return (0);
@@ -74,3 +75,26 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (end_mini(mini, rdline), 0);
 }
+
+/*		PROBLEMA CON LOS DELIMITERS:
+
+
+minishell: /path/minishell
+ ¬ <<delimiter
+> 1
+> 2
+> 3
+> 4
+> ^C
+minishell: /path/minishell
+ ¬ ls
+> 1
+> 2
+> 3
+> 4
+> delimiter
+minishell: /path/minishell
+ ¬ ls
+includes  libft  libft.a  Makefile  minishell  pdfs  src
+
+*/
