@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_mini.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:53:44 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/07 11:05:07 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:44:24 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	setup_redirections(int i, int **pipes, t_pipes *current,
 		dup2(pipes[i][1], STDOUT_FILENO);
 }
 
-void	close_pipes_and_wait(int command_count, int **pipes,
-	pid_t *pids, t_mini *mini)
+void	close_pipes_and_wait(int command_count, int **pipes, t_mini *mini)
 {
-	int	i;
-	int	status;
+	int		i;
+	int		status;
+	t_pipes	*current;
 
 	i = 0;
 	status = 0;
@@ -62,18 +62,16 @@ void	close_pipes_and_wait(int command_count, int **pipes,
 		i++;
 	}
 	free(pipes);
-	i = 0;
-	while (i < command_count)
+	current = mini->pipes;
+	while (current != NULL)
 	{
-		waitpid(pids[i], &status, 0);
-		i++;
+		waitpid(current->pids, &status, 0);
+		current = current->next;
 	}
 	mini->last_ret = status >> 8;
-	if (pids)
-		free(pids);
 }
 
-int	cheatriang_tool(int	***pipes, pid_t **pids,	t_pipes **current)
+int	cheatriang_tool(int	***pipes, t_pipes **current)
 {
 	int	command_count;
 
@@ -84,7 +82,6 @@ int	cheatriang_tool(int	***pipes, pid_t **pids,	t_pipes **current)
 		command_count++;
 	}
 	*pipes = malloc(sizeof(int *) * (command_count - 1));
-	*pids = malloc(sizeof(pid_t) * command_count);
 	create_pipes_for_pipeline(command_count, *pipes);
 	return (command_count);
 }
@@ -93,27 +90,27 @@ void	execute_pipeline(t_pipes *pipeline, t_envp *env_list)
 {
 	int		command_count;
 	int		**pipes;
-	pid_t	*pids;
-	t_pipes	*current;
+	t_pipes	*curr;
 	int		i;
 
 	command_count = -1;
-	current = pipeline;
-	command_count = cheatriang_tool(&pipes, &pids, &current);
-	current = pipeline;
+	curr = pipeline;
+	command_count = cheatriang_tool(&pipes, &curr);
+	curr = pipeline;
+	children_signals(curr->mini);
 	i = -1;
-	while (i++ >= -1 && current)
+	while (i++ >= -1 && curr)
 	{
-		pids[i] = fork();
-		if (pids[i] == -1)
+		curr->pids = fork();
+		if (curr->pids == -1)
 			return (perror("Error forking process"), exit(EXIT_FAILURE));
-		if (pids[i] == 0)
+		if (curr->pids == 0)
 		{
-			setup_redirections(i, pipes, current, command_count);
-			close_pipes_and_wait(command_count, pipes, pids, pipeline->mini);
-			execute_single_command(current, env_list);
+			setup_redirections(i, pipes, curr, command_count);
+			close_pipes_and_wait(command_count, pipes, pipeline->mini);
+			execute_single_command(curr, env_list);
 		}
-		current = current->next;
+		curr = curr->next;
 	}
-	close_pipes_and_wait(command_count, pipes, pids, pipeline->mini);
+	close_pipes_and_wait(command_count, pipes, pipeline->mini);
 }

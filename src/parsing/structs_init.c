@@ -68,7 +68,7 @@ int	init_structs(t_mini *mini, int i, int position)
 		mini->pipes->mini = mini;
 		mini->pipes->position = position;
 		mini->pipes->command = NULL;
-		mini->pipes->pid = -1;
+		mini->pipes->pids = -1;
 		mini->pipes->args = 0;
 		mini->pipes->var_c = 0;
 		mini->pipes->vars = NULL;

@@ -52,7 +52,7 @@ typedef struct s_files
 typedef struct s_pipes
 {
 	char			**command;
-	int				pid;
+	pid_t			pids;
 	int				args;
 	int				position;
 	int				var_c;
@@ -103,8 +103,9 @@ char	*rm_quotes(char *arg, int i, int j);
 
 //RDL
 char	*rdl_management(void);
-void	rdl_signals(int sig);
+void	rdl_new_line(int signal);
 char	*mini_title(void);
+void	*children_signals(t_mini *mini);
 
 //ENVP
 void	load_envp(t_mini *mini, char **envp);
@@ -151,8 +152,7 @@ void	execveloop(char **str, char **path, char **term);
 void	create_pipes_for_pipeline(int command_count, int **pipes);
 void	setup_redirections(int i, int **pipes, t_pipes *current,
 			int command_count);
-void	close_pipes_and_wait(int command_count, int **pipes,
-			pid_t *pids, t_mini *mini);
+void	close_pipes_and_wait(int command_count, int **pipes, t_mini *mini);
 void	execute_pipeline(t_pipes *pipeline, t_envp *env_list);
 
 //PIPEX_UTILS

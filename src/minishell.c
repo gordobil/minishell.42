@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/07 11:15:24 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:02:06 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	parsing(t_mini *mini)
 		add_vars(mini->pipes, mini);
 	return (0);
 }
+
+
 
 int	main(int argc, char **argv, char **envp)
 {

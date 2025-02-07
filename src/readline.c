@@ -19,8 +19,8 @@ void	rdl_new_line(int signal)
 	(void)signal;
 	ft_printf("\n");
 	rl_replace_line("", 0);
-	rl_on_new_line();
 	rl_redisplay();
+	ft_printf("%s", mini_title());
 }
 
 char	*mini_title(void)
@@ -48,7 +48,7 @@ char	*rdl_management(void)
 	return (line);
 }
 
-void	kill_children(int signal)
+void	update_children_signals(int signal)
 {
 	if (signal == SIGINT || signal == SIGQUIT)
 		ft_printf("\n");
@@ -60,22 +60,6 @@ void	*children_signals(t_mini *mini)
 	t_pipes	*pipe;
 
 	pipe = mini->pipes;
-	signal(SIGINT, kill_children);
-	signal(SIGQUIT, kill_children);
-	if (g_signals == SIGQUIT)
-	{
-		while (pipe != NULL)
-		{
-			kill(pipe->pid, SIGQUIT);
-			pipe = pipe->next;
-		}
-	}
-	if (g_signals == SIGINT)
-	{
-		while (pipe != NULL)
-		{
-			kill(pipe->pid, SIGINT);
-			pipe = pipe->next;
-		}
-	}
+	signal(SIGINT, update_children_signals);
+	signal(SIGQUIT, update_children_signals);
 }
