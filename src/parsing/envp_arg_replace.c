@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:18:44 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/07 20:58:12 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/07 20:59:30 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	arg_vars(t_mini *mini)
 			else if (mini->arg_matrix[i][j] == '$')
 			{
 				mini->arg_matrix[i] = replace_vars(mini,
-							mini->arg_matrix[i], j);
+						mini->arg_matrix[i], j);
 				ft_printf("%s\n", mini->arg_matrix[i]);
 				j = -1;
 			}
