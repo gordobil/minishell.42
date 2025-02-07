@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/07 15:19:12 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:41:56 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,30 @@ int	parsing(t_mini *mini)
 	return (0);
 }
 
-int	main(int argc, char **argv, char **envp)
+t_mini	*init_mini(char **envp)
 {
-	char	*rdline;
 	t_mini	*mini;
-	int exit;
 
 	ft_printf ("\n");
 	mini = malloc(sizeof(t_mini));
 	load_envp(mini, envp);
+	return (mini);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	char	*rdline;
+	t_mini	*mini;
+	int		exit;
+
+	mini = init_mini(envp);
 	while (1)
 	{
 		rdline = rdl_management();
-		if (!rdline || (exit = ms_exit(rdline)) == 0)
+		if (!rdline)
+			break ;
+		exit = ms_exit(rdline);
+		if (exit <= 0)
 			break ;
 		else if (exit)
 		{
@@ -61,6 +72,5 @@ int	main(int argc, char **argv, char **envp)
 		}
 		free(rdline);
 	}
-	end_mini(mini, rdline);
-	return (0);
+	return (end_mini(mini, rdline), 0);
 }
