@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/07 17:12:30 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:02:10 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,19 +99,14 @@ int	is_text(t_pipes *pipe, t_envp *envp, int i)
 
 void	pipex(t_pipes *pipes, t_envp *envp)
 {
-	int		status;
-
 	if (!pipes || !pipes->command || !pipes->command[0] || envp == NULL)
 		return ;
 	envp = get_edge_node(pipes->mini->envp, 's');
-	status = 0;
 	if (!pipes->next && is_text(pipes, envp, var_jump(pipes->command)) == 0)
 		building_execute(pipes->mini, pipes, envp, var_jump(pipes->command));
 	else if (!pipes->next
 		&& is_text(pipes, envp, var_jump(pipes->command)) == 1)
-	{
 		building_redir(pipes, envp);
-	}
 	else
 		execute_pipeline(pipes, envp);
 }

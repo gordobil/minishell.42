@@ -116,7 +116,7 @@ t_envp	*get_edge_node(t_envp *envp, char edge);
 
 //ENVP_ARG_REPLACE
 void	arg_vars(t_mini *mini);
-char	*replace_vars(t_mini *mini, char *str);
+char	*replace_vars(t_mini *mini, char *str, int i);
 
 //STRUCTS
 int		pipe_info(char **arg_matrix, t_mini *mini, int i, int j);
@@ -155,6 +155,7 @@ void	setup_redirections(int i, int **pipes, t_pipes *current,
 			int command_count);
 void	close_pipes_and_wait(int command_count, int **pipes, t_mini *mini);
 void	execute_pipeline(t_pipes *pipeline, t_envp *env_list);
+int		is_text(t_pipes *pipe, t_envp *envp, int i);
 
 //PIPEX_UTILS
 char	**get_pathsenv(t_envp *envp);

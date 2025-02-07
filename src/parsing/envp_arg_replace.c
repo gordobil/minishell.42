@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:18:44 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/07 17:17:49 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:24:19 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,12 @@ char	*compare_var(char *str, t_envp *envp, int i, char *comp)
 	return (str);
 }
 
-char	*replace_vars(t_mini *mini, char *str)
+char	*replace_vars(t_mini *mini, char *str, int i)
 {
 	t_envp	*envp;
 	char	*comp;
-	int		i;
 
-	i = -1;
-	while (str[++i] != '\0' && str)
+	while (str[i] != '\0' && str)
 	{
 		if (str[i] == '$' && str[i + 1] == '?')
 		{
@@ -107,6 +105,7 @@ char	*replace_vars(t_mini *mini, char *str)
 			}
 			i = -1;
 		}
+		i++;
 	}
 	return (str);
 }
@@ -115,24 +114,24 @@ void	arg_vars(t_mini *mini)
 {
 	int		i;
 	int		j;
-	char	q;
+	int		q;
 
 	i = 0;
-	q = '0';
+	q = 0;
 	while (mini->arg_matrix[i] != NULL)
 	{
 		j = 0;
 		while (mini->arg_matrix[i][j] != '\0')
 		{
-			if (mini->arg_matrix[i][j] == '\'' && q == '0')
-				q = '\'';
-			else if (mini->arg_matrix[i][j] == '\'' && q == '\'')
-				q = '0';
-			if (mini->arg_matrix[i][j] == '$' && q != '\'')
+			if (mini->arg_matrix[i][j] == '\'')
 			{
-				mini->arg_matrix[i] = replace_vars(mini, mini->arg_matrix[i]);
-				break ;
+				while (mini->arg_matrix[i][j] != '\0'
+					&& mini->arg_matrix[i][j] != '\'')
+					j++;
 			}
+			else if (mini->arg_matrix[i][j] == '$')
+				mini->arg_matrix[i] = replace_vars(mini,
+							mini->arg_matrix[i], j);
 			j++;
 		}
 		i++;

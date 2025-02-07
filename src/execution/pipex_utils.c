@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:00:37 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/07 13:19:51 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:03:29 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void	execute_single_command(t_pipes *current, t_envp *env_list)
 		if (!paths)
 			ft_printf("%s: No such file or directory\n", *current->command);
 	}
-	else if (building_execute(current->mini, current, env_list,
-			var_jump(current->command)) == -1)
-	{
+	if (!current->next
+		&& is_text(current, env_list, var_jump(current->command)) == 1)
+		building_redir(current, env_list);
+	else
 		execveloop(current->command, paths, current->mini->env_str);
-	}
 	if (paths)
 		free_matrix(paths);
 	exit(EXIT_SUCCESS);

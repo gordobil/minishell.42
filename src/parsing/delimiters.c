@@ -102,7 +102,7 @@ void	write_line(t_mini *mini, int fd, int i)
 		}
 		if (del_cmp(mini->delimiters[i], line) == 0)
 			break ;
-		line = replace_vars(mini, line);
+		line = replace_vars(mini, line, 0);
 		write (fd, line, ft_strlen(line));
 		write (fd, "\n", 1);
 		free (line);
