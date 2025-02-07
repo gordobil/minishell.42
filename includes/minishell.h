@@ -1,12 +1,12 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 11:27:39 by ngordobi          #+#    #+#             */
-/*   Updated: 2024/12/02 14:20:06 by ngordobi         ###   ########.fr       */
+/*   Created: 2025/02/07 13:17:34 by ngordobi          #+#    #+#             */
+/*   Updated: 2025/02/07 13:17:34 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ int		ms_cd(t_pipes *pipe, t_envp *envp, int i);
 void	ms_echo(t_pipes *pipe, int i);
 void	ms_pwd(t_envp *envp, t_pipes *pipe);
 int		ms_env(t_envp *envp, t_pipes *pipe, int i, int print_export);
+int		ms_exit(char *rdline);
 void	ms_export(t_pipes *pipes, t_envp *envp, int i);
 void	ms_unset(t_pipes *pipe, t_envp *envp, int i);
 t_envp	*unset_var(char *variable, t_envp *envp);

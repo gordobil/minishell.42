@@ -6,7 +6,7 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:11:48 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/07 13:02:06 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:40:24 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	parsing(t_mini *mini)
 	return (0);
 }
 
-
-
 int	main(int argc, char **argv, char **envp)
 {
 	char	*rdline;
@@ -49,23 +47,19 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		rdline = rdl_management();
-		if (!rdline || ft_strcmp(rdline, "exit") == 0)
+		if (!rdline || ms_exit(rdline) == 0)
 			break ;
-		add_history(rdline);
-		if (split_args(rdline, mini) == 0 && mini->arg_c > 0)
-			if (parsing(mini) == 0)
-				pipex(mini->pipes, mini->envp);
-		if (mini->arg_c > 0)
-			freeing(mini);
+		else if (ms_exit(rdline) == 1)
+		{
+			add_history(rdline);
+			if (split_args(rdline, mini) == 0 && mini->arg_c > 0)
+				if (parsing(mini) == 0)
+					pipex(mini->pipes, mini->envp);
+			if (mini->arg_c > 0)
+				freeing(mini);
+		}
 		free(rdline);
 	}
 	end_mini(mini, rdline);
 	return (0);
 }
-
-// METER PIDS EN ESTRUCTURA PIPES
-
-/*
-valgrind --leak-check=yes ./minishell
-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./minishell
-*/

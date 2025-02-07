@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:00:37 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/07 11:14:04 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:19:51 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,11 @@ int	check_vars(char **command, int i, t_mini *mini)
 	}
 	return (0);
 }
+
 void	building_redir(t_pipes *pipes, t_envp *envp)
 {
 	int	saved_stdout;
-		
+
 	saved_stdout = dup(STDOUT_FILENO);
 	if (pipes->outfile->file)
 	{

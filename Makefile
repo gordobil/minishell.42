@@ -13,7 +13,7 @@
 NAME				=	minishell
 
 CC					=	gcc
-CC_FLAGS			=	-g -Wall -Wextra -Werror -O0 -g
+CC_FLAGS			=	-Wall -Wextra -Werror
 RL_FLAGS			=	-I/usr/include/readline -lreadline
 
 LIBFT				=	libft.a
@@ -47,6 +47,7 @@ SOURCES				=	$(SRC_PATH)errors.c \
 						$(BI_PATH)ms_cd.c \
 						$(BI_PATH)ms_echo.c \
 						$(BI_PATH)ms_env.c \
+						$(BI_PATH)ms_exit.c \
 						$(BI_PATH)ms_export.c \
 						$(BI_PATH)ms_pwd.c \
 						$(BI_PATH)ms_unset.c \
