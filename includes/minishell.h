@@ -101,6 +101,7 @@ char	*rm_arrows(char *str);
 
 //RM_QUOTES
 char	*rm_quotes(char *arg, int i, int j);
+int		jump_single_quotes(char	*str, int i);
 
 //RDL
 char	*rdl_management(void);

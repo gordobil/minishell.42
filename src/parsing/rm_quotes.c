@@ -6,11 +6,19 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:07:35 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/01/29 18:06:04 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/07 20:58:33 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	jump_single_quotes(char	*str, int i)
+{
+	i++;
+	while (str[i] != '\0' && str[i] != '\'')
+		i++;
+	return (i);
+}
 
 int	next_fragment(char *arg, int i, int fragment)
 {
