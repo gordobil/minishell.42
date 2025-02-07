@@ -96,6 +96,7 @@ $(LIBFT):
 clean:
 					rm -rf $(SRC_PATH).objects/
 					rm -rf $(SRC_PATH)*.o
+					rm -rf $(SRC_PATH).print_mini.o
 					rm -rf $(PRS_PATH)*.o
 					rm -rf $(EXC_PATH)*.o
 					rm -rf $(BI_PATH)*.o
