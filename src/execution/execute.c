@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/07 13:48:27 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:12:30 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp, int i)
 			ms_export(pipe, envp, i);
 		else if (ft_strcmp(pipe->command[i], "unset") == 0)
 			ms_unset(pipe, envp, i);
-		else if (ft_strcmp(pipe->command[i], "exit") == 0);
-		
 		return (-1);
 	}
 	return (0);
@@ -53,7 +51,7 @@ void	execveloop(char **str, char **path, char **term)
 		bin = ft_strcat(path[count], *str);
 		if (bin)
 		{
-			execve(bin, str, 0);
+			execve(bin, str, term);
 			free (bin);
 		}
 		count++;

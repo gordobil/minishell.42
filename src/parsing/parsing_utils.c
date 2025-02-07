@@ -97,3 +97,16 @@ int	ms_strcmp(char *s1, char *s2)
 	else
 		return (-1);
 }
+
+char	*rm_arrows(char *str)
+{
+	int		i;
+	char	*delimiter;
+
+	i = 0;
+	while (str[i] == '<')
+		i++;
+	i = jump_spaces(str, i);
+	delimiter = ft_substr(str, i, ft_strlen(str) - i);
+	return (delimiter);
+}

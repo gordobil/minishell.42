@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:28:21 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/07 13:44:30 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:20:39 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	ms_exit(char *rdl)
 		i++;
 		j++;
 	}
-	ft_printf("[%d]%c [%d]%c\n", i, rdl[i], j, exit[j]);
 	if (exit[j] == '\0' && rdl[jump_spaces(rdl, i)] == '\0')
 		return (0);
 	else if ((rdl[i] == ' ' || rdl[i] == '	')

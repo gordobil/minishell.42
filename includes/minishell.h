@@ -97,6 +97,7 @@ int		file_found(char *s, int i);
 void	save_vars(t_pipes *pipe, int count);
 int		count_args(char **arg_matrix, t_pipes *pipe, int i, char ret);
 int		ms_strcmp(char *s1, char *s2);
+char	*rm_arrows(char *str);
 
 //RM_QUOTES
 char	*rm_quotes(char *arg, int i, int j);

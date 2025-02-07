@@ -95,6 +95,11 @@ void	write_line(t_mini *mini, int fd, int i)
 	while (1)
 	{
 		line = readline(YELLOW"> "WHITE);
+		if (!line)
+		{
+			error_messages(-16, rm_arrows(mini->delimiters[i]));
+			break ;
+		}
 		if (del_cmp(mini->delimiters[i], line) == 0)
 			break ;
 		line = replace_vars(mini, line);

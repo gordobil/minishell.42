@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp_arg_replace.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:18:44 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/05 17:33:33 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:17:49 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,16 +113,22 @@ char	*replace_vars(t_mini *mini, char *str)
 
 void	arg_vars(t_mini *mini)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	q;
 
 	i = 0;
+	q = '0';
 	while (mini->arg_matrix[i] != NULL)
 	{
 		j = 0;
 		while (mini->arg_matrix[i][j] != '\0')
 		{
-			if (mini->arg_matrix[i][j] == '$')
+			if (mini->arg_matrix[i][j] == '\'' && q == '0')
+				q = '\'';
+			else if (mini->arg_matrix[i][j] == '\'' && q == '\'')
+				q = '0';
+			if (mini->arg_matrix[i][j] == '$' && q != '\'')
 			{
 				mini->arg_matrix[i] = replace_vars(mini, mini->arg_matrix[i]);
 				break ;
@@ -132,8 +138,3 @@ void	arg_vars(t_mini *mini)
 		i++;
 	}
 }
-
-/*&& (str[j] == '\0' || str[j] == '<'
-			|| str[j] == '"' || str[j] == '\'' || str[j] == '>'
-			|| str[j] == ' ' || str[j] == '	' || str[j] == '\n'
-			|| str[j] == '$')*/
