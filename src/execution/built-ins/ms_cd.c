@@ -38,7 +38,7 @@ int	ms_cd(t_pipes *pipe, t_envp *envp, int i)
 	if (chdir(path) != 0)
 	{
 		error_messages(-6, path);
-		return (free(path), -2);
+		return (pipe->mini->last_ret = 1, (path), -2);
 	}
 	var = envp;
 	while (ft_strcmp(var->variable, "PWD") != 0)

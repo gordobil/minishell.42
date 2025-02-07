@@ -158,6 +158,7 @@ void	execute_pipeline(t_pipes *pipeline, t_envp *env_list);
 char	**get_pathsenv(t_envp *envp);
 void	execute_single_command(t_pipes *current, t_envp *env_list);
 int		var_jump(char **command);
+void	building_redir(t_pipes *pipes, t_envp *envp);
 
 //BUILT-INS
 int		ms_cd(t_pipes *pipe, t_envp *envp, int i);

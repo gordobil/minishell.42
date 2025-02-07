@@ -6,7 +6,7 @@
 /*   By: mafarto- <mafarto-@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 11:53:44 by mafarto-          #+#    #+#             */
-/*   Updated: 2025/02/04 13:28:12 by mafarto-         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:09:19 by mafarto-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	close_pipes_and_wait(int command_count, int **pipes,
 		i++;
 	}
 	mini->last_ret = status >> 8;
-	free(pids);
+	if (pids)
+		free(pids);
 }
 
 int	cheatriang_tool(int	***pipes, pid_t **pids,	t_pipes **current)
