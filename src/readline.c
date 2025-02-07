@@ -14,9 +14,9 @@
 
 static int	g_signals;
 
-void	rdl_new_line(int sig)
+void	rdl_new_line(int signal)
 {
-	(void)sig;
+	(void)signal;
 	ft_printf("\n");
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -46,4 +46,36 @@ char	*rdl_management(void)
 	line = readline(title);
 	free(title);
 	return (line);
+}
+
+void	kill_children(int signal)
+{
+	if (signal == SIGINT || signal == SIGQUIT)
+		ft_printf("\n");
+	g_signals = signal;
+}
+
+void	*children_signals(t_mini *mini)
+{
+	t_pipes	*pipe;
+
+	pipe = mini->pipes;
+	signal(SIGINT, kill_children);
+	signal(SIGQUIT, kill_children);
+	if (g_signals == SIGQUIT)
+	{
+		while (pipe != NULL)
+		{
+			kill(pipe->pid, SIGQUIT);
+			pipe = pipe->next;
+		}
+	}
+	if (g_signals == SIGINT)
+	{
+		while (pipe != NULL)
+		{
+			kill(pipe->pid, SIGINT);
+			pipe = pipe->next;
+		}
+	}
 }

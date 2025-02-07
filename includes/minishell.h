@@ -52,6 +52,7 @@ typedef struct s_files
 typedef struct s_pipes
 {
 	char			**command;
+	int				pid;
 	int				args;
 	int				position;
 	int				var_c;
