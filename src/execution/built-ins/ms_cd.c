@@ -80,7 +80,7 @@ int	ms_cd(t_pipes *pipe, t_envp *envp, int i)
 	if (chdir(path) != 0)
 	{
 		error_messages(-6, path);
-		return (free(path), -2);
+		return (pipe->mini->last_ret = 1, free(path), -2);
 	}
 	update_pwd_var(envp, buffer);
 	return (free(path), 0);

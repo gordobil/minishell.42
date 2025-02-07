@@ -160,6 +160,7 @@ char	**get_pathsenv(t_envp *envp);
 void	execute_single_command(t_pipes *current, t_envp *env_list);
 int		var_jump(char **command);
 int		check_vars(char **command, int i, t_mini *mini);
+void	building_redir(t_pipes *pipes, t_envp *envp);
 
 //BUILT-INS
 int		ms_cd(t_pipes *pipe, t_envp *envp, int i);

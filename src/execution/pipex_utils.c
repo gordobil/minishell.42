@@ -6,7 +6,11 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:00:37 by mafarto-          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/02/05 18:41:13 by ngordobi         ###   ########.fr       */
+=======
+/*   Updated: 2025/02/05 17:26:08 by mafarto-         ###   ########.fr       */
+>>>>>>> manu
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +46,13 @@ void	execute_single_command(t_pipes *current, t_envp *env_list)
 	char	**paths;
 
 	paths = get_pathsenv(env_list);
-	if (paths && building_execute(current->mini, current, env_list,
+	if (!paths)
+	{
+		execve(*current->command, current->command, 0);
+		if (!paths)
+			ft_printf("%s: No such file or directory\n", *current->command);
+	}
+	else if (building_execute(current->mini, current, env_list,
 			var_jump(current->command)) == -1)
 	{
 		execveloop(current->command, paths, current->mini->env_str);
@@ -84,4 +94,26 @@ int	check_vars(char **command, int i, t_mini *mini)
 		}
 	}
 	return (0);
+}
+void	building_redir(t_pipes *pipes, t_envp *envp)
+{
+	int	saved_stdout;
+		
+	saved_stdout = dup(STDOUT_FILENO);
+	if (pipes->outfile->file)
+	{
+		dup2(pipes->outfile->fd, STDOUT_FILENO);
+		close(pipes->outfile->fd);
+		building_execute(pipes->mini, pipes, envp, var_jump(pipes->command));
+	}
+	else if (pipes->append->file)
+	{
+		dup2(pipes->append->fd, STDOUT_FILENO);
+		close(pipes->append->fd);
+		building_execute(pipes->mini, pipes, envp, var_jump(pipes->command));
+	}
+	else
+		building_execute(pipes->mini, pipes, envp, var_jump(pipes->command));
+	dup2(saved_stdout, STDOUT_FILENO);
+	close(saved_stdout);
 }

@@ -6,7 +6,11 @@
 /*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:57:09 by mafarto-          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/02/05 18:44:55 by ngordobi         ###   ########.fr       */
+=======
+/*   Updated: 2025/02/05 17:28:06 by mafarto-         ###   ########.fr       */
+>>>>>>> manu
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +37,7 @@ int	building_execute(t_mini *mini, t_pipes *pipe, t_envp *envp, int i)
 			ms_export(pipe, envp, i);
 		else if (ft_strcmp(pipe->command[i], "unset") == 0)
 			ms_unset(pipe, envp, i);
+		
 		return (-1);
 	}
 	return (0);
@@ -46,17 +51,19 @@ void	execveloop(char **str, char **path, char **term)
 	while (is_it_a_var(*str) > 0)
 		*str++;
 	count = 0;
-	while (path[count] != 0)
+	while (path[count] != 0 && path)
 	{
 		bin = ft_strcat(path[count], *str);
-		execve(bin, str, 0);
-		free (bin);
+		if (bin)
+		{
+			execve(bin, str, 0);
+			free (bin);
+		}
 		count++;
 	}
-	if (path)
-		free_matrix(path);
 	execve(*str, str, 0);
 	ft_printf("%s: command not found\n", *str);
+	free_matrix(path);
 	exit(127);
 }
 
@@ -81,7 +88,7 @@ int	is_text(t_pipes *pipe, t_envp *envp, int i)
 	if (ft_strcmp(pipe->command[i], "cd") == 0)
 		return (0);
 	else if (ft_strcmp(pipe->command[i], "echo") == 0)
-		return (0);
+		return (1);
 	else if (ft_strcmp(pipe->command[i], "pwd") == 0)
 		return (1);
 	else if (ft_strcmp(pipe->command[i], "env") == 0)
@@ -90,19 +97,24 @@ int	is_text(t_pipes *pipe, t_envp *envp, int i)
 		return (0);
 	else if (ft_strcmp(pipe->command[i], "unset") == 0)
 		return (0);
-	return (1);
+	return (-1);
 }
 
 void	pipex(t_pipes *pipes, t_envp *envp)
 {
 	int		status;
-	char	**path;
 
 	if (!pipes || !pipes->command || !pipes->command[0] || envp == NULL)
 		return ;
 	envp = get_edge_node(pipes->mini->envp, 's');
+	status=0;
 	if (!pipes->next && is_text(pipes, envp, var_jump(pipes->command)) == 0)
 		building_execute(pipes->mini, pipes, envp, var_jump(pipes->command));
+	else if (!pipes->next && is_text(pipes, envp,
+		var_jump(pipes->command)) == 1)
+	{
+		building_redir(pipes, envp);
+	}
 	else
 		execute_pipeline(pipes, envp);
 }
