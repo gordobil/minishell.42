@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp_arg_replace.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngordobi <ngordobi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngordobi <ngordobi@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:18:44 by ngordobi          #+#    #+#             */
-/*   Updated: 2025/02/07 20:59:30 by ngordobi         ###   ########.fr       */
+/*   Updated: 2025/02/09 23:27:29 by ngordobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ void	arg_vars(t_mini *mini)
 			{
 				mini->arg_matrix[i] = replace_vars(mini,
 						mini->arg_matrix[i], j);
-				ft_printf("%s\n", mini->arg_matrix[i]);
 				j = -1;
 			}
 			j++;
