@@ -1,1 +1,1 @@
-a mini shell based on bash made between @mafarto- and me.
+a mini shell based on bash made between https://github.com/ManuelFarto and me.
