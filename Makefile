@@ -52,7 +52,6 @@ SOURCES				=	$(SRC_PATH)errors.c \
 						$(BI_PATH)ms_pwd.c \
 						$(BI_PATH)ms_unset.c \
 						
-
 OBJECTS				= 	$(SOURCES:%.c=%.o)
 
 INCLUDES			=	./includes/minishell.h \
