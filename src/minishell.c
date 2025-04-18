@@ -75,26 +75,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (end_mini(mini, rdline), 0);
 }
-
-/*		PROBLEMA CON LOS DELIMITERS:
-
-
-minishell: /path/minishell
- ¬ <<delimiter
-> 1
-> 2
-> 3
-> 4
-> ^C
-minishell: /path/minishell
- ¬ ls
-> 1
-> 2
-> 3
-> 4
-> delimiter
-minishell: /path/minishell
- ¬ ls
-includes  libft  libft.a  Makefile  minishell  pdfs  src
-
-*/
